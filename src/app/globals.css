@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Green & Gold palette from image swatches:
+     #0B1914 (Darkest Charcoal Forest Green - Main background)
+     #143028 (Dark Pine Green - Container / Card background)
+     #1B432C (Deep Forest Green - Surface / Hover background)
+     #2C5E3B (Emerald Green - Borders / Sub-elements)
+     #C69234 (Warm Amber Gold - Highlights / Primary CTAs)
+     #A65D29 (Warm Copper Rust - Secondary accents / Badges)
+  */
+  --darkest-forest: #0B1914;
+  --dark-pine: #143028;
+  --forest-green: #1B432C;
+  --emerald-green: #2C5E3B;
+  --amber-gold: #C69234;
+  --copper-terracotta: #A65D29;
+
+  --deep-violet: #0B1914;
+  --violet: #C69234;
+  --mauve: #2C5E3B;
+  --lavender: #A3C2B2;
+  --white: #FFFFFF;
+
+  /* Accent / interactive */
+  --neon-violet: #C69234;
+  --neon-purple: #C69234;
+  --neon-lavender: #A3C2B2;
+  --soft-pink: #A65D29;
+
+  /* Aliases for theme consistency */
+  --forest: #0B1914;
+  --sage: #A3C2B2;
+  --olive: #2C5E3B;
+  --cream: #E8F3EE;
+  --moss: #1B432C;
+  --neon-teal: #C69234;
+  --neon-gold: #C69234;
+  --neon-rose: #A65D29;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0B1914;
+}
+
+body {
+  font-family: 'Figtree', sans-serif;
+  background-color: #0B1914;
+  color: #F0F7F4;
+  overflow-x: hidden;
+}
+
+/* Subtle noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0B1914; }
+::-webkit-scrollbar-thumb { background: #2C5E3B; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C69234; }
+
+/* Selection */
+::selection { background: #C69234; color: #0B1914; }
+
+/* Glass card — rich pine green frost */
+.glass {
+  background: rgba(20, 48, 40, 0.65);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(44, 94, 59, 0.4);
+}
+
+.glass-dark {
+  background: rgba(11, 25, 20, 0.8);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(44, 94, 59, 0.3);
+}
+
+/* Glow utilities */
+.neon-teal { color: #C69234; }
+.neon-glow { text-shadow: 0 0 20px rgba(198, 146, 52, 0.5), 0 0 40px rgba(198, 146, 52, 0.2); }
+.neon-border { box-shadow: 0 0 20px rgba(198, 146, 52, 0.25), inset 0 0 20px rgba(198, 146, 52, 0.05); }
+
+/* Anton display font */
+.font-display { font-family: 'Anton', sans-serif; }
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+}
+.reveal.visible {
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gradient text — Gold to Copper */
+.gradient-text {
+  background: linear-gradient(135deg, #F5D77F 0%, #C69234 50%, #A65D29 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(198, 146, 52, 0.2);
+  border-top-color: #C69234;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(11, 25, 20, 0.6);
+  border-color: rgba(198, 146, 52, 0.4);
+}
+
+/* Print layout optimizations for Itinerary PDF downloads */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt !important;
+  }
+  
+  header, footer, nav, button, .print\:hidden {
+    display: none !important;
+  }
+  
+  .lg\:col-span-5, .h-\[450px\], .h-\[580px\] {
+    display: none !important; /* Hide map on print since it does not print tiles correctly */
+  }
+
+  .lg\:col-span-7 {
+    width: 100% !important;
+  }
+
+  .bg-white\/50, .dark\:bg-\[\#180E29\]\/60 {
+    background: transparent !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+
+  .border-l-2 {
+    border-left-color: #aaa !important;
+  }
+
+  .w-4\.5 {
+    border-color: #666 !important;
+  }
+}
+

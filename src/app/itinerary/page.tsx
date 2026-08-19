@@ -1,0 +1,660 @@
+'use client';
+import { useEffect, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useAppStore } from '@/store';
+import { useRouter } from 'next/navigation';
+import { createItinerary, updateItinerary } from '@/lib/api';
+import { cityTransportInfo } from '@/data/travelData';
+import { 
+  Calendar, MapPin, Download, Save, Share2, Sparkles, Clock, 
+  ArrowLeft, Compass, ArrowRight, AlertCircle, Trash2, 
+  GripVertical, Pencil, Check, X, ChevronUp, ChevronDown, Loader2
+} from 'lucide-react';
+import Link from 'next/link';
+import toast from 'react-hot-toast';
+import dynamic from 'next/dynamic';
+import type { GeneratedItinerary, SavedItinerary, TimeSlot, ItineraryDay } from '@/types';
+
+// Dynamic import of LeafletMap (client-only)
+const LeafletMap = dynamic(() => import('@/components/map/LeafletMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center bg-violet-50/50 dark:bg-[#120B24] rounded-3xl">
+      <div className="flex flex-col items-center gap-2">
+        <div className="w-6 h-6 rounded-full border-2 border-violet-500 border-t-transparent animate-spin" />
+        <p className="text-violet-500 text-xs font-semibold uppercase tracking-widest">Map Loading...</p>
+      </div>
+    </div>
+  ),
+});
+
+export default function ItineraryPage() {
+  const router = useRouter();
+  const { generatedItinerary, user, setGeneratedItinerary, currentItineraryId, setCurrentItineraryId } = useAppStore();
+  const [activeDay, setActiveDay] = useState(1);
+  const [saving, setSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState('');
+  const [saveError, setSaveError] = useState('');
+  const [shareText, setShareText] = useState('Share Plan');
+  const [downloading, setDownloading] = useState(false);
+
+  // Customization state
+  const [editingNoteIndex, setEditingNoteIndex] = useState<number | null>(null);
+  const [editNoteValue, setEditNoteValue] = useState('');
+  
+  // Title editing
+  const [editingTitle, setEditingTitle] = useState(false);
+  const [editTitleValue, setEditTitleValue] = useState('');
+  
+  // Slot duration editing
+  const [editingDurationIndex, setEditingDurationIndex] = useState<number | null>(null);
+  const [editDurationValue, setEditDurationValue] = useState('');
+
+  // Auth check: redirect to auth if not logged in
+  useEffect(() => {
+    if (!user) {
+      // Check for local session fallback
+      if (typeof window !== 'undefined') {
+        try {
+          const localUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
+          if (!localUser) {
+            toast.error('Please sign in to view itineraries');
+            router.push('/auth');
+            return;
+          }
+        } catch {
+          router.push('/auth');
+          return;
+        }
+      }
+    }
+  }, [user, router]);
+
+  // If no itinerary generated, show message
+  if (!generatedItinerary) {
+    return (
+      <main className="min-h-screen bg-[#0B1914] flex flex-col items-center justify-center px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md bg-[#143028] border border-[#2C5E3B] rounded-3xl p-8 shadow-xl text-white"
+        >
+          <AlertCircle size={40} className="text-[#C69234] mx-auto mb-4" />
+          <h2 className="text-2xl font-extrabold text-white uppercase tracking-tight">No Itinerary Found</h2>
+          <p className="text-[#A3C2B2] text-sm mt-2 mb-6">
+            Generate a custom travel plan on our home search panel to view it here.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#C69234] hover:bg-[#b07f2a] text-[#0B1914] font-black uppercase tracking-widest text-xs transition-all shadow-md"
+          >
+            Go to Planner
+          </Link>
+        </motion.div>
+      </main>
+    );
+  }
+
+  const { config, days, totalPlaces, hiddenGemsCount, estimatedBudget } = generatedItinerary;
+  const currentDayData = days.find((d) => d.dayNumber === activeDay) || days[0];
+
+  const mapItems = currentDayData.slots.map((s) => ({
+    id: s.place.id,
+    name: s.place.name,
+    latitude: s.place.latitude,
+    longitude: s.place.longitude,
+    cover_image: s.place.cover_image,
+    description: s.place.description,
+    type: 'place' as const,
+    category: s.place.category,
+  }));
+
+  const routePoints = currentDayData.slots
+    .filter((s) => s.place.latitude && s.place.longitude)
+    .map((s) => [s.place.latitude, s.place.longitude] as [number, number]);
+
+  const updateItineraryState = (updatedDays: ItineraryDay[]) => {
+    const totalPlacesSet = new Set<string>();
+    let gems = 0;
+    updatedDays.forEach(d => d.slots.forEach(s => {
+      totalPlacesSet.add(s.place.id);
+      if (s.place.is_hidden_gem) gems++;
+    }));
+    setGeneratedItinerary({
+      ...generatedItinerary,
+      days: updatedDays,
+      totalPlaces: totalPlacesSet.size,
+      hiddenGemsCount: gems,
+    });
+  };
+
+  const handleDeleteSlot = (dayNumber: number, slotIndex: number) => {
+    const updatedDays = days.map(d => {
+      if (d.dayNumber !== dayNumber) return d;
+      const newSlots = d.slots.filter((_, i) => i !== slotIndex);
+      return { ...d, slots: newSlots };
+    });
+    updateItineraryState(updatedDays);
+  };
+
+  const handleMoveSlot = (dayNumber: number, slotIndex: number, direction: 'up' | 'down') => {
+    const updatedDays = days.map(d => {
+      if (d.dayNumber !== dayNumber) return d;
+      const newSlots = [...d.slots];
+      const targetIndex = direction === 'up' ? slotIndex - 1 : slotIndex + 1;
+      if (targetIndex < 0 || targetIndex >= newSlots.length) return d;
+      [newSlots[slotIndex], newSlots[targetIndex]] = [newSlots[targetIndex], newSlots[slotIndex]];
+      return { ...d, slots: newSlots };
+    });
+    updateItineraryState(updatedDays);
+  };
+
+  const handleStartEditNote = (slotIndex: number, currentNote: string) => {
+    setEditingNoteIndex(slotIndex);
+    setEditNoteValue(currentNote || '');
+  };
+
+  const handleSaveNote = (dayNumber: number, slotIndex: number) => {
+    const updatedDays = days.map(d => {
+      if (d.dayNumber !== dayNumber) return d;
+      const newSlots = d.slots.map((s, i) => {
+        if (i !== slotIndex) return s;
+        return { ...s, notes: editNoteValue };
+      });
+      return { ...d, slots: newSlots };
+    });
+    updateItineraryState(updatedDays);
+    setEditingNoteIndex(null);
+    setEditNoteValue('');
+  };
+  
+  const handleStartEditDuration = (slotIndex: number, currentDuration: number) => {
+    setEditingDurationIndex(slotIndex);
+    setEditDurationValue(String(currentDuration));
+  };
+  
+  const handleSaveDuration = (dayNumber: number, slotIndex: number) => {
+    const newDuration = parseInt(editDurationValue) || 60;
+    const updatedDays = days.map(d => {
+      if (d.dayNumber !== dayNumber) return d;
+      const newSlots = d.slots.map((s, i) => {
+        if (i !== slotIndex) return s;
+        return { ...s, duration: newDuration };
+      });
+      return { ...d, slots: newSlots };
+    });
+    updateItineraryState(updatedDays);
+    setEditingDurationIndex(null);
+    setEditDurationValue('');
+  };
+
+  const handleSave = async () => {
+    if (!user) {
+      router.push('/auth');
+      return;
+    }
+    setSaving(true);
+    setSaveError('');
+    setSaveSuccess('');
+
+    try {
+      if (currentItineraryId) {
+        await updateItinerary(currentItineraryId, {
+          title: `Trip to ${config.cityName}`,
+          config: config,
+          itinerary_data: generatedItinerary,
+        });
+        setSaveSuccess('Itinerary updated successfully!');
+        toast.success('Changes saved!');
+      } else {
+        const payload: Partial<SavedItinerary> = {
+          user_id: user.id,
+          title: `Trip to ${config.cityName}`,
+          config: config,
+          itinerary_data: generatedItinerary,
+          is_public: true
+        };
+        const saved = await createItinerary(payload);
+        setCurrentItineraryId(saved.id);
+        setSaveSuccess('Itinerary saved to your dashboard!');
+        toast.success('Itinerary saved!');
+      }
+    } catch (err: any) {
+      console.error(err);
+      setSaveError(err.message || 'Failed to save itinerary. Please try again.');
+      toast.error('Save failed');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true);
+    try {
+      const { jsPDF } = await import('jspdf');
+      const doc = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const margin = 16;
+
+      const addWrappedText = (text: string, x: number, y: number, maxWidth: number, fontSize: number, fontStyle: string = 'normal'): number => {
+        doc.setFontSize(fontSize);
+        doc.setFont('helvetica', fontStyle);
+        const lines = doc.splitTextToSize(text, maxWidth);
+        doc.text(lines, x, y);
+        return y + lines.length * (fontSize * 0.4);
+      };
+
+      let y = margin;
+      doc.setFillColor(11, 25, 20);
+      doc.rect(0, 0, pageWidth, 40, 'F');
+      doc.setTextColor(198, 146, 52);
+      doc.setFontSize(22);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`WANDERSPHERE: ${config.cityName.toUpperCase()}`, margin, 20);
+
+      doc.setTextColor(240, 247, 244);
+      doc.setFontSize(10);
+      doc.text(`${days.length} Days · ${config.travelStyle.toUpperCase()} · ${config.budget.toUpperCase()} BUDGET`, margin, 28);
+      y = 48;
+
+      for (const day of days) {
+        if (y > 240) {
+          doc.addPage();
+          y = margin;
+        }
+
+        doc.setFillColor(20, 48, 40);
+        doc.rect(margin, y, pageWidth - margin * 2, 10, 'F');
+        doc.setTextColor(198, 146, 52);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`DAY ${day.dayNumber}: ${day.title}`, margin + 4, y + 7);
+        y += 16;
+
+        for (const slot of day.slots) {
+          if (y > 260) {
+            doc.addPage();
+            y = margin;
+          }
+
+          doc.setFontSize(9);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(198, 146, 52);
+          doc.text(`${slot.time} - ${slot.place.name}`, margin + 4, y);
+          y += 5;
+
+          doc.setFontSize(8);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(163, 194, 178);
+          y = addWrappedText(slot.place.description || '', margin + 4, y, pageWidth - margin * 2 - 8, 8);
+          y += 6;
+        }
+
+        y += 4;
+      }
+
+      doc.save(`WanderSphere_${config.cityName}_Itinerary.pdf`);
+      toast.success('PDF downloaded!');
+    } catch (err) {
+      console.error(err);
+      window.print();
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: `My Itinerary to ${config.cityName}`,
+        text: `Check out my ${days.length}-day itinerary for ${config.cityName} generated by WanderSphere!`,
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      setShareText('Link Copied!');
+      setTimeout(() => setShareText('Share Plan'), 2000);
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-[#0B1914] pb-24 text-[#F0F7F4] transition-colors duration-300">
+      <header className="relative py-8 px-6 bg-[#143028]/80 border-b border-[#2C5E3B]/60 backdrop-blur-xl shrink-0 print:hidden">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className="p-3 bg-[#0B1914] border border-[#2C5E3B] hover:border-[#C69234] rounded-full transition-all text-[#C69234]"
+            >
+              <ArrowLeft size={16} />
+            </Link>
+            <div>
+              <div className="flex items-center gap-2 text-2xs uppercase font-extrabold tracking-widest text-[#C69234]">
+                <span>{config.stateName}</span>
+                <span>•</span>
+                <span className="text-[#A65D29] flex items-center gap-0.5">
+                  <Sparkles size={10} /> {config.travelStyle}
+                </span>
+              </div>
+              {editingTitle ? (
+                <div className="flex items-center gap-2 mt-1">
+                  <input
+                    type="text"
+                    value={editTitleValue}
+                    onChange={(e) => setEditTitleValue(e.target.value)}
+                    className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase bg-transparent border-b-2 border-[#C69234] outline-none"
+                    autoFocus
+                  />
+                  <button onClick={() => { setEditingTitle(false); }} className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400"><Check size={16} /></button>
+                  <button onClick={() => { setEditingTitle(false); setEditTitleValue(''); }} className="p-1.5 rounded-lg bg-rose-500/20 text-rose-400"><X size={16} /></button>
+                </div>
+              ) : (
+                <h1 
+                  className="text-2xl md:text-3xl font-black tracking-tight mt-1 text-white uppercase group cursor-pointer flex items-center gap-2"
+                  onClick={() => { setEditingTitle(true); setEditTitleValue(`${config.cityName} Itinerary`); }}
+                >
+                  {editTitleValue || `${config.cityName} Itinerary`}
+                  <Pencil size={14} className="text-[#A3C2B2] opacity-0 group-hover:opacity-100 transition-opacity" />
+                </h1>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2.5">
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-1.5 px-4.5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all"
+            >
+              <Share2 size={13} />
+              <span>{shareText}</span>
+            </button>
+            <button
+              onClick={handleDownloadPDF}
+              disabled={downloading}
+              className="flex items-center gap-1.5 px-4.5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all disabled:opacity-50"
+            >
+              {downloading ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
+              <span>{downloading ? 'Generating...' : 'Download PDF'}</span>
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-wider hover:bg-[#b07f2a] transition-all disabled:opacity-50 shadow-md"
+            >
+              <Save size={13} />
+              <span>{saving ? 'Saving...' : currentItineraryId ? 'Update' : 'Save'}</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {(saveSuccess || saveError) && (
+          <div className="max-w-6xl mx-auto px-6 mt-4 print:hidden">
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className={`rounded-2xl p-4 text-xs font-semibold border ${
+                saveSuccess 
+                  ? 'bg-[#143028] border-[#2C5E3B] text-[#C69234]' 
+                  : 'bg-rose-950/40 border-rose-800 text-rose-300'
+              }`}
+            >
+              {saveSuccess || saveError}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <div className="max-w-6xl mx-auto px-6 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 print:hidden">
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
+            <Calendar className="text-[#C69234] shrink-0" size={20} />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Duration</p>
+              <p className="text-sm font-extrabold text-white">{days.length} Days</p>
+            </div>
+          </div>
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
+            <Clock className="text-[#A65D29] shrink-0" size={20} />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Sights Planned</p>
+              <p className="text-sm font-extrabold text-white">{totalPlaces} Places</p>
+            </div>
+          </div>
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
+            <Sparkles className="text-[#C69234] shrink-0" size={20} />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Hidden Gems</p>
+              <p className="text-sm font-extrabold text-white">{hiddenGemsCount} Sights</p>
+            </div>
+          </div>
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
+            <Compass className="text-[#C69234] shrink-0" size={20} />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Est. Budget</p>
+              <p className="text-sm font-extrabold text-white">₹{estimatedBudget?.toLocaleString('en-IN')}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-2 overflow-x-auto pb-3 mb-6 print:hidden">
+          {days.map((d) => (
+            <button
+              key={d.dayNumber}
+              onClick={() => setActiveDay(d.dayNumber)}
+              className={`px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shrink-0 ${
+                activeDay === d.dayNumber
+                  ? 'bg-[#C69234] text-[#0B1914] font-black shadow-md'
+                  : 'bg-[#143028] border border-[#2C5E3B]/60 text-[#A3C2B2] hover:text-white hover:border-[#C69234]'
+              }`}
+            >
+              Day {d.dayNumber}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-black uppercase tracking-wider text-white">
+                {currentDayData.title}
+              </h2>
+              <span className="text-xs text-[#C69234] font-bold bg-[#143028] border border-[#2C5E3B] px-3 py-1 rounded-full print:hidden">
+                Day distance: {currentDayData.totalDistance} km
+              </span>
+            </div>
+
+            {currentDayData.slots.length === 0 ? (
+              <div className="text-center py-12 bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl">
+                <p className="text-[#A3C2B2] text-sm">All slots removed for this day. Regenerate or add from home planner.</p>
+              </div>
+            ) : (
+              <div className="relative border-l-2 border-[#2C5E3B] ml-4 pl-6 space-y-8 py-2">
+                {currentDayData.slots.map((slot, index) => (
+                  <div key={`${slot.place.id}-${index}`} className="relative group">
+                    <span className="absolute -left-[33px] top-1.5 w-4.5 h-4.5 rounded-full border-2 border-[#C69234] bg-[#0B1914] flex items-center justify-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C69234]" />
+                    </span>
+
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md bg-[#1B432C] border border-[#2C5E3B] text-[#C69234]">
+                        {slot.time}
+                      </span>
+                      <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#A3C2B2]">
+                        {slot.label}
+                      </span>
+
+                      <div className="ml-auto flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
+                        <button
+                          onClick={() => handleMoveSlot(currentDayData.dayNumber, index, 'up')}
+                          disabled={index === 0}
+                          className="p-1 rounded-md hover:bg-[#1B432C] text-[#A3C2B2] disabled:opacity-30 transition-all"
+                          title="Move up"
+                        >
+                          <ChevronUp size={14} />
+                        </button>
+                        <button
+                          onClick={() => handleMoveSlot(currentDayData.dayNumber, index, 'down')}
+                          disabled={index === currentDayData.slots.length - 1}
+                          className="p-1 rounded-md hover:bg-[#1B432C] text-[#A3C2B2] disabled:opacity-30 transition-all"
+                          title="Move down"
+                        >
+                          <ChevronDown size={14} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteSlot(currentDayData.dayNumber, index)}
+                          className="p-1 rounded-md hover:bg-rose-950/40 text-rose-400 transition-all"
+                          title="Remove slot"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+                      {slot.place.cover_image && (
+                        <div
+                          className="w-full sm:w-36 h-32 sm:h-auto bg-cover bg-center shrink-0"
+                          style={{ backgroundImage: `url(${slot.place.cover_image})` }}
+                        />
+                      )}
+                      <div className="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[9px] font-bold uppercase tracking-widest text-[#A65D29]">
+                              {slot.place.category}
+                            </span>
+                            {slot.place.is_hidden_gem && (
+                              <span className="inline-flex items-center gap-0.5 text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[#1B432C] text-[#C69234] border border-[#2C5E3B]">
+                                <Sparkles size={8} /> Hidden Gem
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="font-extrabold text-base text-white mt-1">
+                            {slot.place.name}
+                          </h3>
+                          <p className="text-[#A3C2B2] text-xs leading-relaxed mt-1.5 mb-2">
+                            {slot.place.description}
+                          </p>
+
+                          {editingNoteIndex === index ? (
+                            <div className="flex items-center gap-2 mb-2 print:hidden">
+                              <input
+                                type="text"
+                                value={editNoteValue}
+                                onChange={(e) => setEditNoteValue(e.target.value)}
+                                placeholder="Add a personal note..."
+                                className="flex-1 bg-[#0B1914] border border-[#2C5E3B] rounded-lg py-1.5 px-3 text-xs text-white placeholder-[#A3C2B2]/40 focus:outline-none focus:border-[#C69234]"
+                                autoFocus
+                              />
+                              <button
+                                onClick={() => handleSaveNote(currentDayData.dayNumber, index)}
+                                className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 transition-all"
+                              >
+                                <Check size={13} />
+                              </button>
+                              <button
+                                onClick={() => { setEditingNoteIndex(null); setEditNoteValue(''); }}
+                                className="p-1.5 rounded-lg bg-rose-500/20 text-rose-400 transition-all"
+                              >
+                                <X size={13} />
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="print:hidden">
+                              {slot.notes ? (
+                                <button
+                                  onClick={() => handleStartEditNote(index, slot.notes || '')}
+                                  className="text-[10px] text-[#C69234] hover:underline italic flex items-center gap-1 mb-2 transition-colors"
+                                >
+                                  <Pencil size={9} /> {slot.notes}
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => handleStartEditNote(index, '')}
+                                  className="text-[10px] text-[#A3C2B2]/60 hover:text-[#C69234] flex items-center gap-1 mb-2 transition-colors"
+                                >
+                                  <Pencil size={9} /> Add note
+                                </button>
+                              )}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex items-center justify-between border-t border-[#2C5E3B]/60 pt-3 text-[11px] text-[#A3C2B2]">
+                          <div className="flex gap-4">
+                            {editingDurationIndex === index ? (
+                              <span className="flex items-center gap-1 print:hidden">
+                                <Clock size={11} />
+                                <input
+                                  type="number"
+                                  value={editDurationValue}
+                                  onChange={(e) => setEditDurationValue(e.target.value)}
+                                  className="w-12 bg-[#0B1914] border border-[#2C5E3B] rounded px-1 py-0.5 text-[10px] text-white outline-none"
+                                  autoFocus
+                                  min={10}
+                                  max={480}
+                                />
+                                <span className="text-[9px]">mins</span>
+                                <button onClick={() => handleSaveDuration(currentDayData.dayNumber, index)} className="text-emerald-400"><Check size={11} /></button>
+                                <button onClick={() => { setEditingDurationIndex(null); }} className="text-rose-400"><X size={11} /></button>
+                              </span>
+                            ) : (
+                              <span
+                                className="flex items-center gap-1 cursor-pointer hover:text-[#C69234] transition-colors print:cursor-default"
+                                onClick={() => handleStartEditDuration(index, slot.duration)}
+                              >
+                                <Clock size={11} />
+                                {slot.duration} mins
+                                <Pencil size={8} className="opacity-0 group-hover:opacity-50 print:hidden" />
+                              </span>
+                            )}
+                            {slot.place.entry_fee !== undefined && (
+                              <span>
+                                Fee: {slot.place.entry_fee === 0 ? 'Free' : `₹${slot.place.entry_fee}`}
+                              </span>
+                            )}
+                          </div>
+
+                          <a
+                            href={`https://www.google.com/maps/dir/?api=1&destination=${slot.place.latitude},${slot.place.longitude}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#C69234] hover:underline font-bold uppercase tracking-widest text-[10px] flex items-center gap-1.5"
+                          >
+                            Directions
+                            <ArrowRight size={10} />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="lg:col-span-5 h-[450px] lg:h-[580px] lg:sticky lg:top-28 print:hidden">
+            <div className="h-full bg-[#143028] border border-[#2C5E3B] rounded-3xl overflow-hidden shadow-xl p-3 flex flex-col">
+              <div className="flex items-center gap-2 mb-3 px-2">
+                <MapPin size={16} className="text-[#C69234]" />
+                <span className="text-xs font-bold uppercase tracking-widest text-white">Day {activeDay} Route Visualization</span>
+              </div>
+              <div className="flex-1 rounded-2xl overflow-hidden border border-[#2C5E3B]/60">
+                <LeafletMap
+                  items={mapItems}
+                  center={routePoints[0] || [20.5937, 78.9629]}
+                  zoom={12}
+                  routePoints={routePoints}
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  );
+}
