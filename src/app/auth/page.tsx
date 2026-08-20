@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { useAppStore } from '@/store';
 import { useRouter } from 'next/navigation';
-import { Globe, Mail, Lock, User, Eye, EyeOff, Chrome, ArrowLeft, ShieldCheck, Check, X } from 'lucide-react';
+import { Globe, Mail, Lock, User, Eye, EyeOff, ArrowLeft, ShieldCheck, Check, X } from 'lucide-react';
 import Link from 'next/link';
 
 type Mode = 'signin' | 'signup' | 'forgot';
@@ -255,19 +255,6 @@ export default function AuthPage() {
     }
   };
 
-  const handleGoogle = async () => {
-    setLoading(true);
-    setError('');
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
-    });
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
   return (
     <main className="min-h-screen bg-[#0B1914] flex items-center justify-center px-6 relative overflow-hidden text-[#F0F7F4] transition-colors duration-300">
       {/* Background effect */}
@@ -300,25 +287,6 @@ export default function AuthPage() {
 
         {/* Card */}
         <div className="bg-[#143028] backdrop-blur-xl border border-[#2C5E3B] rounded-3xl p-8 shadow-2xl">
-          {mode !== 'forgot' && (
-            <>
-              <button
-                onClick={handleGoogle}
-                disabled={loading}
-                className="w-full flex items-center justify-center gap-3 py-3.5 rounded-2xl border border-[#2C5E3B] bg-[#1B432C] hover:border-[#C69234] transition-all duration-300 text-white text-sm font-semibold mb-6 shadow-sm"
-              >
-                <Chrome size={18} className="text-[#C69234]" />
-                Continue with Google
-              </button>
-
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex-1 h-px bg-[#2C5E3B]" />
-                <span className="text-[#A3C2B2] text-xs uppercase tracking-widest font-semibold">or</span>
-                <div className="flex-1 h-px bg-[#2C5E3B]" />
-              </div>
-            </>
-          )}
-
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === 'signup' && (
               <div className="relative">
