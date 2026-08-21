@@ -188,30 +188,43 @@ function ProfileContent() {
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file || !user) return;
+    if (!file) return;
+
+    const activeUserId = user?.id || profile?.id || 'local-user-id';
     try {
-      const url = await uploadAvatar(user.id, file);
-      if (profile) {
-        setProfile({ ...profile, avatar_url: url });
-      } else {
-        setProfile({ id: user.id, avatar_url: url });
+      const url = await uploadAvatar(activeUserId, file);
+      const newProfile = { ...(profile || { id: activeUserId }), avatar_url: url };
+      setProfile(newProfile);
+      if (user) {
+        setUser({ ...user, user_metadata: { ...user.user_metadata, avatar_url: url } });
       }
-      toast.success('Avatar updated successfully!');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('local_session_profile', JSON.stringify(newProfile));
+      }
+      setShowAvatarMenu(false);
+      toast.success('Profile picture updated successfully!');
     } catch (err: any) {
+      console.error('Avatar upload error:', err);
       toast.error('Failed to upload avatar');
     }
   };
 
   const handleRemoveAvatar = async () => {
-    if (!user) return;
+    const activeUserId = user?.id || profile?.id || 'local-user-id';
     try {
-      await removeAvatar(user.id);
-      if (profile) {
-        setProfile({ ...profile, avatar_url: '' });
+      await removeAvatar(activeUserId);
+      const newProfile = { ...(profile || { id: activeUserId }), avatar_url: '' };
+      setProfile(newProfile);
+      if (user) {
+        setUser({ ...user, user_metadata: { ...user.user_metadata, avatar_url: '' } });
+      }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('local_session_profile', JSON.stringify(newProfile));
       }
       setShowAvatarMenu(false);
       toast.success('Profile picture removed!');
     } catch (err: any) {
+      console.error('Remove avatar error:', err);
       toast.error('Failed to remove photo');
     }
   };
@@ -317,9 +330,15 @@ function ProfileContent() {
             <div className="relative">
               <button
                 type="button"
-                onClick={() => setShowAvatarMenu(!showAvatarMenu)}
+                onClick={() => {
+                  if (!profile?.avatar_url && !user?.user_metadata?.avatar_url) {
+                    fileInputRef.current?.click();
+                  } else {
+                    setShowAvatarMenu(!showAvatarMenu);
+                  }
+                }}
                 className="relative group block rounded-full focus:outline-none focus:ring-2 focus:ring-[#C69234]"
-                title="Click to change profile picture"
+                title="Click to upload or manage profile picture"
               >
                 <div className="w-24 h-24 rounded-full bg-[#1B432C] border-2 border-[#2C5E3B] flex items-center justify-center overflow-hidden shadow-md group-hover:border-[#C69234] transition-all">
                   {profile?.avatar_url || user?.user_metadata?.avatar_url ? (

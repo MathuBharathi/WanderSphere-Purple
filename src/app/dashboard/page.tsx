@@ -49,16 +49,11 @@ export default function DashboardPage() {
         }
       }
 
-      if (activeUserId) {
-        loadDashboardData(activeUserId);
-      } else {
-        // Fallback load for guest session
-        loadDashboardData('guest-user');
-      }
+      await loadDashboardData(activeUserId);
     };
     initDashboard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, []);
 
   // Load itineraries and wishlist places
   const loadDashboardData = async (userId: string) => {

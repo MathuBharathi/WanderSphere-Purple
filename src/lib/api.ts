@@ -386,64 +386,64 @@ export async function removeAvatar(userId: string): Promise<void> {
 export async function createItinerary(itinerary: Partial<SavedItinerary>): Promise<SavedItinerary> {
   // 1. Determine effective user ID
   let activeUserId = itinerary.user_id;
-  if (!activeUserId) {
+
+  if (!activeUserId || activeUserId === 'guest-user' || activeUserId === 'local-user-id') {
     try {
       const { data } = await supabase.auth.getUser();
       if (data?.user?.id) activeUserId = data.user.id;
     } catch {}
   }
 
-  // 2. Validate UUID string format for Supabase database compatibility
-  const isValidUuid = typeof activeUserId === 'string' && 
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(activeUserId);
+  // Fallback valid UUID for unauthenticated/guest itineraries so Supabase DB accepts insert
+  if (!activeUserId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(activeUserId)) {
+    activeUserId = '00000000-0000-0000-0000-000000000000';
+  }
 
   let savedItinerary: SavedItinerary | null = null;
 
-  // 3. Attempt Supabase DB Insert if activeUserId is a valid UUID
-  if (isValidUuid) {
-    try {
-      const payload = {
-        user_id: activeUserId,
-        title: itinerary.title || 'My Travel Plan',
-        description: JSON.stringify({
-          config: itinerary.config,
-          itinerary_data: itinerary.itinerary_data
-        }),
-        cover_image: itinerary.itinerary_data?.config?.cityName 
-          ? getCityImageUrl(itinerary.itinerary_data.config.cityName)
-          : undefined,
-        is_public: itinerary.is_public || false
-      };
+  // 2. Attempt Supabase DB Insert
+  try {
+    const payload = {
+      user_id: activeUserId,
+      title: itinerary.title || 'My Travel Plan',
+      description: JSON.stringify({
+        config: itinerary.config,
+        itinerary_data: itinerary.itinerary_data
+      }),
+      cover_image: itinerary.itinerary_data?.config?.cityName 
+        ? getCityImageUrl(itinerary.itinerary_data.config.cityName)
+        : undefined,
+      is_public: true
+    };
 
-      const { data, error } = await supabase.from('itineraries').insert(payload).select().single();
-      if (!error && data) {
-        const parsed = JSON.parse(data.description);
-        savedItinerary = {
-          id: data.id,
-          user_id: data.user_id,
-          title: data.title,
-          config: parsed.config,
-          itinerary_data: parsed.itinerary_data,
-          is_public: data.is_public,
-          created_at: data.created_at
-        };
-      } else if (error) {
-        console.warn('Supabase createItinerary DB error:', error.message);
-      }
-    } catch (e: any) {
-      console.warn('Supabase createItinerary failed:', e.message);
+    const { data, error } = await supabase.from('itineraries').insert(payload).select().single();
+    if (!error && data) {
+      const parsed = JSON.parse(data.description);
+      savedItinerary = {
+        id: data.id,
+        user_id: data.user_id,
+        title: data.title,
+        config: parsed.config,
+        itinerary_data: parsed.itinerary_data,
+        is_public: data.is_public,
+        created_at: data.created_at
+      };
+    } else if (error) {
+      console.warn('Supabase createItinerary DB error:', error.message);
     }
+  } catch (e: any) {
+    console.warn('Supabase createItinerary failed:', e.message);
   }
 
-  // 4. Fallback / Client dual persistence in localStorage
+  // 3. Fallback / Client dual persistence in localStorage
   if (!savedItinerary) {
     savedItinerary = {
       id: `local-itin-${Date.now()}`,
-      user_id: activeUserId || 'guest-user',
+      user_id: activeUserId,
       title: itinerary.title || 'My Travel Plan',
       config: itinerary.config!,
       itinerary_data: itinerary.itinerary_data!,
-      is_public: itinerary.is_public || false,
+      is_public: true,
       created_at: new Date().toISOString()
     };
   }
@@ -479,7 +479,7 @@ export async function updateItinerary(id: string, updates: Partial<SavedItinerar
     if (error) throw error;
 
     const parsed = JSON.parse(data.description);
-    return {
+    const updated = {
       id: data.id,
       user_id: data.user_id,
       title: data.title,
@@ -488,6 +488,19 @@ export async function updateItinerary(id: string, updates: Partial<SavedItinerar
       is_public: data.is_public,
       created_at: data.created_at
     };
+
+    if (typeof window !== 'undefined') {
+      try {
+        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
+        const idx = localItins.findIndex((item: any) => item.id === id);
+        if (idx !== -1) {
+          localItins[idx] = updated;
+          localStorage.setItem('local_itineraries', JSON.stringify(localItins));
+        }
+      } catch (_) {}
+    }
+
+    return updated;
   } catch (e: any) {
     console.warn('Supabase updateItinerary failed, updating local itineraries:', e.message);
     if (typeof window !== 'undefined') {
@@ -567,13 +580,11 @@ export async function getUserItineraries(userId?: string): Promise<SavedItinerar
   const resultsMap = new Map<string, SavedItinerary>();
 
   try {
-    let query = supabase.from('itineraries').select('*').order('created_at', { ascending: false });
-    
-    if (userId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)) {
-      query = query.eq('user_id', userId);
-    }
+    const { data, error } = await supabase
+      .from('itineraries')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-    const { data, error } = await query;
     if (!error && data) {
       for (const item of data) {
         try {
