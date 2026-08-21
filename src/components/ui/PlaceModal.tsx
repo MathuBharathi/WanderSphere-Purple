@@ -6,6 +6,7 @@ import {
   Sun, Camera, ExternalLink, Heart, Share2, Loader2
 } from 'lucide-react';
 import { getPlaceImages, getReviewsByPlace } from '@/lib/api';
+import { getPlaceImageUrl } from '@/lib/placeImages';
 import { MasonryGallery } from '@/components/gallery/MasonryGallery';
 import { ReviewForm } from '@/components/ui/ReviewForm';
 import { useAppStore } from '@/store';
@@ -29,11 +30,11 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
   const [reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     loadData();
     return () => { document.body.style.overflow = ''; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place.id]);
 
   const loadData = async () => {
@@ -113,7 +114,7 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
         <div className="relative h-64 md:h-80 overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800'})` }}
+            style={{ backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#143028] via-[#143028]/40 to-transparent" />
 

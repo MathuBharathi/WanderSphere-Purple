@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Loader2, Star } from 'lucide-react';
 import { getHiddenGems } from '@/lib/api';
+import { getPlaceImageUrl } from '@/lib/placeImages';
 import { useRouter } from 'next/navigation';
 import type { Place } from '@/types';
 
@@ -76,7 +77,7 @@ export function HiddenGemsSection() {
                   <div
                     className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{
-                      backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600'})`,
+                      backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})`,
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B1914]/90 to-transparent" />

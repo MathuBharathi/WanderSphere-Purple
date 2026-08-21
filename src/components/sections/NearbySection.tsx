@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Loader2, Compass, Sparkles, Navigation, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAppStore } from '@/store';
 import { getNearbyCities, getNearbyPlaces, getFeaturedCities, getFeaturedPlaces } from '@/lib/api';
+import { getCityImageUrl, getPlaceImageUrl } from '@/lib/placeImages';
 import { useRouter } from 'next/navigation';
 import type { City, Place } from '@/types';
 
@@ -240,7 +241,9 @@ export function NearbySection() {
                     : (item as Place).distance_km 
                       ? `${Math.round((item as Place).distance_km!)} km away` 
                       : (item as Place).city_name;
-                  const imgUrl = item.cover_image || `https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80`;
+                  const imgUrl = isCitiesTab
+                    ? getCityImageUrl(item.name, item.cover_image)
+                    : getPlaceImageUrl(item.name, (item as Place).category, item.cover_image);
 
                   return (
                     <motion.div

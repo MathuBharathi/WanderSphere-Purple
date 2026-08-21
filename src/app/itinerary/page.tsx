@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/store';
 import { useRouter } from 'next/navigation';
 import { createItinerary, updateItinerary } from '@/lib/api';
+import { getPlaceImageUrl } from '@/lib/placeImages';
 import { cityTransportInfo } from '@/data/travelData';
 import { 
   Calendar, MapPin, Download, Save, Share2, Sparkles, Clock, 
@@ -514,12 +515,10 @@ export default function ItineraryPage() {
                     </div>
 
                     <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
-                      {slot.place.cover_image && (
-                        <div
-                          className="w-full sm:w-36 h-32 sm:h-auto bg-cover bg-center shrink-0"
-                          style={{ backgroundImage: `url(${slot.place.cover_image})` }}
-                        />
-                      )}
+                      <div
+                        className="w-full sm:w-36 h-32 sm:h-auto bg-cover bg-center shrink-0"
+                        style={{ backgroundImage: `url(${getPlaceImageUrl(slot.place.name, slot.place.category, slot.place.cover_image)})` }}
+                      />
                       <div className="p-4 flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between gap-2">

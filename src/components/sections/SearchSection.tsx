@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ChevronDown, Navigation, Sparkles, Clock, Compass, DollarSign, SlidersHorizontal, Loader2 } from 'lucide-react';
+import { Search, ChevronDown, Navigation, Sparkles, Clock, Compass, DollarSign, SlidersHorizontal, Loader2, Eye, ArrowRight } from 'lucide-react';
 import { getStates, getCitiesByState, getNearbyCities, createItinerary } from '@/lib/api';
 import { generateItinerary } from '@/lib/itineraryEngine';
 import { useAppStore } from '@/store';
@@ -18,7 +18,8 @@ export function SearchSection() {
     setSelectedCity,
     setGeneratedItinerary,
     setItineraryConfig,
-    setCurrentItineraryId
+    setCurrentItineraryId,
+    generatedItinerary
   } = useAppStore();
 
   const [states, setStates] = useState<State[]>([]);
@@ -360,16 +361,16 @@ export function SearchSection() {
                     <DollarSign size={12} />
                     Budget Level
                   </label>
-                  <div className="grid grid-cols-3 gap-2 bg-[#1B432C] p-1 rounded-xl border border-[#2C5E3B]/40">
+                  <div className="flex items-center bg-[#1B432C] p-1 rounded-xl border border-[#2C5E3B]/40 w-full overflow-hidden">
                     {(['budget', 'moderate', 'luxury'] as BudgetLevel[]).map((level) => (
                       <button
                         key={level}
                         type="button"
                         onClick={() => setBudget(level)}
-                        className={`py-2 text-2xs font-bold uppercase tracking-wider rounded-lg transition-all ${
+                        className={`flex-1 py-2 px-1 text-[10px] sm:text-xs font-extrabold uppercase tracking-tight text-center rounded-lg transition-all truncate ${
                           budget === level
-                            ? 'bg-[#C69234] text-[#0B1914] shadow-sm font-black'
-                            : 'text-[#A3C2B2] hover:bg-[#2C5E3B]/50'
+                            ? 'bg-[#C69234] text-[#0B1914] shadow-md'
+                            : 'text-[#A3C2B2] hover:bg-[#2C5E3B]/50 hover:text-white'
                         }`}
                       >
                         {level}
@@ -402,8 +403,20 @@ export function SearchSection() {
                 </div>
               </div>
 
-              {/* Start Generating button */}
-              <div className="flex justify-end pt-2">
+              {/* Start Generating & View Itinerary buttons */}
+              <div className="flex flex-wrap items-center justify-end gap-3 pt-2">
+                {generatedItinerary && (
+                  <button
+                    type="button"
+                    onClick={() => router.push('/itinerary')}
+                    className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1B432C] border border-[#C69234] text-[#C69234] text-xs font-extrabold uppercase tracking-wider hover:bg-[#C69234] hover:text-[#0B1914] transition-all shadow-md"
+                  >
+                    <Eye size={14} />
+                    <span>View Itinerary</span>
+                    <ArrowRight size={14} />
+                  </button>
+                )}
+
                 <button
                   type="button"
                   onClick={handleGenerate}

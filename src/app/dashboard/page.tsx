@@ -23,41 +23,42 @@ export default function DashboardPage() {
   // 1. Authenticate user — check Zustand store first, then Supabase session
   useEffect(() => {
     const initDashboard = async () => {
-      // If user is already loaded in the store (from AuthProvider), use that
-      if (user) {
-        loadDashboardData(user.id);
-        return;
-      }
-      // Otherwise try Supabase session
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session?.user) {
-          setUser(session.user);
-          loadDashboardData(session.user.id);
-          return;
+      let activeUserId = user?.id;
+
+      if (!activeUserId) {
+        try {
+          const { data } = await supabase.auth.getUser();
+          if (data?.user) {
+            activeUserId = data.user.id;
+            setUser(data.user);
+          }
+        } catch (e) {
+          console.warn('Supabase session check failed:', e);
         }
-      } catch (e) {
-        console.warn('Supabase session check failed:', e);
       }
-      // Check for local session fallback
-      if (typeof window !== 'undefined') {
+
+      if (!activeUserId && typeof window !== 'undefined') {
         try {
           const localUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-          if (localUser) {
+          if (localUser?.id) {
+            activeUserId = localUser.id;
             setUser(localUser);
-            loadDashboardData(localUser.id);
-            return;
           }
         } catch (e) {
           console.warn('Local session check failed:', e);
         }
       }
-      // No session at all — redirect to auth
-      router.push('/auth');
+
+      if (activeUserId) {
+        loadDashboardData(activeUserId);
+      } else {
+        // Fallback load for guest session
+        loadDashboardData('guest-user');
+      }
     };
     initDashboard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   // Load itineraries and wishlist places
   const loadDashboardData = async (userId: string) => {

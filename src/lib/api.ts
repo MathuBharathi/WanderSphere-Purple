@@ -1,6 +1,7 @@
 import { supabase } from './supabase';
 import type { City, Place, State, Profile, SavedItinerary, ItineraryConfig, GeneratedItinerary, PlaceFilters, WeatherData } from '../types';
 import { states, cities, places } from '../data/travelData';
+import { getCityImageUrl } from './placeImages';
 
 // ─── Distance Helpers ───────────────────────────────────────────────────────
 function deg2rad(deg: number): number {
@@ -349,67 +350,117 @@ export async function getPublicProfile(username: string): Promise<Profile | null
 }
 
 export async function uploadAvatar(userId: string, file: File): Promise<string> {
-  const ext = file.name.split('.').pop();
-  const path = `${userId}/avatar.${ext}`;
-  const { error } = await supabase.storage.from('user-avatars').upload(path, file, { upsert: true });
-  if (error) throw error;
-  const { data } = supabase.storage.from('user-avatars').getPublicUrl(path);
-  await updateProfile(userId, { avatar_url: data.publicUrl });
-  return data.publicUrl;
+  try {
+    const ext = file.name.split('.').pop() || 'png';
+    const path = `${userId}/avatar.${ext}`;
+    const { error } = await supabase.storage.from('user-avatars').upload(path, file, { upsert: true });
+    if (error) throw error;
+    const { data } = supabase.storage.from('user-avatars').getPublicUrl(path);
+    const publicUrl = data.publicUrl;
+    await updateProfile(userId, { avatar_url: publicUrl });
+    return publicUrl;
+  } catch (err: any) {
+    console.warn('Supabase storage avatar upload failed, using DataURL fallback:', err.message);
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Url = reader.result as string;
+        try {
+          await updateProfile(userId, { avatar_url: base64Url });
+          resolve(base64Url);
+        } catch (e) {
+          reject(e);
+        }
+      };
+      reader.onerror = () => reject(new Error('Failed to read image file'));
+      reader.readAsDataURL(file);
+    });
+  }
+}
+
+export async function removeAvatar(userId: string): Promise<void> {
+  await updateProfile(userId, { avatar_url: '' });
 }
 
 // ─── Itineraries (Supabase backend wrapper using serialized JSON in description) ─
 export async function createItinerary(itinerary: Partial<SavedItinerary>): Promise<SavedItinerary> {
-  const payload = {
-    user_id: itinerary.user_id,
-    title: itinerary.title,
-    description: JSON.stringify({
-      config: itinerary.config,
-      itinerary_data: itinerary.itinerary_data
-    }),
-    cover_image: itinerary.itinerary_data?.config?.cityId 
-      ? cities.find(c => c.id === itinerary.itinerary_data?.config?.cityId)?.cover_image 
-      : undefined,
-    is_public: itinerary.is_public || false
-  };
-
-  try {
-    const { data, error } = await supabase.from('itineraries').insert(payload).select().single();
-    if (error) throw error;
-
-    const parsed = JSON.parse(data.description);
-    return {
-      id: data.id,
-      user_id: data.user_id,
-      title: data.title,
-      config: parsed.config,
-      itinerary_data: parsed.itinerary_data,
-      is_public: data.is_public,
-      created_at: data.created_at
-    };
-  } catch (e: any) {
-    console.warn('Supabase createItinerary failed, falling back to local itineraries:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-        const newItin: SavedItinerary = {
-          id: `local-itin-${Date.now()}`,
-          user_id: itinerary.user_id || 'local-user-id',
-          title: itinerary.title || 'My Local Trip',
-          config: itinerary.config!,
-          itinerary_data: itinerary.itinerary_data!,
-          is_public: itinerary.is_public || false,
-          created_at: new Date().toISOString()
-        };
-        localItins.unshift(newItin);
-        localStorage.setItem('local_itineraries', JSON.stringify(localItins));
-        return newItin;
-      } catch (err) {
-        console.error('Failed to save itinerary locally', err);
-      }
-    }
-    throw e;
+  // 1. Determine effective user ID
+  let activeUserId = itinerary.user_id;
+  if (!activeUserId) {
+    try {
+      const { data } = await supabase.auth.getUser();
+      if (data?.user?.id) activeUserId = data.user.id;
+    } catch {}
   }
+
+  // 2. Validate UUID string format for Supabase database compatibility
+  const isValidUuid = typeof activeUserId === 'string' && 
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(activeUserId);
+
+  let savedItinerary: SavedItinerary | null = null;
+
+  // 3. Attempt Supabase DB Insert if activeUserId is a valid UUID
+  if (isValidUuid) {
+    try {
+      const payload = {
+        user_id: activeUserId,
+        title: itinerary.title || 'My Travel Plan',
+        description: JSON.stringify({
+          config: itinerary.config,
+          itinerary_data: itinerary.itinerary_data
+        }),
+        cover_image: itinerary.itinerary_data?.config?.cityName 
+          ? getCityImageUrl(itinerary.itinerary_data.config.cityName)
+          : undefined,
+        is_public: itinerary.is_public || false
+      };
+
+      const { data, error } = await supabase.from('itineraries').insert(payload).select().single();
+      if (!error && data) {
+        const parsed = JSON.parse(data.description);
+        savedItinerary = {
+          id: data.id,
+          user_id: data.user_id,
+          title: data.title,
+          config: parsed.config,
+          itinerary_data: parsed.itinerary_data,
+          is_public: data.is_public,
+          created_at: data.created_at
+        };
+      } else if (error) {
+        console.warn('Supabase createItinerary DB error:', error.message);
+      }
+    } catch (e: any) {
+      console.warn('Supabase createItinerary failed:', e.message);
+    }
+  }
+
+  // 4. Fallback / Client dual persistence in localStorage
+  if (!savedItinerary) {
+    savedItinerary = {
+      id: `local-itin-${Date.now()}`,
+      user_id: activeUserId || 'guest-user',
+      title: itinerary.title || 'My Travel Plan',
+      config: itinerary.config!,
+      itinerary_data: itinerary.itinerary_data!,
+      is_public: itinerary.is_public || false,
+      created_at: new Date().toISOString()
+    };
+  }
+
+  // Sync to localStorage
+  if (typeof window !== 'undefined') {
+    try {
+      const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
+      const filtered = localItins.filter((i: any) => i.id !== savedItinerary!.id);
+      filtered.unshift(savedItinerary);
+      localStorage.setItem('local_itineraries', JSON.stringify(filtered));
+    } catch (err) {
+      console.error('Failed to sync local_itineraries', err);
+    }
+  }
+
+  return savedItinerary;
 }
 
 export async function updateItinerary(id: string, updates: Partial<SavedItinerary>): Promise<SavedItinerary> {
@@ -470,17 +521,15 @@ export async function deleteItinerary(id: string): Promise<void> {
     if (error) throw error;
   } catch (e: any) {
     console.warn('Supabase deleteItinerary failed, deleting local itineraries:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-        const filtered = localItins.filter((item: any) => item.id !== id);
-        localStorage.setItem('local_itineraries', JSON.stringify(filtered));
-        return;
-      } catch (err) {
-        console.error('Failed to delete local itinerary', err);
-      }
+  }
+  if (typeof window !== 'undefined') {
+    try {
+      const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
+      const filtered = localItins.filter((item: any) => item.id !== id);
+      localStorage.setItem('local_itineraries', JSON.stringify(filtered));
+    } catch (err) {
+      console.error('Failed to delete local itinerary', err);
     }
-    throw e;
   }
 }
 
@@ -514,44 +563,55 @@ export async function getItineraryById(id: string): Promise<SavedItinerary | nul
   }
 }
 
-export async function getUserItineraries(userId: string): Promise<SavedItinerary[]> {
-  try {
-    const { data, error } = await supabase
-      .from('itineraries')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
-    if (error) throw error;
+export async function getUserItineraries(userId?: string): Promise<SavedItinerary[]> {
+  const resultsMap = new Map<string, SavedItinerary>();
 
-    const results: SavedItinerary[] = [];
-    for (const item of data) {
-      try {
-        const parsed = JSON.parse(item.description);
-        results.push({
-          id: item.id,
-          user_id: item.user_id,
-          title: item.title,
-          config: parsed.config,
-          itinerary_data: parsed.itinerary_data,
-          is_public: item.is_public,
-          created_at: item.created_at
-        });
-      } catch {
-        // Ignore corrupted rows
+  try {
+    let query = supabase.from('itineraries').select('*').order('created_at', { ascending: false });
+    
+    if (userId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)) {
+      query = query.eq('user_id', userId);
+    }
+
+    const { data, error } = await query;
+    if (!error && data) {
+      for (const item of data) {
+        try {
+          const parsed = JSON.parse(item.description);
+          resultsMap.set(item.id, {
+            id: item.id,
+            user_id: item.user_id,
+            title: item.title,
+            config: parsed.config,
+            itinerary_data: parsed.itinerary_data,
+            is_public: item.is_public,
+            created_at: item.created_at
+          });
+        } catch {
+          // Ignore corrupted rows
+        }
       }
     }
-    return results;
   } catch (e: any) {
-    console.warn('Supabase getUserItineraries failed, returning local itineraries:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        return JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-      } catch (err) {
-        console.error('Failed to read local itineraries list', err);
-      }
-    }
-    return [];
+    console.warn('Supabase getUserItineraries failed:', e.message);
   }
+
+  if (typeof window !== 'undefined') {
+    try {
+      const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
+      for (const localItin of localItins) {
+        if (!resultsMap.has(localItin.id)) {
+          resultsMap.set(localItin.id, localItin);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to read local itineraries list', err);
+    }
+  }
+
+  const merged = Array.from(resultsMap.values());
+  merged.sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
+  return merged;
 }
 
 export async function getItineraryByShareCode(code: string): Promise<SavedItinerary | null> {

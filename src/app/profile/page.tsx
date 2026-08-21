@@ -1,13 +1,13 @@
 'use client';
-import { useEffect, useState, Suspense } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { updateProfile, getUserItineraries, uploadAvatar, deleteItinerary, changePassword, changeEmail } from '@/lib/api';
+import { updateProfile, getUserItineraries, uploadAvatar, removeAvatar, deleteItinerary, changePassword, changeEmail } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   User, Heart, Map, Settings, LogOut, Globe, Loader2,
   Camera, MapPin, Calendar, Trash2, ChevronRight, ArrowLeft,
-  Phone, Lock, Mail, Pencil, Eye, EyeOff, Check, X
+  Phone, Lock, Mail, Pencil, Eye, EyeOff, Check, X, Upload
 } from 'lucide-react';
 import { NavDock } from '@/components/dock/NavDock';
 import { Footer } from '@/components/ui/Footer';
@@ -182,6 +182,10 @@ function ProfileContent() {
     }
   };
 
+  // Avatar menu dropdown state
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !user) return;
@@ -189,10 +193,26 @@ function ProfileContent() {
       const url = await uploadAvatar(user.id, file);
       if (profile) {
         setProfile({ ...profile, avatar_url: url });
+      } else {
+        setProfile({ id: user.id, avatar_url: url });
       }
       toast.success('Avatar updated successfully!');
     } catch (err: any) {
       toast.error('Failed to upload avatar');
+    }
+  };
+
+  const handleRemoveAvatar = async () => {
+    if (!user) return;
+    try {
+      await removeAvatar(user.id);
+      if (profile) {
+        setProfile({ ...profile, avatar_url: '' });
+      }
+      setShowAvatarMenu(false);
+      toast.success('Profile picture removed!');
+    } catch (err: any) {
+      toast.error('Failed to remove photo');
     }
   };
 
@@ -293,21 +313,74 @@ function ProfileContent() {
           </button>
 
           <div className="flex items-center gap-6">
-            {/* Avatar upload */}
-            <div className="relative group">
-              <div className="w-24 h-24 rounded-full bg-[#1B432C] border-2 border-[#2C5E3B] flex items-center justify-center overflow-hidden shadow-md">
-                {profile?.avatar_url || user?.user_metadata?.avatar_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={profile?.avatar_url || user.user_metadata.avatar_url} alt="" className="w-full h-full object-cover" />
-                ) : (
-                  <User size={36} className="text-[#C69234]" />
+            {/* Avatar upload dropdown */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowAvatarMenu(!showAvatarMenu)}
+                className="relative group block rounded-full focus:outline-none focus:ring-2 focus:ring-[#C69234]"
+                title="Click to change profile picture"
+              >
+                <div className="w-24 h-24 rounded-full bg-[#1B432C] border-2 border-[#2C5E3B] flex items-center justify-center overflow-hidden shadow-md group-hover:border-[#C69234] transition-all">
+                  {profile?.avatar_url || user?.user_metadata?.avatar_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={profile?.avatar_url || user.user_metadata.avatar_url} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <User size={36} className="text-[#C69234]" />
+                  )}
+                </div>
+                <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <Camera size={20} className="text-white" />
+                </div>
+                <div className="absolute bottom-0 right-0 w-7 h-7 bg-[#C69234] rounded-full border-2 border-[#0B1914] flex items-center justify-center shadow-md">
+                  <Camera size={12} className="text-[#0B1914]" />
+                </div>
+              </button>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  handleAvatarUpload(e);
+                  setShowAvatarMenu(false);
+                }}
+              />
+
+              <AnimatePresence>
+                {showAvatarMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 mt-3 w-52 bg-[#143028] border border-[#2C5E3B] rounded-2xl p-1.5 shadow-2xl z-50 backdrop-blur-xl"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        fileInputRef.current?.click();
+                      }}
+                      className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white hover:bg-[#1B432C] hover:text-[#C69234] transition-all text-left"
+                    >
+                      <Upload size={14} className="text-[#C69234]" />
+                      <span>Upload New Picture</span>
+                    </button>
+
+                    {(profile?.avatar_url || user?.user_metadata?.avatar_url) && (
+                      <button
+                        type="button"
+                        onClick={handleRemoveAvatar}
+                        className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/30 transition-all text-left border-t border-[#2C5E3B]/40 mt-1 pt-2"
+                      >
+                        <Trash2 size={14} className="text-rose-400" />
+                        <span>Remove Picture</span>
+                      </button>
+                    )}
+                  </motion.div>
                 )}
-              </div>
-              <label className="absolute inset-0 cursor-pointer flex items-center justify-center rounded-full bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Camera size={18} className="text-white" />
-                <input type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} />
-              </label>
-              <div className="absolute bottom-0 right-0 w-6 h-6 bg-[#C69234] rounded-full border-2 border-[#0B1914]" />
+              </AnimatePresence>
             </div>
 
             <div>

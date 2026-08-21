@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, MapPin, Thermometer, Clock, Star, Loader2,
   Globe, Camera, Coffee, ShoppingBag, Moon, Sparkles,
-  Landmark, TreePine, Utensils, Zap, Compass, DollarSign, X
+  Landmark, TreePine, Utensils, Zap, Compass, DollarSign, X, Eye, ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
-import { getCityById, getPlacesByCity, getWeather } from '@/lib/api';
+import { getCityById, getPlacesByCity, getWeather, createItinerary } from '@/lib/api';
 import { generateItinerary } from '@/lib/itineraryEngine';
 import { MasonryGallery } from '@/components/gallery/MasonryGallery';
 import { PlaceModal } from '@/components/ui/PlaceModal';
@@ -73,7 +73,7 @@ function CityContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const openPlaceId = searchParams.get('place');
-  const { setGeneratedItinerary, setItineraryConfig } = useAppStore();
+  const { user, generatedItinerary, setGeneratedItinerary, setItineraryConfig, setCurrentItineraryId } = useAppStore();
 
   const [city, setCity] = useState<City | null>(null);
   const [places, setPlaces] = useState<Place[]>([]);
@@ -127,7 +127,7 @@ function CityContent() {
   const handleGenerateItinerary = () => {
     if (!city) return;
     setGenerating(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       const config = {
         stateId: city.state_id,
         stateName: city.state_name || 'State',
@@ -140,6 +140,20 @@ function CityContent() {
       const itinerary = generateItinerary(config);
       setItineraryConfig(config);
       setGeneratedItinerary(itinerary);
+
+      try {
+        const saved = await createItinerary({
+          user_id: user?.id || 'local-user-id',
+          title: `Trip to ${config.cityName}`,
+          config,
+          itinerary_data: itinerary,
+          is_public: false
+        });
+        setCurrentItineraryId(saved.id);
+      } catch (e) {
+        console.warn('City page auto-save failed:', e);
+      }
+
       setGenerating(false);
       setShowGenModal(false);
       router.push('/itinerary');
@@ -436,16 +450,16 @@ function CityContent() {
                     <DollarSign size={12} />
                     Budget Level
                   </label>
-                  <div className="grid grid-cols-3 gap-2 bg-[#1B432C] p-1 rounded-xl border border-[#2C5E3B]/40">
+                  <div className="flex items-center bg-[#1B432C] p-1 rounded-xl border border-[#2C5E3B]/40 w-full overflow-hidden">
                     {(['budget', 'moderate', 'luxury'] as BudgetLevel[]).map((level) => (
                       <button
                         key={level}
                         type="button"
                         onClick={() => setBudget(level)}
-                        className={`py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all ${
+                        className={`flex-1 py-2 px-1 text-[10px] sm:text-xs font-extrabold uppercase tracking-tight text-center rounded-lg transition-all truncate ${
                           budget === level
-                            ? 'bg-[#C69234] text-[#0B1914] font-black shadow-sm'
-                            : 'text-[#A3C2B2] hover:bg-[#2C5E3B]/50'
+                            ? 'bg-[#C69234] text-[#0B1914] shadow-md'
+                            : 'text-[#A3C2B2] hover:bg-[#2C5E3B]/50 hover:text-white'
                         }`}
                       >
                         {level}
@@ -475,23 +489,37 @@ function CityContent() {
                   </select>
                 </div>
 
-                <button
-                  onClick={handleGenerateItinerary}
-                  disabled={generating}
-                  className="w-full py-4 rounded-xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-[#C69234]/20 flex items-center justify-center gap-2 hover:bg-[#b07f2a]"
-                >
-                  {generating ? (
-                    <>
-                      <Loader2 size={14} className="animate-spin" />
-                      <span>Creating itinerary...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles size={14} className="text-[#0B1914] animate-pulse" />
-                      <span>Generate Itinerary</span>
-                    </>
+                <div className="flex flex-col gap-2 pt-2">
+                  {generatedItinerary && (
+                    <button
+                      type="button"
+                      onClick={() => router.push('/itinerary')}
+                      className="w-full py-3.5 rounded-xl bg-[#1B432C] border border-[#C69234] text-[#C69234] font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 hover:bg-[#C69234] hover:text-[#0B1914]"
+                    >
+                      <Eye size={14} />
+                      <span>View Generated Itinerary</span>
+                      <ArrowRight size={14} />
+                    </button>
                   )}
-                </button>
+
+                  <button
+                    onClick={handleGenerateItinerary}
+                    disabled={generating}
+                    className="w-full py-4 rounded-xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-[#C69234]/20 flex items-center justify-center gap-2 hover:bg-[#b07f2a]"
+                  >
+                    {generating ? (
+                      <>
+                        <Loader2 size={14} className="animate-spin" />
+                        <span>Creating itinerary...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles size={14} className="text-[#0B1914] animate-pulse" />
+                        <span>Generate Itinerary</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>

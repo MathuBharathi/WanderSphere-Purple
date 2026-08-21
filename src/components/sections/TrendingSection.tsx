@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, ArrowRight, Loader2 } from 'lucide-react';
 import { getTrendingCities, getFeaturedCities } from '@/lib/api';
+import { getCityImageUrl } from '@/lib/placeImages';
 import { useRouter } from 'next/navigation';
 import type { City } from '@/types';
 
@@ -93,7 +94,7 @@ export function TrendingSection() {
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   style={{
-                    backgroundImage: `url(${city.cover_image || 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600'})`,
+                    backgroundImage: `url(${getCityImageUrl(city.name, city.cover_image)})`,
                   }}
                 />
 
