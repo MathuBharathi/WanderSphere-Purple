@@ -1,10 +1,13 @@
 {
   "total": 3727,
-  "evaluated": 105,
-  "replaced": 20,
-  "kept": 85,
-  "pending": 3622,
-  "lastRun": "2026-08-22T17:04:26.564Z",
-  "apiRequestsThisRun": 74,
+  "evaluated": 153,
+  "pexels_exact": 9,
+  "pexels_relevant": 20,
+  "existing_verified_correct": 1,
+  "existing_retained_pexels_unsuitable": 39,
+  "needs_manual_review": 84,
+  "pending": 3574,
+  "lastRun": "2026-08-22T17:51:35.001Z",
+  "apiRequestsThisRun": 189,
   "quotaStopped": true
 }
