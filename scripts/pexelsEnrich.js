@@ -179,24 +179,49 @@ async function processPlace(place, cityMap, stateMap, usedIds) {
   }
 
   const oldImage = place.cover_image;
-  let status = 'kept_existing', finalUrl = oldImage, photoId = null;
+  let status, action, finalUrl = oldImage, photoId = null;
   let pexelsUrl = '', photographer = '', photographerUrl = '';
 
-  if (bestPhoto && bestScore >= 60) {
-    matchType = bestScore >= 75 ? 'exact' : 'relevant';
+  if (bestPhoto && bestScore >= 75) {
+    // High confidence — exact match
+    matchType = 'exact';
     const candidateUrl = bestPhoto.src.large2x || bestPhoto.src.large || bestPhoto.src.landscape;
     const valid = await validateUrl(candidateUrl);
     if (valid) {
-      status = 'replaced';
+      status = 'replaced'; action = 'REPLACED_PEXELS_EXACT';
       finalUrl = candidateUrl;
       photoId = bestPhoto.id;
       pexelsUrl = bestPhoto.url;
       photographer = bestPhoto.photographer;
       photographerUrl = bestPhoto.photographer_url;
       usedIds.add(photoId);
+    } else {
+      status = 'kept_existing'; action = 'EXISTING_RETAINED_PEXELS_UNSUITABLE';
+    }
+  } else if (bestPhoto && bestScore >= 60) {
+    // Good confidence — relevant match
+    matchType = 'relevant';
+    const candidateUrl = bestPhoto.src.large2x || bestPhoto.src.large || bestPhoto.src.landscape;
+    const valid = await validateUrl(candidateUrl);
+    if (valid) {
+      status = 'replaced'; action = 'REPLACED_PEXELS_RELEVANT';
+      finalUrl = candidateUrl;
+      photoId = bestPhoto.id;
+      pexelsUrl = bestPhoto.url;
+      photographer = bestPhoto.photographer;
+      photographerUrl = bestPhoto.photographer_url;
+      usedIds.add(photoId);
+    } else {
+      status = 'kept_existing'; action = 'EXISTING_RETAINED_PEXELS_UNSUITABLE';
     }
   } else if (bestScore >= 30) {
+    // Pexels had results but not good enough — existing is better
     matchType = 'weak';
+    status = 'kept_existing'; action = 'EXISTING_RETAINED_PEXELS_UNSUITABLE';
+  } else {
+    // No suitable Pexels image found at all, or existing is already fine
+    matchType = bestScore > -100 ? 'none_suitable' : 'no_results';
+    status = 'kept_existing'; action = 'EXISTING_VERIFIED_CORRECT';
   }
 
   return {
@@ -204,7 +229,7 @@ async function processPlace(place, cityMap, stateMap, usedIds) {
     query_used: bestQuery, pexels_photo_id: photoId,
     old_image_url: oldImage, new_image_url: finalUrl,
     pexels_page_url: pexelsUrl, photographer, photographer_url: photographerUrl,
-    match_score: bestScore, match_type: matchType, status,
+    match_score: bestScore, match_type: matchType, status, action,
     processed_at: new Date().toISOString(), genuinely_evaluated: true
   };
 }
@@ -278,14 +303,20 @@ async function main() {
 
   saveCache();
 
-  // Count final state
-  let finalDone = 0, finalReplaced = 0, finalKept = 0, finalPending = 0;
+  // Count final state with full audit distinctions
+  let finalDone = 0, finalPending = 0;
+  let pexelsExact = 0, pexelsRelevant = 0;
+  let existingVerifiedCorrect = 0, existingRetainedUnsuitable = 0, needsReview = 0;
   places.forEach(p => {
     const e = cache[p.id];
     if (e && isGenuinelyEvaluated(e)) {
       finalDone++;
-      if (e.status === 'replaced') finalReplaced++;
-      else finalKept++;
+      if (e.status === 'replaced' && e.match_type === 'exact') pexelsExact++;
+      else if (e.status === 'replaced') pexelsRelevant++;
+      else if (e.action === 'EXISTING_RETAINED_PEXELS_UNSUITABLE') existingRetainedUnsuitable++;
+      else if (e.action === 'EXISTING_VERIFIED_CORRECT') existingVerifiedCorrect++;
+      else if (e.match_type === 'weak') needsReview++;
+      else existingVerifiedCorrect++;
     } else {
       finalPending++;
     }
@@ -293,22 +324,29 @@ async function main() {
 
   console.log('\n═══════════════════════════════════════════════════════════');
   if (finalPending === 0) {
-    console.log('✅ FULL DATASET COMPLETE — ALL 3,727 PLACES EVALUATED');
+    console.log('✅ FULL DATASET COMPLETE — ALL 3,727 PLACES AUDITED');
   } else {
     console.log('⏳ PARTIAL — RESUME REQUIRED');
   }
   console.log('═══════════════════════════════════════════════════════════');
-  console.log(`Genuinely evaluated: ${finalDone} / ${places.length}`);
-  console.log(`Pexels replacements: ${finalReplaced}`);
-  console.log(`Existing images kept: ${finalKept}`);
-  console.log(`Pending (need more API quota): ${finalPending}`);
-  console.log(`API requests this run: ${apiRequestsThisRun}`);
-  console.log(`Unique Pexels photos: ${usedIds.size}`);
+  console.log(`AUDITED:                          ${finalDone} / ${places.length}`);
+  console.log(`  Replaced with Pexels (exact):   ${pexelsExact}`);
+  console.log(`  Replaced with Pexels (relevant):${pexelsRelevant}`);
+  console.log(`  Existing verified correct:      ${existingVerifiedCorrect}`);
+  console.log(`  Existing retained (Pexels N/A): ${existingRetainedUnsuitable}`);
+  console.log(`  Needs manual review:            ${needsReview}`);
+  console.log(`PENDING (API quota):              ${finalPending}`);
+  console.log(`API requests this run:            ${apiRequestsThisRun}`);
+  console.log(`Unique Pexels photos:             ${usedIds.size}`);
 
   // Save progress metadata
   fs.writeFileSync(PROGRESS_PATH, JSON.stringify({
-    total: places.length, evaluated: finalDone, replaced: finalReplaced,
-    kept: finalKept, pending: finalPending, lastRun: new Date().toISOString(),
+    total: places.length, evaluated: finalDone,
+    pexels_exact: pexelsExact, pexels_relevant: pexelsRelevant,
+    existing_verified_correct: existingVerifiedCorrect,
+    existing_retained_pexels_unsuitable: existingRetainedUnsuitable,
+    needs_manual_review: needsReview,
+    pending: finalPending, lastRun: new Date().toISOString(),
     apiRequestsThisRun, quotaStopped: quotaStop
   }, null, 2), 'utf8');
 
@@ -365,25 +403,29 @@ export const cityTransportInfo: Record<string, { airport?: string; railway?: str
 `;
   fs.writeFileSync(DATA_PATH, code, 'utf8');
 
-  // Audit CSV
+  // Audit CSV with proper action categories
   const auditH = 'place_id,place_name,city,state,old_image_url,new_image_url,pexels_photo_id,pexels_url,photographer,photographer_url,query_used,match_type,match_score,action,status\n';
-  const auditRows = Object.values(cache).map(e => [
-    `"${e.place_id}"`, `"${(e.place_name||'').replace(/"/g,'""')}"`, `"${(e.city||'').replace(/"/g,'""')}"`,
-    `"${(e.state||'').replace(/"/g,'""')}"`, `"${e.old_image_url||''}"`, `"${e.new_image_url||''}"`,
-    `"${e.pexels_photo_id||''}"`, `"${e.pexels_page_url||''}"`, `"${(e.photographer||'').replace(/"/g,'""')}"`,
-    `"${e.photographer_url||''}"`, `"${(e.query_used||'').replace(/"/g,'""')}"`, `"${e.match_type}"`,
-    e.match_score, `"${e.status==='replaced'?(e.match_type==='exact'?'REPLACED_EXACT':'REPLACED_RELEVANT'):'KEPT_EXISTING'}"`,
-    `"${e.status}"`
-  ].join(','));
+  const auditRows = Object.values(cache).map(e => {
+    const action = e.action || (e.status === 'replaced' ? (e.match_type === 'exact' ? 'REPLACED_PEXELS_EXACT' : 'REPLACED_PEXELS_RELEVANT') : 'EXISTING_VERIFIED_CORRECT');
+    return [
+      `"${e.place_id}"`, `"${(e.place_name||'').replace(/"/g,'""')}"`, `"${(e.city||'').replace(/"/g,'""')}"`,
+      `"${(e.state||'').replace(/"/g,'""')}"`, `"${e.old_image_url||''}"`, `"${e.new_image_url||''}"`,
+      `"${e.pexels_photo_id||''}"`, `"${e.pexels_page_url||''}"`, `"${(e.photographer||'').replace(/"/g,'""')}"`,
+      `"${e.photographer_url||''}"`, `"${(e.query_used||'').replace(/"/g,'""')}"`, `"${e.match_type}"`,
+      e.match_score, `"${action}"`, `"${e.status}"`
+    ].join(',');
+  });
   fs.writeFileSync(AUDIT_CSV, auditH + auditRows.join('\n'), 'utf8');
 
-  // Review CSV
+  // Review CSV — only truly problematic places
   const revH = 'place_id,place_name,city,state,match_score,reason\n';
-  const revRows = Object.values(cache).filter(e => e.status !== 'replaced').map(e => [
-    `"${e.place_id}"`, `"${(e.place_name||'').replace(/"/g,'""')}"`, `"${(e.city||'').replace(/"/g,'""')}"`,
-    `"${(e.state||'').replace(/"/g,'""')}"`, e.match_score,
-    `"${e.match_score < 30 ? 'NO_SUITABLE_PEXELS_IMAGE' : 'LOW_CONFIDENCE'}"`
-  ].join(','));
+  const revRows = Object.values(cache)
+    .filter(e => e.match_type === 'weak' || (e.status !== 'replaced' && e.match_score < 10))
+    .map(e => [
+      `"${e.place_id}"`, `"${(e.place_name||'').replace(/"/g,'""')}"`, `"${(e.city||'').replace(/"/g,'""')}"`,
+      `"${(e.state||'').replace(/"/g,'""')}"`, e.match_score,
+      `"${e.match_score < 0 ? 'NO_SUITABLE_PEXELS_IMAGE' : e.match_score < 30 ? 'LOW_CONFIDENCE' : 'NEEDS_MANUAL_REVIEW'}"`
+    ].join(','));
   fs.writeFileSync(REVIEW_CSV, revH + revRows.join('\n'), 'utf8');
 
   console.log(`\n✅ Dataset updated: Exact=${exactCount} Relevant=${relevantCount} Kept=${keptCount} UniquePhotos=${usedPhotos.size}`);
