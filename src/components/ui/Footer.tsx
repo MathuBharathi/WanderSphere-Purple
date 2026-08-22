@@ -100,7 +100,15 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-16 pt-6 border-t border-[#2C5E3B]/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#A3C2B2]/50 text-[10px] uppercase tracking-widest">
-            © 2026 WanderSphere. All rights reserved.
+            © 2026 WanderSphere. All rights reserved. • Photos provided by{' '}
+            <a
+              href="https://www.pexels.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#C69234] hover:underline"
+            >
+              Pexels
+            </a>
           </p>
           <div className="flex items-center gap-2">
             <span className="text-[#A3C2B2]/50 text-[10px] uppercase tracking-widest">
