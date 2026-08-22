@@ -1,0 +1,10 @@
+{
+  "total": 3727,
+  "evaluated": 105,
+  "replaced": 20,
+  "kept": 85,
+  "pending": 3622,
+  "lastRun": "2026-08-22T17:04:26.564Z",
+  "apiRequestsThisRun": 74,
+  "quotaStopped": true
+}
