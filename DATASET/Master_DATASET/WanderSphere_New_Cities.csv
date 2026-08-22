@@ -1,0 +1,12 @@
+city_id,city_name,state,state_code,district,latitude,longitude,tourism_relevance,major_attractions_found,source,source_url,verification_status
+CT-0500,Kohima,Nagaland,NL,Kohima,25.6751,94.1086,"State capital; WWII battle site, Hornbill Festival host",5,Club Mahindra / Incredible India,https://www.clubmahindra.com/blog/places-to-visit/best-places-to-visit-in-nagaland,VERIFIED
+CT-0501,Dimapur,Nagaland,NL,Dimapur,25.9091,93.7266,Commercial gateway city; 10th-century Kachari ruins,4,TravelTriangle / Oddessemania,https://traveltriangle.com/blog/places-to-visit-in-nagaland/,VERIFIED
+CT-0502,Mokokchung,Nagaland,NL,Mokokchung,26.3236,94.5153,"Cultural capital of Ao tribe; hill views, heritage villages",2,Oddessemania / Club Mahindra,https://oddessemania.in/tourist-places-in-nagaland/,VERIFIED
+CT-0503,Mon,Nagaland,NL,Mon,26.7333,95.05,"Konyak Naga tribal heritage, Longwa village",1,Oddessemania,https://oddessemania.in/tourist-places-in-nagaland/,VERIFIED
+CT-0504,Wokha,Nagaland,NL,Wokha,26.1,94.2667,"Doyang River/Reservoir, Amur Falcon migratory bird site",1,Oddessemania,https://oddessemania.in/tourist-places-in-nagaland/,VERIFIED
+CT-0505,Kavaratti,Lakshadweep,LD,Lakshadweep,10.5669,72.642,Capital island of Lakshadweep UT; lagoons and marine museum,2,Thomas Cook / Holidify,https://www.thomascook.in/blog/india-holidays/10-places-to-visit-in-lakshadweep/,VERIFIED
+CT-0506,Agatti Island,Lakshadweep,LD,Lakshadweep,10.8459,72.1958,"Only island with an airport; lagoons, colonial-era lighthouse",2,MakeMyTrip / GoIndiGo,https://www.goindigo.in/get-inspired/lakshadweep-travel-guide.html,VERIFIED
+CT-0507,Bangaram Island,Lakshadweep,LD,Lakshadweep,10.9317,72.2833,Largest atoll island; scuba diving and water sports,1,SetMyTrip,https://www.setmytrip.in/places-to-visit-in-the-lakshadweep-islands/,VERIFIED
+CT-0508,Kadmat Island,Lakshadweep,LD,Lakshadweep,11.2167,72.7833,Dual-lagoon island popular for snorkelling & diving,1,Holidify,https://www.holidify.com/places/lakshadweep-islands/sightseeing-and-things-to-do.html,VERIFIED
+CT-0509,Kalpeni Island,Lakshadweep,LD,Lakshadweep,10.0967,73.6417,"Coral reefs, historic mosque, lagoon sandbanks",2,GoIndiGo,https://www.goindigo.in/get-inspired/lakshadweep-travel-guide.html,VERIFIED
+CT-0510,Minicoy Island,Lakshadweep,LD,Lakshadweep,8.2833,73.05,"Southernmost island, distinct Mahl culture, lighthouse",1,SetMyTrip,https://www.setmytrip.in/places-to-visit-in-the-lakshadweep-islands/,VERIFIED

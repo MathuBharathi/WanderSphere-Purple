@@ -1,0 +1,1189 @@
+place_id,place_name,city,state,source_name,flag_activity_phrase,reason
+PL-00134,Enjoy the Colours of Lajpat Nagar,Delhi,Delhi,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00168,Shop & Eat at Dilli Haat,Delhi,Delhi,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00169,Stroll through Pragati Maidan,Delhi,Delhi,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00202,Explore Dona Paula,Goa,Goa,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00215,Relax at the Palolem beach,Goa,Goa,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00347,Capture the Sceneries of Old Manali,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00353,Engage in the Adventures of Solang Valley,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00354,Explore the Wildlife at Manali Sanctuary,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00365,Marvel at the Gauri Shankar Temple,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00381,Take a Dip in the Vashisht Baths,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00383,Trek the Hampta Pass,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00384,Trek through The Great Himalayan National Park,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00385,Trek to Cafes in Malana,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00386,Trek to the Beas Kund,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00387,Trek to the Chandratal Baralacha lake,Manali,Himachal Pradesh,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00587,Explore the Universe at Jawaharlal Nehru Planetarium,Bangalore,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00608,Relax in Lal Bagh,Bangalore,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00636,Engage in the Adventures around Somwarpet,Coorg,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00650,Take a Dip under the Iruppu Falls,Coorg,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00651,Take a Safari through Nagarhole National Park,Coorg,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00652,Take a Walk in Madikeri Fort,Coorg,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00654,Trek & Camp at Tadiandamol Peak,Coorg,Karnataka,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-00744,Abbey Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00745,Achyutaraya Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00746,Adichunchanagiri Hills,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00747,Afzalpur Dargah,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00748,Aland Dargah,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00749,"Allalanatha Temple, Kondajji",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00750,Aluva Sivarathri Manappuram,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00751,Amani Byrasagara Lake,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00752,Anamudi Peak,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00753,Anjanadri Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00754,Anshi National Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00755,Appa Lake,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00756,Apsarakonda Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00757,Arakere Heritage,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00758,Attukal Waterfalls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00759,Avalabetta,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00760,Azhikode Munakkam Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00761,Badavilinga Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00762,Bagepalli (Silk Hub),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00763,Balamuri & Yedamuri Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00764,Balamuri Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00765,Banavasi Madhukeshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00766,Bandipur National Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00767,Bannerghatta Biological Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00768,Basaralu Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00769,Basaveshwara Statue (City Center),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00770,Basti Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00771,Bejai Museum (Seemanthi Bai Government Museum),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00772,Bengaluru Palace,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00773,Bhagamandala,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00774,Bhima River Banks,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00775,Bhimeshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00776,Bhoga Nandeeshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00777,Bisle Ghat,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00778,Blossom International Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00779,Bolgatty Event Centre,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00780,Brahmagiri Wildlife Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00781,Brahmapur Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00782,Brindavan Gardens,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00783,"Bucheshwara Temple, Koravangala",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00784,Buddha Vihar,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00785,Bull Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00786,Bylakuppe Tibetan Settlement (Golden Temple),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00787,Captain Scott’s Bungalow,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00788,Chamundi Hills,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00789,Chandragiri Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00790,Chandralamba Temple (Sannati),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00791,Chandrampalli Dam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00792,Chavundaraya Basadi,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00793,Cheeyappara Waterfalls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00794,Chelavara Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00795,Chendamangalam Synagogue,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00796,"Chennakeshava Temple, Belur",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00797,Cherai Backwaters,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00798,Chincholi Wildlife Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00799,Chinnar Wildlife Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00800,Chintamani,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00801,Chithirapuram,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00802,Chottanikkara Bhagavathy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00803,Coffee Plantations,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00804,Coracle Ride,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00805,Cubbon Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00806,Dandeli Wildlife Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00807,Daria Daulat Bagh,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00808,Datta Peetham,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00809,Devanahalli Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00810,Devbagh Island,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00811,Devikulam (Sita Devi Lake),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00812,Dodda Aalada Mara (Big Banyan Tree),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00813,Dubare Elephant Camp,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00814,Durbar Hall Ground,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00815,Echo Point,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00816,Elephant Arrival Spot,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00817,Elephant Stables,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00818,Eravikulam National Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00819,Ethipotha Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00820,Ezhattumugham Prakrithi Gramam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00821,GRS Fantasy Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00822,Gaddige Raja's Tomb,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00823,Ganagapura Dattatreya Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00824,Gap Road (Munnar-Theni),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00825,Gendekatte Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00826,Ghati Subramanya Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00827,Ghatikallu,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00828,Gokarna Main Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00829,Gokarnanatheshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00830,"Gomateshwara Statue, Shravanabelagola",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00831,Gorur Dam (Hemavati Dam),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00832,Goshree Bridges,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00833,Grover Zampa Vineyards,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00834,Gudavi Bird Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00835,Gudibande Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00836,Gulbarga Science Centre,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00837,Gumbaz,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00838,Gummanayaka Kote,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00839,HAL Aerospace Museum,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00840,Haft Gumbaz,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00841,Half Moon Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00842,Hampi Bazaar,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00843,Harangi Dam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00844,Hasanamba Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00845,Hazara Rama Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00846,Hemagiri Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00847,Hemakuta Hill Temples,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00848,Honey Valley Estate,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00849,Hosaholalu Lakshminarayana Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00850,"Hoysaleswara Temple, Halebidu",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00851,Hulikere Pond,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00852,ISKCON Temple Bangalore,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00853,Idagunji Ganesha Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00854,Idly Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00855,Innovator's Nest (Formerly Innovative Film City),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00856,Iringole Kavu,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00857,Iruppu Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00858,"Ishvara Temple, Arasikere",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00859,Jaganmohan Palace Art Gallery,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00860,"Jain Matt, Shravanabelagola",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00861,Jama Masjid Gulbarga,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00862,Jaramadagu Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00863,Jenukallu Betta,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00864,Jew Town Antique Market,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00865,Jivargi (Jevargi) Caves,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00866,Jog Falls (Siddapur side),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00867,Kadale Kalu Ganesha Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00868,Kadamakkudy Prawn Farms,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00869,Kadambrayar Tourism,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00870,Kadri Manjunath Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00871,Kailasagiri,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00872,Kaiwara,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00873,Kalaburagi Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00874,Kalady Sree Adi Shankara Keerthi Sthambam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00875,Kali River Rafting (Dandeli),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00876,Kallar Waterfalls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00877,Kambleshwar Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00878,Kandavara Lake,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00879,Kappe Chennigaraya Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00880,Karanji Lake,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00881,Karighatta Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00882,Karinjeshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00883,Karwar Beach (Rabindranath Tagore Beach),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00884,Kateel Durga Parameshwari Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00885,Kaup Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00886,Kaveripura (Sir M.V. Museum),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00887,"Kedareshwara Temple, Halebidu",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00888,Kere Thonnur,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00889,Khoroti (Khorooti) Village,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00890,Khwaja Bande Nawaz Dargah,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00891,King's Balance,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00892,Kokkare Bellur,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00893,Kolukkumalai Tea Estate,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00894,Krishna Raja Sagara (KRS) Dam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00895,Kudle Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00896,Kudroli Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00897,Kundala Lake,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00898,Kuntibetta,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00899,Lakkam Waterfalls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00900,"Lakshmi Devi Temple, Doddagaddavalli",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00901,"Lakshmi Narasimha Temple, Nuggehalli",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00902,Lal Bagh Botanical Garden,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00903,Lalitha Mahal Palace,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00904,Lockhart Gap,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00905,Lotus Mahal,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00906,Maddur Vada Hub,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00907,Magod Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00908,Maharaja Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00909,Majali Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00910,Malkhed Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00911,Mallalli Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00912,Malpe Beach (Udupi),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00913,Mandala Viewpoint,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00914,Mandikal Hills,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00915,Mangaladevi Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00916,Manjarabad Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00917,Marayoor Sandalwood Forest,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00918,Matanga Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00919,Mattupetty Dam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00920,Melukote,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00921,Melukote Cheluvanarayana Swamy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00922,Mezapulimala,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00923,Milagres Church,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00924,Minakanagurki,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00925,Mirjan Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00926,Monolithic Nandi,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00927,Moodabidri (Jain Kashi),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00928,Muddenahalli,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00929,Murudeshwar Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00930,Murudeshwar Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00931,Mysore Palace,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00932,Mysore Zoo (Sri Chamarajendra Zoological Gardens),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00933,Nagavi Ghat,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00934,Namdroling Monastery (Golden Temple),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00935,Nandi Hills,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00936,National Gallery of Modern Art,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00937,Nedumbassery (Cochin Airport Area),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00938,Netrani Island,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00939,Netravathi River Bridge,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00940,New Mangalore Port,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00941,Nisargadhama,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00942,Nrityagram,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00943,Nyayamakad Waterfalls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00944,Om Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00945,Omkareshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00946,Palliport Fort (Pallipuram Fort),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00947,Pallivasal Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00948,Panambur Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00949,Panchakuta Basadi,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00950,Pandavapura,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00951,Paradise Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00952,Parvathamma Betta,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00953,Paschima Vahini,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00954,Photo Point,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00955,Pilikula Nisargadhama,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00956,Pizhala Island,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00957,Pothamedu Viewpoint,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00958,Princess Street,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00959,Pushpagiri Wildlife Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00960,Queen's Bath,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00961,Railway Museum Mysore,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00962,Raja's Seat,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00963,Rajamala,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00964,Ramadevara Betta (Sholay Hill),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00965,Ramanathapura Temples,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00966,Rangadhama Hill,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00967,Ranganatha Swamy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00968,Ranganathaswamy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00969,Ranganathittu Bird Sanctuary,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00970,Regional Museum of Natural History,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00971,Rose Garden Munnar,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00972,"Sadasiva Temple, Nuggehalli",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00973,Sahasralinga,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00974,Sangama,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00975,Sannati (Ashokan Edicts),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00976,Sasivekalu Ganesha Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00977,Sathi Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00978,Sathodi Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00979,Sedam Heritage Homes,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00980,Sevenmallay Hills,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00981,Shantala Devi Alcove,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00982,Sharana Basaveshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00983,Shettihalli Rosary Church,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00984,Shimsha Hydroelectric Project,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00985,Shivaganga Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00986,Shivagange,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00987,Shivanasamudra Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00988,Shri Krishna Math (Udupi),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00989,Sindagi (Sindagi) Fort,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00990,Sirsi Marikamba Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00991,Skandagiri (Kalavara Durga),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00992,Skandagiri Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00993,Somnathpur Temple (Chennakesava Temple),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00994,Sri Revanasiddaeshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00995,Srinivasa Sagara,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00996,Srirangapatna,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00997,Srirangapatna Island,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00998,St. Aloysius Chapel,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-00999,St. Philomena's Church,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01000,Stepped Tank (Pushkarani),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01001,Stone Chariot,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01002,Subhash Bose Park,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01003,Sultan Battery,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01004,Supa Dam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01005,Syntheri Rocks,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01006,Tadiandamol Peak,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01007,Talakad,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01008,Talakaveri,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01009,Tannirbhavi Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01010,Tea Museum (Tata Tea),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01011,Thrikkakara Vamana Moorthy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01012,Tipu Sultan's Summer Palace,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01013,Tipu Sultan’s Armor,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01014,Tomb of Sultan Hassan,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01015,Top Station,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01016,Tungabhadra River,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01017,Twin Temples of Mosale,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01018,UB City,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01019,Ullal Beach,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01020,Unchalli Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01021,Uttaradi Matha (Malkhed),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01022,Valara Waterfalls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01023,Venkataramana Swamy Temple (Alamgiri),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01024,Venugopala Swamy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01025,Vibhuti Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01026,Vidhana Soudha,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01027,Vidurashwatha,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01028,Virupaksha Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01029,Visvesvaraya Industrial & Technological Museum,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01030,Vitthala Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01031,Vivekananda Falls,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01032,Vypeen Lighthouse,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01033,Vypin Island,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01034,Wellesley Bridge,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01035,Willingdon Island Port,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01036,Wonderla Kochi,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01037,Yadgir Hill Fort (Nearby),,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01038,Yagachi Dam,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01039,Yana Caves,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01040,Yoga Nandeeshwara Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01041,Yoga Narasimha Swamy Temple,,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01042,"Yoganarasimha Swamy Temple, Gorur",,Karnataka,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01159,Trek & Camp in Chinnar Wildlife Sanctuary,Munnar,Kerala,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-01164,Witness a combat at Kalari Kshethra,Munnar,Kerala,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-01165,Witness the Neelakurinji Blooming Spectacle at Top Station,Munnar,Kerala,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-01223,Adavi Eco-Tourism,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01224,Adoor Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01225,Adyanpara Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01226,Agasthyakoodam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01227,Akkulam Tourist Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01228,Alappuzha Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01229,Alappuzha Lighthouse,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01230,Alathiyoor Hanuman Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01231,Alumkadavu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01232,Ambalapuzha Sree Krishna Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01233,Amritapuri (Vallikavu),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01234,Ananthapura Lake Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01235,Anayirankal Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01236,Andhakaranazhi Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01237,Angadippuram Thirumandhamkunnu Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01238,Anikkattilammakshethram,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01239,Anjuruli,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01240,Arakkal Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01241,Aralam Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01242,Aranmula Mirror Workshops,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01243,Aranmula Parthasarathy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01244,Arattupara,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01245,Arattupuzha Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01246,Areekkal Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01247,Arthunkal St. Andrew’s Basilica,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01248,Aruvacode Pottery Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01249,AruvikkuZhi Viewpoint,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01250,Aruvikkuzhi Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01251,Aryankavu Sastha Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01252,Ashtamudi Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01253,Athirappilly Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01254,Attappadi Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01255,Attukal Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01256,Azhikode Munakkal Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01257,Baby Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01258,Bamboo Forest Muthanga,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01259,Banasura Sagar Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01260,Basilica of Our Lady of Dolours,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01261,Beemapally Mosque,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01262,Bekal Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01263,Bekal Fort,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01264,Bela Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01265,Beypore Port & Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01266,Bharananganam St. Alphonsa Shrine,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01267,Bhoothathankettu Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01268,Bible Tower,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01269,Biyyam Kayal,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01270,Bolgatty Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01271,Canoli Canal,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01272,Chain Tree,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01273,Champakulam Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01274,Chandragiri Fort,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01275,Charalkunnu Hill Station,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01276,Chavakkad Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01277,Chavara (Mining Area),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01278,Chembra Peak,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01279,Cherai Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01280,Cheraman Juma Masjid,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01281,Cheraman Juma Masjid (Ponnani),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01282,Cheriyapally Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01283,Cherukolpuzha,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01284,Cheruthoni Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01285,Cheruvathur Kotta,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01286,Chethalayam Falls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01287,Chimmini Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01288,Chinese Fishing Nets,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01289,Chittur Gurumadhom,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01290,Choottad Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01291,Chottanikkara Devi Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01292,Chulanur Peafowl Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01293,Conolly's Plot,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01294,Devikulam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01295,Dharmadam Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01296,Dhoni Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01297,Discs & Machines Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01298,Dolphin's Point,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01299,Edakkal Caves,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01300,Edappally St. George Forane Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01301,Edathua Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01302,Elathur Backwaters,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01303,Elaveezhapoonchira,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01304,Ettumanoor Mahadeva Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01305,Ezhimala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01306,Fantasy Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01307,Flora Fantasia Amusement Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01308,Focus Mall,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01309,Fort Kochi Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01310,Garuda Temple (Triprangode),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01311,Gavi,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01312,Gundert Bungalow,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01313,Guruvayur Sree Krishna Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01314,Haripad Subrahmanya Swamy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01315,HiLite Mall,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01316,Hill Palace Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01317,Hill View Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01318,Hosdurg Fort,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01319,Idukki Arch Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01320,Illikkal Kallu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01321,Indo-Portuguese Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01322,Iringal Craft Village (Sargaalaya),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01323,Jain Temple Sulthan Bathery,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01324,Jain Temple of Jainimedu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01325,Janaki Forest (Janaki Kadu),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01326,Jatayu Earth Center,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01327,Jew Town,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01328,Jewish Synagogue (Paradesi Synagogue),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01329,Kadalundi Bird Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01330,Kadalundi-Vallikkunnu Community Reserve,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01331,Kadamakkudy Islands,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01332,Kadammanitta Devi Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01333,Kadampanad St. Thomas Cathedral,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01334,Kadampuzha Bhagavathy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01335,Kaduthuruthy Valiapally,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01336,Kakkathuruthu (Island of Crows),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01337,Kakkayam Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01338,Kakki Reservoir,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01339,Kallar Meenmutty Falls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01340,Kalpathy Heritage Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01341,Kalvari Mount,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01342,Kanakakkunnu Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01343,Kanhangad (Town Center),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01344,Kanjirapuzha Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01345,Kannadipara,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01346,Kannur Lighthouse,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01347,Kanwatheertha Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01348,Kappad Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01349,Kappil Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01350,Karapuzha Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01351,Kareem's Forest Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01352,Karlad Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01353,Karma Road (Ponnani),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01354,Karumadikuttan,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01355,Karunagappally Backwaters,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01356,Kattikkayam Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01357,Kauthuka Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01358,Kaviyoor Rock-cut Cave Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01359,Kavvayi Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01360,Kerala Folklore Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01361,Kerala Kalamandalam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01362,Keralamkundu Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01363,Kizhunna Ezhara Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01364,Kochu Pampa,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01365,Kodanad Elephant Training Centre,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01366,Kodikuthimala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01367,Kodumon Chilanthiyambalam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01368,Kodungallur Sree Kurumba Bhagavathy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01369,Kolagappara,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01370,Kollam Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01371,Kollam Port,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01372,Kollengode Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01373,Konni Elephant Training Centre,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01374,Kottaikkal Juma Masjid,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01375,Kottakkal Arya Vaidya Sala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01376,Kottakkunnu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01377,Kottancheri Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01378,Kottarakkara Sree Mahaganapathi Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01379,Kottayam Clock Tower,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01380,Kottayi (Chembai Memorial),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01381,Kovalam Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01382,Kozhencherry (Pamba River Banks),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01383,Kozhikode Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01384,Kozhikode Planetarium,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01385,Kozhippara Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01386,Krishnapuram Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01387,Kulamavu Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01388,Kulathupuzha Sastha Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01389,Kumarakom Bird Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01390,Kumaranasan Smarakam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01391,Kumbhavurutty Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01392,Kunjali Marakkar Memorial,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01393,Kuruva Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01394,Kuthira Malika Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01395,Kuttanad Backwaters,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01396,Kuzhupilly Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01397,Lakkidi Viewpoint,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01398,Lokanarkavu Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01399,Lulu Mall,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01400,Madayipara,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01401,Madhur Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01402,Madiyan Koolom Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01403,Magic Planet,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01404,Mahatma Gandhi Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01405,Maipady Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01406,Makarajyothi Viewpoint,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01407,Malabar Botanical Garden,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01408,Malampuzha Dam & Gardens,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01409,Malankara Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01410,Malayalappuzha Devi Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01411,Malayattoor Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01412,Malik Deenar Mosque,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01413,Mallikarjuna Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01414,Malom Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01415,Mampuram Maqam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01416,Mananchira Square,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01417,Mananthavady Pazhassi Tomb,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01418,Mangalam Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01419,Mangalavanam Bird Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01420,Mangatiri River View,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01421,Manjamp,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01422,Manjeshwaram (Religious Harmony),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01423,Manjinikkara Dayara,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01424,Mankallu Mudakal Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01425,Mannadi,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01426,Mannanam St. Joseph's Monastery,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01427,Mannarasala Sree Nagaraja Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01428,Mannathippara Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01429,Mappila Bay,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01430,Marari Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01431,Marine Drive,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01432,Marmala Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01433,Marottichal Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01434,Mattancherry Palace (Dutch Palace),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01435,Mavelikkara Buddha Statue,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01436,Mayiladumpara Peacock Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01437,Meenkara Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01438,Meenkunnu Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01439,Meenmutty Falls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01440,Meenvallam Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01441,Meesapulimala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01442,Mini Ooty (Arimbra Hills),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01443,Mishkal Mosque,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01444,Mooloor Smarakam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01445,Moovattu Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01446,Mozhikkal Heritage Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01447,Muchundi Mosque,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01448,Mullakkal Rajeshwari Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01449,Munambam Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01450,Munnar Tea Gardens,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01451,Munroe Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01452,Muthanga Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01453,Muzhappilangad Drive-in Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01454,Napier Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01455,Nattakom Backwaters,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01456,Nedumkayam Rainforest,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01457,Neelimala Viewpoint,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01458,Neendakara Port,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01459,Neendoor Subrahmanya Swamy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01460,Nellikunnu Mosque,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01461,Nelliyampathy Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01462,Neyyar Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01463,Nilambur Kovilakom,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01464,Nilambur Teak Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01465,Nileshwaram (Cultural Center),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01466,Niranam Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01467,Noor Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01468,Ochira Parabrahma Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01469,Omallur (Cattle Fair Ground),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01470,Ottapalam (Bharatuzhapuzha Banks),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01471,Padinjarekkara Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01472,Padmanabhaswamy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01473,Paithalmala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01474,Pakshipathalam Bird Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01475,Palakkad Fort (Tipu's Fort),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01476,Palakkayam Thattu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01477,Palayruvi Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01478,Palayur Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01479,Paliakara Church (Thiruvalla),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01480,Paliyeri Bhagavathy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01481,Pampa Ganapathi Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01482,Panachikkad Saraswathy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01483,Panchalimedu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01484,Pandalam Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01485,Pandavan Para,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01486,Paniyeli Poru,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01487,Parambikulam Tiger Reserve,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01488,Paramekkavu Bhagavathy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01489,Parassinikadavu Muthappan Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01490,Parassinikadavu Snake Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01491,Paravur Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01492,Parumala Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01493,Parunthumpara,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01494,Pathanapuram,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01495,Pathiramanal Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01496,Payyambalam Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01497,Pazhassi Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01498,Pazhassi Raja Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01499,Pazhayangadi Mosque (Kondotty),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01500,Peechi Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01501,Peppara Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01502,Peralassery Hanging Bridge,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01503,Peralassery Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01504,Perunthenaruvi Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01505,Peruvannamuzhi Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01506,Phantom Rock,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01507,Pichandikulam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01508,Ponmudi Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01509,Pookad Kalalayam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01510,Pookode Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01511,Poonjar Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01512,Poonthanam Illam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01513,Poovar Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01514,Possadigumpe,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01515,Pothundi Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01516,Priyadarshini Planetarium,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01517,Punalur Suspension Bridge,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01518,Punnamada Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01519,Punnapra Vayalar Memorial,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01520,Punnathur Kotta (Elephant Sanctuary),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01521,R-Block & Q-S-T Block,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01522,Rajarajeshwara Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01523,Ramakkalmedu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01524,Rameswaram Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01525,Ranipuram Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01526,Revi Karunakaran Memorial Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01527,Rosemala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01528,S.M. Street (Sweet Meat Street),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01529,Sabarimala Sree Dharma Sastha Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01530,Sadhoo Merry Kingdom,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01531,Sakthan Thampuran Palace,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01532,Santa Cruz Cathedral Basilica,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01533,Sarada Mandiram,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01534,Sardar Vallabhbhai Patel Police Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01535,Sarovaram Biopark,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01536,Sasthamkotta Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01537,Sea View Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01538,Seetha Devi Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01539,Seetharkundu Viewpoint,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01540,Seetharkundu Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01541,Shangumugham Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01542,Shenduruny Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01543,Silent Valley National Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01544,Siruvani Falls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01545,Siruvani Reservoir,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01546,Snehatheeram Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01547,Soochipara Falls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01548,Sree Koodalmanikyam Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01549,St. Angelo Fort,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01550,St. Francis Church,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01551,St. Mary's Forane Church (Athirampuzha),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01552,St. Mary's Forane Church (Champakulam),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01553,St. Mary's Forane Church (Koratty),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01554,St. Mary's Orthodox Syrian Church (Kottayam Cheriapally),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01555,Subhash Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01556,Sundareswara Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01557,Tali Maha Shiva Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01558,Tea Museum Munnar,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01559,Thaikadappuram Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01560,Thakazhi Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01561,Thalassery Fort,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01562,Thangassery Lighthouse,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01563,Thattekad Bird Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01564,Thazhathangady Juma Masjid,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01565,Thekkady (Periyar),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01566,Thenmala Eco-Tourism,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01567,Thirumullavaram Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01568,Thirunakkara Mahadeva Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01569,Thirunavaya Nava Mukunda Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01570,Thirunelli Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01571,Thiruvalathur Randu Moorthy Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01572,Thiruvalla Sree Vallabha Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01573,Thiruvambady Sree Krishna Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01574,Tholpetty Wildlife Sanctuary,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01575,Thommankuthu Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01576,Thooval Theeram Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01577,Thottappally Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01578,Thriprayar Sree Rama Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01579,Thrissur Zoo & State Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01580,Thumboormuzhi Dam & Garden,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01581,Thunchan Paramba,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01582,Thusharagiri Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01583,Trikkanad Tryambakeshwara Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01584,Uravu Bamboo Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01585,Vadakkunnathan Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01586,Vagamon Kurisumala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01587,Vagamon Meadows,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01588,Vaidyaratnam Ayurveda Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01589,Vaikom Lake Beach,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01590,Vaikom Mahadeva Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01591,Valapattanam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01592,Valiya Juma Masjid,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01593,Valiyaparamba Backwaters,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01594,Valliyoorkavu Temple,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01595,Varambetta Mosque,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01596,Varikkassery Mana,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01597,Varkala Cliff,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01598,Vasco House,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01599,Vasthuvidya Gurukulam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01600,Vayalapra Floating Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01601,Vazhachal Waterfalls,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01602,Vazhani Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01603,Veeramala Hills,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01604,Veli Tourist Village,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01605,Vellari Mala,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01606,Vellinezhi (Cultural Village),,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01607,Vembanad Lake,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01608,Vijay Beach Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01609,Vilangan Kunnu,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01610,Vismaya Water Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01611,Vizhinjam Marine Aquarium,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01612,Walayar Dam,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01613,Wayand Heritage Museum,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01614,Willingdon Island,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01615,Wonderla Amusement Park,,Kerala,Kerala_Karnataka_Districts,False,Missing state or city
+PL-01949,Shop it Cheap at Hong-Kong Lane,Pune,Maharashtra,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02081,Capture some Pictures in Ousteri Wetland and National Park,Pondicherry,Puducherry,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02086,Explore the sites of Arikamedu,Pondicherry,Puducherry,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02100,Relax in Bharathi Park,Pondicherry,Puducherry,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02106,Take a Leisure Walk by the Seaside Promenade,Pondicherry,Puducherry,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02107,Take the Kids to Jawahar Toy Museum,Pondicherry,Puducherry,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02271,Experience the Village of Chokhi Dhani,Jaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02272,Explore collections at Albert Hall Museum,Jaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02273,Explore the Temples of Karauli,Jaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02300,Take a tour of Jaigarh Fort,Jaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02302,Witness the Magic of Jantar Mantar,Jaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02446,Take a Ride of Mansapurna Karni Ropeway,Udaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02447,Take an Evening Walk in Chetak Circle,Udaipur,Rajasthan,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02500,Enjoy the games at VGP Golden Beach,Chennai,Tamil Nadu,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02501,Explore The Marina Beach,Chennai,Tamil Nadu,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02529,Trek the Koli Hills,Chennai,Tamil Nadu,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02790,Enjoy the Show and Food at Hussain Sagar Lake,Hyderabad,Telangana,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02802,Indulge in Various Activities of Shilparamam,Hyderabad,Telangana,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02817,Relax at the Lumbini Park,Hyderabad,Telangana,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02824,Shop for Bangles at the Laad Bazaar,Hyderabad,Telangana,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-02826,Stroll in the Inorbit Mall,Hyderabad,Telangana,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03214,Take Cooking Classes,Rishikesh,Uttarakhand,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03215,Take a Dip in Rishi Kund,Rishikesh,Uttarakhand,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03216,Take a walk over Ram Jhula,Rishikesh,Uttarakhand,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03294,Enjoy the rides at Aquatica,Kolkata,West Bengal,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03308,Marvel at the Victoria Memorial,Kolkata,West Bengal,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03319,Relax on the Tajpur Beach,Kolkata,West Bengal,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03332,Take a Toure of Birla Industrial & Technological Museum,Kolkata,West Bengal,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03333,Take a tour of Science city,Kolkata,West Bengal,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03339,Ahmednagar Fort,Ahilyanagar,,india_tourism_food_dataset,False,Missing state or city
+PL-03340,Shirdi Sai Baba Temple,Ahilyanagar,,india_tourism_food_dataset,False,Missing state or city
+PL-03341,Wet N Joy Water Park,Ahilyanagar,,india_tourism_food_dataset,False,Missing state or city
+PL-03342,Akshi Beach,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03343,Alibaug Beach,Alibaug,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03344,Brahma Kund,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03345,City Shopping,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03346,Hanuman temple,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03347,Kanakeshwar Devasthan Temple,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03348,Kanakeshwar forest,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03349,Karmarkar Museum,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03350,Khanderi Island,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03351,Kolaba fort,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03352,Mandwa,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03353,Murud Beach,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03354,Murud-Janjira Fort,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03355,Nagoba Mandir,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03356,Raigadi Bazaar,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03357,Revdanda Fort and Beach,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03358,Rewas jetty,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03359,Sagargad Fort,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03360,Underi Fort,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03361,Villa Stay,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03362,Vrindavan Farm,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03363,Water Sports,Alibaug,,Tourist_Places_merged,False,Missing state or city
+PL-03364,Alappuzha Lighthouse,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03365,Alappuzha beach,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03366,Ambalapuzha Sree Krishna Temple,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03367,Arthunkal Beach,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03368,Backwaters,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03369,Bay Island Driftwood Museum,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03370,Chettikulangara Devi Temple,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03371,Coir Weaving in Alleppey,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03372,Edathua Church,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03373,Haripad Sree Subrahmanya Swamy Temple,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03374,Houseboats,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03375,International Coir Museum,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03376,Karumadikkuttan,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03377,Krishnapuram Palace,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03378,Kuttanad,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03379,Mannarasala Sree Nagaraja Temple,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03380,Marari Beach,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03381,Mullakkal Rajeshwari Temple,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03382,Nehru Trophy Snake Boat race,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03383,Pallippuram,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03384,Pandavan Para,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03385,Pathiramanal,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03386,Punnamada Lake,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03387,Punnapra Beach,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03388,Revi Karunakaran Museum,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03389,Spa & Massage in Alleppey,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03390,St. Andrew's Basilica Arthunkal,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03391,St. Mary's Forane Church,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03392,Thottappally Beach,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03393,Thumpoly Beach,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03394,Vembanad Lake,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03395,Vijay Beach Park,Alleppey,,Tourist_Places_merged,False,Missing state or city
+PL-03396,Amarnath Cave,Amarnath,,Tourist_Places_merged,False,Missing state or city
+PL-03397,Baltal,Amarnath,,Tourist_Places_merged,False,Missing state or city
+PL-03398,Pahalgam,Amarnath,,Tourist_Places_merged,False,Missing state or city
+PL-03399,Amkunj Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03400,Anthropological Museum,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03401,Baratang Island,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03402,Bharatpur Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03403,Boat Trips Andaman,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03404,Cellular Jail,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03405,Chatham Saw Mill,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03406,Chidiya Tapu,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03407,City Shopping,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03408,Corbyn's Cove,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03409,Diglipur,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03410,Elephant Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03411,Glass Bottom Dolphin Boat,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03412,Guitar Island Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03413,"Howrah Bridge, Andaman",Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03414,Jolly Buoy Island,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03415,Kalapathar Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03416,Lalaji Bay Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03417,Laxmanpur Beach 1,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03418,Limestone Caves Andaman,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03419,Little Andaman,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03420,Mahatma Gandhi Marine National Park,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03421,Mangrove Creeks in Andaman,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03422,Mangrove Kayaking,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03423,Mount Harriet National Park,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03424,Narcondam Island,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03425,Night Kayaking in Andaman,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03426,North Bay Island,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03427,Radhanagar Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03428,Rajiv Gandhi Water Sports Complex,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03429,Saddle Peak National Park,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03430,Samudrika Naval Marine Museum,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03431,Sandbar Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03432,Sitapur Beach,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03433,Water Sports in Andamans,Andaman,,Tourist_Places_merged,False,Missing state or city
+PL-03434,Radhanagar Beach,Andaman Islands,,Expanded_Indian_Travel_Dataset,False,Missing state or city
+PL-03435,Ajanta Caves,Chhatrapati Sambhajinagar,,india_tourism_food_dataset,False,Missing state or city
+PL-03436,Bibi Ka Maqbara,Chhatrapati Sambhajinagar,,india_tourism_food_dataset,False,Missing state or city
+PL-03437,Ellora Caves,Chhatrapati Sambhajinagar,,india_tourism_food_dataset,False,Missing state or city
+PL-03438,Aghanjar Mahadev Temple,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03439,Bhagsu falls,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03440,Bhagsu nath temple,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03441,Dal lake and Nadi,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03442,Dalai Lama Temple Complex,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03443,Dharamkot Studio,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03444,Dharamshala Cricket Stadium,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03445,Dharamshala International Film Festival,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03446,Dharamshala to Mcleodganj Ropeway,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03447,Guna Devi Temple,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03448,Gyuto Monastery,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03449,Indrahar Pass Trek,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03450,Jwalamukhi Devi Temple,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03451,Kalachakra Temple,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03452,Kangra art museum,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03453,Lahesh Cave Trek,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03454,Laka Glacier Trek,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03455,Library of Tibetan Works and Archives,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03456,Masroor Rock Cut Temple,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03457,Mcleodganj Market,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03458,Naam Art Gallery,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03459,"Namgyal Monastery, Mcleodganj",Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03460,Namgyalma Stupa,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03461,Nandi View Point,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03462,Nechung Monastery,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03463,Norbulingka Institute,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03464,Paragliding in Dharamshala,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03465,Pong Dam,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03466,St. John in the Wilderness Church,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03467,Tea gardens,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03468,"Tibet museum, Mcleodganj",Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03469,Trekking,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03470,Triund,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03471,"Tsuglagkhang, Mcleodganj",Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03472,View of the Dhauladhar Ranges,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03473,War Memorial,Dharamshala,,Tourist_Places_merged,False,Missing state or city
+PL-03474,Chandramouleshwara Temple,Hubli,,india_tourism_food_dataset,False,Missing state or city
+PL-03475,Nrupatunga Hill,Hubli,,india_tourism_food_dataset,False,Missing state or city
+PL-03476,Unkal Lake,Hubli,,india_tourism_food_dataset,False,Missing state or city
+PL-03477,Bird Watching at Jim Corbett National Park,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03478,Birjani,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03479,Corbett Museum,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03480,Corbett Waterfall,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03481,Dhikala,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03482,Durga Devi Zone,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03483,Durga Mandir Temple,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03484,Elephant Safari at Jim Corbett,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03485,Garjia Temple,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03486,Gyan Yatra,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03487,Jhirna,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03488,Jungle Safari,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03489,Kosi River,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03490,Rappelling in Jim Corbett,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03491,River Rafting,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03492,Rock Climbing in Corbett National Park,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03493,Sitabani Temple,Jim Corbett National Park,,Tourist_Places_merged,False,Missing state or city
+PL-03494,Barshaini,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03495,Buddha Place,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03496,Camping,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03497,Chalal,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03498,Flea Market,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03499,Kheerganga Trek,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03500,Little Italy,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03501,Magic Valley,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03502,Malana,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03503,Manikaran Gurudwara,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03504,Parvati River,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03505,Pin Parvati Pass,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03506,Pulga,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03507,Rasol,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03508,Sar Pass Trek,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03509,Shiv Temple,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03510,Stargazing,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03511,Tosh,Kasol,,Tourist_Places_merged,False,Missing state or city
+PL-03512,"Amrutanjan Point, Lonavala",Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03513,Bedsa caves,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03514,Bushi Dam,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03515,"Celebrity Wax Museum, Lonavala",Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03516,City Shopping,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03517,Duke's Nose,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03518,Karla and Bhaja Caves,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03519,Kune Waterfalls,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03520,Lion's Point,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03521,Lohagad Fort,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03522,Lonavala Lake,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03523,Manoranjan Fort,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03524,Rajmachi Fort,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03525,Reversing Station,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03526,Shingroba Temple,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03527,Shooting Point,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03528,Shrivardhan Fort,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03529,Tiger's Leap,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03530,Tunga Fort,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03531,Tungarli Lake,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03532,Valvan Dam,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03533,Visapur Fort,Khandala,,Tourist_Places_merged,False,Missing state or city
+PL-03534,Agatti Islands,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03535,Amindivi Islands,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03536,Bangaram Island,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03537,City Shopping,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03538,Kadmat,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03539,Kalpeni Island,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03540,"Lighthouse, Minicoy Island",Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03541,Marine Museum,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03542,Parasailing in Lakshadweep,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03543,Water Sports,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03544,Yacht Cruise,Lakshadweep,,Tourist_Places_merged,False,Missing state or city
+PL-03545,Bamboosa,Lavasa,,Tourist_Places_merged,False,Missing state or city
+PL-03546,Lakeshore Watersports,Lavasa,,Tourist_Places_merged,False,Missing state or city
+PL-03547,Lakeside Promenade,Lavasa,,Tourist_Places_merged,False,Missing state or city
+PL-03548,Sightseeing in Lavasa,Lavasa,,Tourist_Places_merged,False,Missing state or city
+PL-03549,Temghar Dam,Lavasa,,Tourist_Places_merged,False,Missing state or city
+PL-03550,Alchi,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03551,"Bactarian camel safari, Nubra Valley",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03552,Chadar Trek,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03553,Chang La Pass,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03554,Changtang Wildlife Sanctuary,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03555,Chemrey Monastery,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03556,City Shopping,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03557,Dah Hanu,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03558,Darcha to Padum Trek,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03559,"Diskit monastery, Lachung temple and Hundur monastery.",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03560,Hall Of Fame Museum,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03561,Handicrafts Industrial Cooperative Shop,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03562,"Hemis High Altitude Wildlife Sanctuary, Hemis",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03563,Hunder Village,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03564,Kargil,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03565,Lachung Temple,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03566,Ladakh Trekking,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03567,Lamayuru Town,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03568,Leh Palace,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03569,Magnetic Hill,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03570,"Maitreya Buddha, Nubra Valley",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03571,"MoonLand, Lamayuru",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03572,Mountain Biking,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03573,Namgyal Tsemo Gompa,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03574,Nubra Valley,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03575,Nyoma,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03576,"Panamik village, Nubra Valley",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03577,Pangong Lake,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03578,Pathar Sahib Gurudwara,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03579,"Phuktal Monastery, Zanskar",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03580,Sangam,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03581,Sankar Gompa,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03582,Shanti Stupa,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03583,Shey Monastery and Palace,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03584,Shyok Valley,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03585,Sindhu Darshan Festival,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03586,Stargazing,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03587,Stok Palace,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03588,Taglang La,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03589,Tso Kar lake,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03590,Turtuk,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03591,White water rafting,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03592,"Yarab Tso, Sumur",Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03593,Zanskar Valley,Leh Ladakh,,Tourist_Places_merged,False,Missing state or city
+PL-03594,"Baglamukhi Temple, Kangra",Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03595,Bhagsu Falls,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03596,Bhagsunath Temple,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03597,Body Temple,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03598,Camping in Mcleodganj,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03599,Church of St. Johns in the wilderness,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03600,City Shopping,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03601,Dal Lake,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03602,Dalai Lama Temple,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03603,Dharamkot,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03604,Dharamshala to Mcleodganj Ropeway,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03605,Gallu Devi Temple,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03606,Homestays in Mcleodganj,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03607,Indrahar Pass Trek,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03608,Kalachakra Temple,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03609,"Kangra Art Museum, Kangra",Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03610,"Kareri Lake, Kangra",Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03611,Laka Glacier Trek,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03612,Masroor Rock Cut Temple,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03613,Minkiani Pass,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03614,Naam Art Gallery,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03615,Naddi View Point,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03616,Namgyal Monastery,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03617,Norbulingka Institute,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03618,Pong Dam,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03619,Thatharana Trek,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03620,Tibet Kitchen,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03621,Tibetan Institute of Performing Arts,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03622,Tibetan Museum,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03623,Trekking,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03624,Triund,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03625,Tushita Meditation Centre,Mcleodganj,,Tourist_Places_merged,False,Missing state or city
+PL-03626,Aksa Beach,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03627,Bollywood Tour at Film City,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03628,Chhatrapati Shivaji Maharaj Vastu Sangrahalaya,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03629,Chowpatty Beach,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03630,Drive Through Bandra Worli Sea Link,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03631,Elephanta Caves,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03632,Enjoy Rides at Essel World,Mumbai,,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03633,Enjoy Street Food,Mumbai,,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03634,Essel World,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03635,Explore Cafes at Carter Road,Mumbai,,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03636,Gateway of India,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03637,Global Pagoda,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03638,Gorai Beach,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03639,Gorakhgad Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03640,Haji Ali Dargah,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03641,Hajimalang Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03642,Hanging Gardens,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03643,Hangout with friends at Bandstand,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03644,ISKCON Temple,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03645,Jama Masjid,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03646,Jehangir art gallery,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03647,Jivdhan Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03648,Kamla Nehru park,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03649,Kanheri caves,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03650,KidZania Mumbai,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03651,Madh Island,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03652,Mahakali caves,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03653,Mahalaxmi Temple,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03654,Mahipatagad Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03655,Mahuli Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03656,Marine Drive,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03657,Marve Beach,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03658,Marvel at the Victoria Terminus,Mumbai,,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03659,Mount Mary Church,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03660,Mumbai Zoo,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03661,Naneghat Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03662,National Museum of Indian Cinema,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03663,National gallery of Modern Art,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03664,"Partying at Hill Road and Linkin Road, Bandra",Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03665,Picnic at Juhu Beach,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03666,Prince of Wales Museum,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03667,Sanjay Gandhi National Park,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03668,Shopping at Colaba Causeway,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03669,Shopping at Fashion Street,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03670,Shopping at Lokhandwala,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03671,Siddhgad Bhimashankar Trek,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03672,Siddhivinayak Temple,Mumbai,,Top_Indian_Places_to_Visit,False,Missing state or city
+PL-03673,Spend your evening at Worli Sea Face,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03674,Street Food at Girgaum Chowpatty,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03675,Stroll around Gateway of India,Mumbai,,Tourist_Places_merged,True,"Activity-phrased name, not a clean attraction name"
+PL-03676,Uran,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03677,Versova Beach,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03678,Water Sports in Mandwa Beach,Mumbai,,Tourist_Places_merged,False,Missing state or city
+PL-03679,Kaleshwar Temple,Nanded,,india_tourism_food_dataset,False,Missing state or city
+PL-03680,Sachkhand Gurudwara,Nanded,,india_tourism_food_dataset,False,Missing state or city
+PL-03681,Sahastrakund Waterfall,Nanded,,india_tourism_food_dataset,False,Missing state or city
+PL-03682,Ayurveda,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03683,Boat Race,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03684,Cruises,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03685,Kovalam Beach,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03686,Shopping in Poovar,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03687,The Fishing Village,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03688,Thirparappu Falls,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03689,Vizhinjam,Poovar,,Tourist_Places_merged,False,Missing state or city
+PL-03690,Diveagar Beach,Raigad,,india_tourism_food_dataset,False,Missing state or city
+PL-03691,Murud-Janjira Fort,Raigad,,india_tourism_food_dataset,False,Missing state or city
+PL-03692,Raigad Fort,Raigad,,india_tourism_food_dataset,False,Missing state or city
+PL-03693,Abdul Kalam House,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03694,Agnitheertham,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03695,Annai Indira Gandhi Road Bridge,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03696,Ariyaman Beach,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03697,Burial Place Of Abdul Kalam,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03698,Dhanushkodi Temple and Beach,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03699,Gandhamadhana Parvatham,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03700,Glass boat ride at Pamban Bridge,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03701,Jada Tirtham,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03702,Kalam National Memorial,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03703,Kothandaramaswamy Temple,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03704,Kunthu Kal Beach,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03705,Lakshmana Tirtham,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03706,Nambu Nayagiamman Temple,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03707,Rameshwaram Temple,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03708,Sea World Aquarium,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03709,Silk Shopping,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03710,The Five-faced Hanuman Temple,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03711,Thiruppullani,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03712,Villoondi Tirtham,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03713,Water Bird Sanctuary,Rameshwaram,,Tourist_Places_merged,False,Missing state or city
+PL-03714,Akaula Region,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03715,Bird Watching,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03716,Dastkar Ranthambore,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03717,Ganesh Trinetra Temple,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03718,Jeep Safari,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03719,Jogi Mahal,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03720,Kacheeda Valley,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03721,Lakarda and Anantpura,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03722,Malik Talao,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03723,Padam Lake,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03724,Raj Bagh Ruins,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03725,Raj Bagh Talao,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03726,Rajiv Gandhi Regional Museum of Natural History,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03727,Ranthambhore Fort,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03728,Ranthambore Tiger Reserve,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03729,Surwal Lake,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03730,Village Women Craft,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03731,Wild Dragon Adventure Park,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03732,Wildlife Safari,Ranthambore,,Tourist_Places_merged,False,Missing state or city
+PL-03733,Chandoli National Park,Sangli,,india_tourism_food_dataset,False,Missing state or city
+PL-03734,Ganpati Temple,Sangli,,india_tourism_food_dataset,False,Missing state or city
+PL-03735,Sangli Fort,Sangli,,india_tourism_food_dataset,False,Missing state or city
+PL-03736,Achakanya Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03737,Agumbe,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03738,Bhadra River Project Dam,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03739,Dabbe Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03740,Gajanur Dam,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03741,Gandhi Park,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03742,Gudavi Bird Sanctuary,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03743,Hidlumane Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03744,Honnemaradu,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03745,Hosahalli,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03746,Jog Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03747,Kanoor Fort,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03748,Kavaledurga,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03749,Keladi,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03750,Kodachadri,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03751,Koodli,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03752,Kunchikal Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03753,Kundadari,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03754,Linganamakki Dam,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03755,Mattur,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03756,Nagara Fort,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03757,Onake Abbi Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03758,Pongal,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03759,Sacred Heart Church,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03760,Sakrebayalu Elephant Camp,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03761,Shiva Temple,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03762,Shivaganga Falls,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03763,Shivappa nayaka Palace Museum,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03764,Shopping in Shimoga,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03765,Sigandur,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03766,Tavarekoppa Tiger and Lion Safari,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03767,Tunga Anicut Dam,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03768,Tyavarekoppa,Shimoga (Shivamogga),,Tourist_Places_merged,False,Missing state or city
+PL-03769,Malvan Marine Sanctuary,Sindhudurg,,india_tourism_food_dataset,False,Missing state or city
+PL-03770,Sindhudurg Fort,Sindhudurg,,india_tourism_food_dataset,False,Missing state or city
+PL-03771,Tarkarli Beach,Sindhudurg,,india_tourism_food_dataset,False,Missing state or city
+PL-03772,Jambukeswarar Temple,Trichy,,india_tourism_food_dataset,False,Missing state or city
+PL-03773,Rock Fort Temple,Trichy,,india_tourism_food_dataset,False,Missing state or city
+PL-03774,Sri Ranganathaswamy Temple,Trichy,,india_tourism_food_dataset,False,Missing state or city
+PL-03775,Ardh Kuwari Cave,Vaishno Devi,,Tourist_Places_merged,False,Missing state or city
+PL-03776,Bhairavnath Temple,Vaishno Devi,,Tourist_Places_merged,False,Missing state or city
+PL-03777,City Shopping,Vaishno Devi,,Tourist_Places_merged,False,Missing state or city
+PL-03778,Dera Baba Banda,Vaishno Devi,,Tourist_Places_merged,False,Missing state or city
+PL-03779,Katra,Vaishno Devi,,Tourist_Places_merged,False,Missing state or city
+PL-03780,Vaishno Devi by Helicopter,Vaishno Devi,,Tourist_Places_merged,False,Missing state or city

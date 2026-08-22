@@ -1,0 +1,37 @@
+state,tourist_place_count,district_count,city_count,cities_with_10_plus,cities_below_10,coverage_percentage,needs_research
+Andhra Pradesh,71,10,13,2,11,15.4,True
+Arunachal Pradesh,4,2,2,0,2,0.0,True
+Assam,11,1,7,0,7,0.0,True
+Bihar,30,2,2,1,1,50.0,True
+Chhattisgarh,1,0,1,0,1,0.0,True
+Goa,49,1,2,1,1,50.0,True
+Gujarat,61,7,10,1,9,10.0,True
+Haryana,9,2,3,0,3,0.0,True
+Himachal Pradesh,170,7,19,5,15,25.0,True
+Jharkhand,11,4,4,0,4,0.0,True
+Karnataka,476,19,16,17,10,63.0,True
+Kerala,573,14,15,19,9,67.9,True
+Madhya Pradesh,102,8,14,4,10,28.6,True
+Maharashtra,263,11,16,8,8,50.0,True
+Manipur,3,1,1,0,1,0.0,True
+Meghalaya,18,1,2,1,1,50.0,True
+Mizoram,3,1,1,0,1,0.0,True
+Nagaland,0,0,0,0,0,0.0,True
+Odisha,60,5,11,2,9,18.2,True
+Punjab,82,3,3,2,1,66.7,True
+Rajasthan,254,8,10,9,1,90.0,False
+Sikkim,34,2,4,1,3,25.0,True
+Tamil Nadu,293,11,22,7,15,31.8,True
+Telangana,53,1,1,1,0,100.0,False
+Tripura,13,1,3,1,2,33.3,True
+Uttar Pradesh,164,15,19,5,14,26.3,True
+Uttarakhand,212,6,15,7,8,46.7,True
+West Bengal,117,6,12,3,9,25.0,True
+Andaman and Nicobar Islands,4,1,4,0,4,0.0,True
+Chandigarh,0,0,0,0,0,0.0,True
+Dadra and Nagar Haveli and Daman and Diu,2,1,1,0,1,0.0,True
+Delhi,53,0,2,1,1,50.0,True
+Jammu and Kashmir,90,6,7,3,4,42.9,True
+Ladakh,9,2,6,0,6,0.0,True
+Lakshadweep,0,0,0,0,0,0.0,True
+Puducherry,43,1,3,1,2,33.3,True
