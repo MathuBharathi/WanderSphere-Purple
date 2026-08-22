@@ -267,7 +267,7 @@ function CityContent() {
             <div className="mt-8">
               <button
                 onClick={() => setShowGenModal(true)}
-                className="flex items-center gap-2 px-6 py-4.5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs hover:bg-[#b07f2a] transition-all shadow-lg shadow-[#C69234]/20 hover:scale-[1.02]"
+                className="flex items-center gap-2 px-6 py-5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs hover:bg-[#b07f2a] transition-all shadow-lg shadow-[#C69234]/20 hover:scale-[1.02]"
               >
                 <Sparkles size={14} className="text-[#0B1914] animate-pulse" />
                 <span>Create AI Itinerary for {city.name}</span>

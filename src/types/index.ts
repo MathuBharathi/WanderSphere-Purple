@@ -94,10 +94,12 @@ export interface Profile {
   phone?: string;
   home_city?: string;
   location?: string;
+  website?: string;
   travel_style?: string;
   total_trips?: number;
   total_places_visited?: number;
   created_at?: string;
+  updated_at?: string;
 }
 
 // ─── Itinerary Types ────────────────────────────────────────────────────────
@@ -145,13 +147,14 @@ export interface SavedItinerary {
   id: string;
   user_id: string;
   title: string;
-  description?: string;
   config: ItineraryConfig;
   itinerary_data: GeneratedItinerary;
+  cover_image?: string;
   status?: 'upcoming' | 'active' | 'completed';
   is_public?: boolean;
-  share_code?: string;
+  share_token?: string;
   created_at?: string;
+  updated_at?: string;
 }
 
 // ─── UI Types ───────────────────────────────────────────────────────────────

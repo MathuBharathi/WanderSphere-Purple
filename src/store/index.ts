@@ -11,6 +11,8 @@ interface AppStore {
   setUser: (u: any | null) => void;
   profile: Profile | null;
   setProfile: (p: Profile | null) => void;
+  authReady: boolean;
+  setAuthReady: (v: boolean) => void;
 
   // Search selections
   selectedState: State | null;
@@ -63,6 +65,8 @@ export const useAppStore = create<AppStore>((set, get) => ({
   setUser: (u) => set({ user: u }),
   profile: null,
   setProfile: (p) => set({ profile: p }),
+  authReady: false,
+  setAuthReady: (v) => set({ authReady: v }),
 
   selectedState: null,
   selectedCity: null,

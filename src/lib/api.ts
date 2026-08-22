@@ -58,6 +58,15 @@ function enrichPlace(p: Place): Place {
   };
 }
 
+// ─── Helper: Check if user is a Supabase-authenticated user ──────────────────
+function isSupabaseUser(user: any): boolean {
+  if (!user) return false;
+  // Local sandbox users have IDs starting with 'local-'
+  if (typeof user.id === 'string' && user.id.startsWith('local-')) return false;
+  // Valid UUID pattern check
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
+}
+
 // ─── States ─────────────────────────────────────────────────────────────────
 export async function getStates(): Promise<State[]> {
   return states.map(enrichState).sort((a, b) => a.name.localeCompare(b.name));
@@ -266,393 +275,398 @@ export async function getNearbyPlaces(lat: number, lng: number, radiusKm = 50, c
 }
 
 // ─── Profile ─────────────────────────────────────────────────────────────────
-export async function getProfile(userId: string): Promise<Profile | null> {
-  try {
-    const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
-    if (error) throw error;
-    return data;
-  } catch (e: any) {
-    console.warn('Supabase getProfile failed, checking local profiles:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localProfiles = JSON.parse(localStorage.getItem('local_profiles') || '{}');
-        if (localProfiles[userId]) return localProfiles[userId];
-        
-        // Return default local profile if user is a local session user
-        const localSessionUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-        if (localSessionUser && localSessionUser.id === userId) {
-          const defaultProfile = {
-            id: userId,
-            full_name: localSessionUser.user_metadata?.full_name || 'Traveler',
-            username: localSessionUser.email?.split('@')[0] || 'traveler',
-            travel_style: 'explorer',
-            created_at: new Date().toISOString()
-          };
-          localProfiles[userId] = defaultProfile;
-          localStorage.setItem('local_profiles', JSON.stringify(localProfiles));
-          return defaultProfile;
-        }
-      } catch (err) {
-        console.error('Failed to parse local profiles', err);
-      }
-    }
+export async function getProfile(userId?: string): Promise<Profile | null> {
+  let targetId = userId;
+  if (!targetId) {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return null;
+    targetId = user.id;
+  }
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', targetId)
+    .maybeSingle();
+
+  if (error) {
+    console.error('[getProfile] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
     return null;
   }
+  return data;
 }
 
-export async function updateProfile(userId: string, updates: Partial<Profile>) {
-  try {
-    const { data, error } = await supabase.from('profiles').update(updates).eq('id', userId).select().single();
-    if (error) throw error;
-    return data;
-  } catch (e: any) {
-    console.warn('Supabase updateProfile failed, falling back to local profiles:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localProfiles = JSON.parse(localStorage.getItem('local_profiles') || '{}');
-        const currentProfile = localProfiles[userId] || { id: userId };
-        const updatedProfile = { ...currentProfile, ...updates, updated_at: new Date().toISOString() };
-        localProfiles[userId] = updatedProfile;
-        localStorage.setItem('local_profiles', JSON.stringify(localProfiles));
-        
-        const localSessionUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-        if (localSessionUser && localSessionUser.id === userId) {
-          localStorage.setItem('local_session_profile', JSON.stringify(updatedProfile));
-        }
-        return updatedProfile;
-      } catch (err) {
-        console.error('Failed to update local profile', err);
-      }
-    }
-    throw e;
+export async function updateProfile(updates: Partial<Profile>, profileId?: string): Promise<Profile> {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('User is not authenticated');
   }
+
+  const authUserId = user.id;
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[DIAGNOSTICS] Before Profile UPDATE:', {
+      authUserId,
+      profileId: profileId || 'N/A',
+      isMatch: profileId ? authUserId === profileId : true,
+      targetRowId: authUserId,
+      payload: updates
+    });
+  }
+
+  const payload: Partial<Profile> = {
+    updated_at: new Date().toISOString()
+  };
+  if (updates.full_name !== undefined) payload.full_name = updates.full_name;
+  if (updates.username !== undefined) payload.username = updates.username;
+  if (updates.phone !== undefined) payload.phone = updates.phone;
+  if (updates.travel_style !== undefined) payload.travel_style = updates.travel_style;
+  if (updates.bio !== undefined) payload.bio = updates.bio;
+  if (updates.location !== undefined) payload.location = updates.location;
+  if (updates.website !== undefined) payload.website = updates.website;
+  if (updates.avatar_url !== undefined) payload.avatar_url = updates.avatar_url;
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .update(payload)
+    .eq('id', authUserId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('[updateProfile] Supabase update error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
+    throw new Error(`Unable to update your profile: ${error.message}`);
+  }
+
+  return data;
 }
 
 export async function getPublicProfile(username: string): Promise<Profile | null> {
-  try {
-    const { data, error } = await supabase.from('profiles').select('*').eq('username', username).single();
-    if (error) throw error;
-    return data;
-  } catch (e: any) {
-    console.warn('Supabase getPublicProfile failed, checking local profiles:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localProfiles = JSON.parse(localStorage.getItem('local_profiles') || '{}');
-        const profilesList = Object.values(localProfiles) as Profile[];
-        const found = profilesList.find(p => p.username?.toLowerCase() === username.toLowerCase());
-        if (found) return found;
-      } catch (err) {
-        console.error('Failed to read local profiles', err);
-      }
-    }
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('username', username)
+    .maybeSingle();
+
+  if (error) {
+    console.warn('[getPublicProfile] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
     return null;
   }
+  return data;
 }
 
-export async function uploadAvatar(userId: string, file: File): Promise<string> {
+export async function uploadAvatar(file: File): Promise<string> {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('User is not authenticated');
+  }
+
+  if (!file.type.startsWith('image/')) {
+    throw new Error('Please select an image file.');
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error('Image must be smaller than 5MB.');
+  }
+
+  const userId = user.id;
+
   try {
-    const ext = file.name.split('.').pop() || 'png';
-    const path = `${userId}/avatar.${ext}`;
-    const { error } = await supabase.storage.from('user-avatars').upload(path, file, { upsert: true });
-    if (error) throw error;
-    const { data } = supabase.storage.from('user-avatars').getPublicUrl(path);
-    const publicUrl = data.publicUrl;
-    await updateProfile(userId, { avatar_url: publicUrl });
-    return publicUrl;
-  } catch (err: any) {
-    console.warn('Supabase storage avatar upload failed, using DataURL fallback:', err.message);
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const base64Url = reader.result as string;
-        try {
-          await updateProfile(userId, { avatar_url: base64Url });
-          resolve(base64Url);
-        } catch (e) {
-          reject(e);
-        }
-      };
-      reader.onerror = () => reject(new Error('Failed to read image file'));
-      reader.readAsDataURL(file);
+    const { data: existingFiles } = await supabase.storage.from('user-avatars').list(userId);
+    if (existingFiles && existingFiles.length > 0) {
+      const filesToDelete = existingFiles.map(f => `${userId}/${f.name}`);
+      await supabase.storage.from('user-avatars').remove(filesToDelete);
+    }
+  } catch (e) {
+    console.warn('[uploadAvatar] Cleanup warning:', e);
+  }
+
+  const ext = file.name.split('.').pop() || 'png';
+  const path = `${userId}/avatar.${ext}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('user-avatars')
+    .upload(path, file, { upsert: true });
+
+  if (uploadError) {
+    console.error('[uploadAvatar] Storage upload error:', {
+      message: uploadError.message,
+      code: (uploadError as any).code,
+      details: (uploadError as any).details,
+      hint: (uploadError as any).hint
     });
+    throw new Error(`Unable to upload your profile photo: ${uploadError.message}`);
   }
+
+  const { data } = supabase.storage.from('user-avatars').getPublicUrl(path);
+  const publicUrl = `${data.publicUrl}?t=${Date.now()}`;
+  await updateProfile({ avatar_url: publicUrl }, userId);
+  return publicUrl;
 }
 
-export async function removeAvatar(userId: string): Promise<void> {
-  await updateProfile(userId, { avatar_url: '' });
-}
-
-// ─── Itineraries (Supabase backend wrapper using serialized JSON in description) ─
-export async function createItinerary(itinerary: Partial<SavedItinerary>): Promise<SavedItinerary> {
-  // 1. Determine effective user ID
-  let activeUserId = itinerary.user_id;
-
-  if (!activeUserId || activeUserId === 'guest-user' || activeUserId === 'local-user-id') {
-    try {
-      const { data } = await supabase.auth.getUser();
-      if (data?.user?.id) activeUserId = data.user.id;
-    } catch {}
+export async function removeAvatar(): Promise<void> {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('User is not authenticated');
   }
 
-  // Fallback valid UUID for unauthenticated/guest itineraries so Supabase DB accepts insert
-  if (!activeUserId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(activeUserId)) {
-    activeUserId = '00000000-0000-0000-0000-000000000000';
-  }
+  const userId = user.id;
 
-  let savedItinerary: SavedItinerary | null = null;
-
-  // 2. Attempt Supabase DB Insert
   try {
-    const payload = {
-      user_id: activeUserId,
-      title: itinerary.title || 'My Travel Plan',
-      description: JSON.stringify({
-        config: itinerary.config,
-        itinerary_data: itinerary.itinerary_data
-      }),
-      cover_image: itinerary.itinerary_data?.config?.cityName 
-        ? getCityImageUrl(itinerary.itinerary_data.config.cityName)
-        : undefined,
-      is_public: true
-    };
-
-    const { data, error } = await supabase.from('itineraries').insert(payload).select().single();
-    if (!error && data) {
-      const parsed = JSON.parse(data.description);
-      savedItinerary = {
-        id: data.id,
-        user_id: data.user_id,
-        title: data.title,
-        config: parsed.config,
-        itinerary_data: parsed.itinerary_data,
-        is_public: data.is_public,
-        created_at: data.created_at
-      };
-    } else if (error) {
-      console.warn('Supabase createItinerary DB error:', error.message);
+    const { data: existingFiles } = await supabase.storage.from('user-avatars').list(userId);
+    if (existingFiles && existingFiles.length > 0) {
+      const filesToDelete = existingFiles.map(f => `${userId}/${f.name}`);
+      const { error: deleteError } = await supabase.storage.from('user-avatars').remove(filesToDelete);
+      if (deleteError) {
+        console.error('[removeAvatar] Storage delete error:', {
+          message: deleteError.message,
+          code: (deleteError as any).code,
+          details: (deleteError as any).details,
+          hint: (deleteError as any).hint
+        });
+        throw new Error(`Unable to delete your profile photo from storage: ${deleteError.message}`);
+      }
     }
   } catch (e: any) {
-    console.warn('Supabase createItinerary failed:', e.message);
+    if (e.message?.includes('Unable to delete')) throw e;
+    console.warn('[removeAvatar] Non-critical warning:', e);
   }
 
-  // 3. Fallback / Client dual persistence in localStorage
-  if (!savedItinerary) {
-    savedItinerary = {
-      id: `local-itin-${Date.now()}`,
-      user_id: activeUserId,
-      title: itinerary.title || 'My Travel Plan',
-      config: itinerary.config!,
-      itinerary_data: itinerary.itinerary_data!,
-      is_public: true,
-      created_at: new Date().toISOString()
-    };
-  }
+  await updateProfile({ avatar_url: '' }, userId);
+}
 
-  // Sync to localStorage
-  if (typeof window !== 'undefined') {
+// ─── Itineraries ─────────────────────────────────────────────────────────────
+function parseItineraryRow(row: any): SavedItinerary {
+  let config = row.config;
+  let itinerary_data = row.itinerary_data;
+
+  if ((!config || !itinerary_data) && row.description) {
     try {
-      const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-      const filtered = localItins.filter((i: any) => i.id !== savedItinerary!.id);
-      filtered.unshift(savedItinerary);
-      localStorage.setItem('local_itineraries', JSON.stringify(filtered));
-    } catch (err) {
-      console.error('Failed to sync local_itineraries', err);
+      const parsed = JSON.parse(row.description);
+      config = config || parsed.config;
+      itinerary_data = itinerary_data || parsed.itinerary_data;
+    } catch {
+      // ignore
     }
   }
 
-  return savedItinerary;
+  return {
+    id: row.id,
+    user_id: row.user_id,
+    title: row.title,
+    config: config || {},
+    itinerary_data: itinerary_data || {},
+    cover_image: row.cover_image,
+    is_public: row.is_public,
+    share_token: row.share_token,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+  };
+}
+
+export async function createItinerary(itinerary: Partial<SavedItinerary>): Promise<SavedItinerary> {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    throw new Error('Please sign in to save your itinerary.');
+  }
+
+  const authUserId = user.id;
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[DIAGNOSTICS] Before Itinerary INSERT:', {
+      authUserId,
+      itinerary_user_id: itinerary.user_id || 'N/A',
+      isMatch: authUserId === itinerary.user_id,
+      title: itinerary.title || 'My Travel Plan'
+    });
+  }
+
+  const coverImage = itinerary.cover_image || (
+    itinerary.itinerary_data?.config?.cityName
+      ? getCityImageUrl(itinerary.itinerary_data.config.cityName)
+      : undefined
+  );
+
+  const descriptionText = (itinerary.config as any)?.cityName
+    ? `${(itinerary.config as any).days || 3}-Day Trip to ${(itinerary.config as any).cityName}`
+    : itinerary.title || 'Travel Plan';
+
+  const payload = {
+    user_id: authUserId,
+    title: itinerary.title || 'My Travel Plan',
+    description: descriptionText,
+    config: itinerary.config || {},
+    itinerary_data: itinerary.itinerary_data || {},
+    cover_image: coverImage,
+    is_public: itinerary.is_public ?? false,
+    share_token: itinerary.share_token
+  };
+
+  const { data, error } = await supabase
+    .from('itineraries')
+    .insert(payload)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('[createItinerary] Supabase insert error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
+    throw new Error(`Failed to save itinerary to your account: ${error.message}`);
+  }
+
+  if (!data) {
+    throw new Error('Failed to save itinerary: no data returned from database.');
+  }
+
+  return parseItineraryRow(data);
 }
 
 export async function updateItinerary(id: string, updates: Partial<SavedItinerary>): Promise<SavedItinerary> {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    throw new Error('User is not authenticated');
+  }
+
   const payload: any = {};
-  if (updates.title) payload.title = updates.title;
+  if (updates.title !== undefined) payload.title = updates.title;
   if (updates.is_public !== undefined) payload.is_public = updates.is_public;
-  if (updates.itinerary_data) {
-    payload.description = JSON.stringify({
-      config: updates.config || updates.itinerary_data.config,
-      itinerary_data: updates.itinerary_data
+  if (updates.config !== undefined) payload.config = updates.config;
+  if (updates.itinerary_data !== undefined) payload.itinerary_data = updates.itinerary_data;
+  if (updates.cover_image !== undefined) payload.cover_image = updates.cover_image;
+
+  payload.updated_at = new Date().toISOString();
+
+  const { data, error } = await supabase
+    .from('itineraries')
+    .update(payload)
+    .eq('id', id)
+    .eq('user_id', user.id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('[updateItinerary] Supabase update error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
     });
+    throw new Error(`Unable to save your itinerary changes: ${error.message}`);
   }
 
-  try {
-    const { data, error } = await supabase.from('itineraries').update(payload).eq('id', id).select().single();
-    if (error) throw error;
-
-    const parsed = JSON.parse(data.description);
-    const updated = {
-      id: data.id,
-      user_id: data.user_id,
-      title: data.title,
-      config: parsed.config,
-      itinerary_data: parsed.itinerary_data,
-      is_public: data.is_public,
-      created_at: data.created_at
-    };
-
-    if (typeof window !== 'undefined') {
-      try {
-        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-        const idx = localItins.findIndex((item: any) => item.id === id);
-        if (idx !== -1) {
-          localItins[idx] = updated;
-          localStorage.setItem('local_itineraries', JSON.stringify(localItins));
-        }
-      } catch (_) {}
-    }
-
-    return updated;
-  } catch (e: any) {
-    console.warn('Supabase updateItinerary failed, updating local itineraries:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-        const idx = localItins.findIndex((item: any) => item.id === id);
-        if (idx !== -1) {
-          const current = localItins[idx];
-          const updated = {
-            ...current,
-            title: updates.title || current.title,
-            is_public: updates.is_public !== undefined ? updates.is_public : current.is_public,
-            config: updates.config || current.config,
-            itinerary_data: updates.itinerary_data || current.itinerary_data
-          };
-          localItins[idx] = updated;
-          localStorage.setItem('local_itineraries', JSON.stringify(localItins));
-          return updated;
-        }
-      } catch (err) {
-        console.error('Failed to update local itinerary', err);
-      }
-    }
-    throw e;
-  }
+  return parseItineraryRow(data);
 }
 
 export async function deleteItinerary(id: string): Promise<void> {
-  try {
-    const { error } = await supabase.from('itineraries').delete().eq('id', id);
-    if (error) throw error;
-  } catch (e: any) {
-    console.warn('Supabase deleteItinerary failed, deleting local itineraries:', e.message);
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    throw new Error('User is not authenticated');
   }
-  if (typeof window !== 'undefined') {
-    try {
-      const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-      const filtered = localItins.filter((item: any) => item.id !== id);
-      localStorage.setItem('local_itineraries', JSON.stringify(filtered));
-    } catch (err) {
-      console.error('Failed to delete local itinerary', err);
-    }
+
+  const { error } = await supabase
+    .from('itineraries')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', user.id);
+
+  if (error) {
+    console.error('[deleteItinerary] Supabase delete error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
+    throw new Error(`Failed to delete itinerary: ${error.message}`);
   }
 }
 
 export async function getItineraryById(id: string): Promise<SavedItinerary | null> {
-  try {
-    const { data, error } = await supabase.from('itineraries').select('*').eq('id', id).single();
-    if (error) throw error;
+  const { data, error } = await supabase
+    .from('itineraries')
+    .select('*')
+    .eq('id', id)
+    .maybeSingle();
 
-    const parsed = JSON.parse(data.description);
-    return {
-      id: data.id,
-      user_id: data.user_id,
-      title: data.title,
-      config: parsed.config,
-      itinerary_data: parsed.itinerary_data,
-      is_public: data.is_public,
-      created_at: data.created_at
-    };
-  } catch (e: any) {
-    console.warn('Supabase getItineraryById failed, checking local itineraries:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-        const found = localItins.find((item: any) => item.id === id);
-        if (found) return found;
-      } catch (err) {
-        console.error('Failed to read local itineraries', err);
-      }
-    }
+  if (error) {
+    console.error('[getItineraryById] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
     return null;
   }
+  return parseItineraryRow(data);
 }
 
 export async function getUserItineraries(userId?: string): Promise<SavedItinerary[]> {
-  const resultsMap = new Map<string, SavedItinerary>();
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-  try {
-    const { data, error } = await supabase
-      .from('itineraries')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (!error && data) {
-      for (const item of data) {
-        try {
-          const parsed = JSON.parse(item.description);
-          resultsMap.set(item.id, {
-            id: item.id,
-            user_id: item.user_id,
-            title: item.title,
-            config: parsed.config,
-            itinerary_data: parsed.itinerary_data,
-            is_public: item.is_public,
-            created_at: item.created_at
-          });
-        } catch {
-          // Ignore corrupted rows
-        }
-      }
-    }
-  } catch (e: any) {
-    console.warn('Supabase getUserItineraries failed:', e.message);
+  if (authError || !user) {
+    return [];
   }
 
-  if (typeof window !== 'undefined') {
-    try {
-      const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-      for (const localItin of localItins) {
-        if (!resultsMap.has(localItin.id)) {
-          resultsMap.set(localItin.id, localItin);
-        }
-      }
-    } catch (err) {
-      console.error('Failed to read local itineraries list', err);
-    }
+  const targetId = user.id;
+
+  const { data, error } = await supabase
+    .from('itineraries')
+    .select('*')
+    .eq('user_id', targetId)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('[getUserItineraries] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
+    throw new Error(`Failed to load your itineraries: ${error.message}`);
   }
 
-  const merged = Array.from(resultsMap.values());
-  merged.sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
-  return merged;
+  if (!data) return [];
+
+  return data.map(parseItineraryRow);
 }
 
 export async function getItineraryByShareCode(code: string): Promise<SavedItinerary | null> {
-  try {
-    const { data, error } = await supabase.from('itineraries').select('*').eq('share_token', code).single();
-    if (error) throw error;
+  const { data, error } = await supabase
+    .from('itineraries')
+    .select('*')
+    .eq('share_token', code)
+    .maybeSingle();
 
-    const parsed = JSON.parse(data.description);
-    return {
-      id: data.id,
-      user_id: data.user_id,
-      title: data.title,
-      config: parsed.config,
-      itinerary_data: parsed.itinerary_data,
-      is_public: data.is_public,
-      created_at: data.created_at
-    };
-  } catch (e: any) {
-    console.warn('Supabase getItineraryByShareCode failed, checking local itineraries:', e.message);
-    if (typeof window !== 'undefined') {
-      try {
-        const localItins = JSON.parse(localStorage.getItem('local_itineraries') || '[]');
-        const found = localItins.find((item: any) => item.share_token === code || item.id === code);
-        if (found) return found;
-      } catch (err) {
-        console.error('Failed to check local itinerary by share code', err);
-      }
-    }
+  if (error) {
+    console.warn('[getItineraryByShareCode] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    });
     return null;
   }
+  return parseItineraryRow(data);
 }
 
 // ─── Weather ─────────────────────────────────────────────────────────────────
@@ -677,7 +691,7 @@ export async function getWeather(lat: number, lon: number): Promise<WeatherData 
   } catch { return null; }
 }
 
-// ─── Reviews (Local storage & Mock fallback) ─────────────────────────────────
+// ─── Reviews ─────────────────────────────────────────────────────────────────
 export interface Review {
   id: string;
   place_id: string;
@@ -719,20 +733,11 @@ export async function getReviewsByPlace(placeId: string): Promise<Review[]> {
       }
     }
   ];
-
-  if (typeof window !== 'undefined') {
-    try {
-      const localRevs = JSON.parse(localStorage.getItem(`reviews_${placeId}`) || '[]');
-      return [...localRevs, ...mockReviews];
-    } catch (e) {
-      return mockReviews;
-    }
-  }
   return mockReviews;
 }
 
 export async function createReview(review: Omit<Review, 'id' | 'created_at'>): Promise<Review> {
-  const newReview: Review = {
+  return {
     ...review,
     id: `user-rev-${Date.now()}`,
     created_at: new Date().toISOString(),
@@ -740,75 +745,30 @@ export async function createReview(review: Omit<Review, 'id' | 'created_at'>): P
       full_name: 'You (Traveler)'
     }
   };
-
-  if (typeof window !== 'undefined') {
-    try {
-      const localRevs = JSON.parse(localStorage.getItem(`reviews_${review.place_id}`) || '[]');
-      localRevs.unshift(newReview);
-      localStorage.setItem(`reviews_${review.place_id}`, JSON.stringify(localRevs));
-    } catch (e) {
-      console.error('Failed to save review to localStorage', e);
-    }
-  }
-  return newReview;
 }
 
 // ─── Auth Management ─────────────────────────────────────────────────────────
 export async function changePassword(newPassword: string): Promise<void> {
-  try {
-    const { error } = await supabase.auth.updateUser({ password: newPassword });
-    if (error) throw error;
-  } catch (e: any) {
-    // Offline fallback: update local user password
-    if (e.message?.includes('fetch') || e.message?.includes('Failed to fetch')) {
-      if (typeof window !== 'undefined') {
-        try {
-          const localUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-          if (localUser) {
-            const localUsers = JSON.parse(localStorage.getItem('local_users') || '[]');
-            const idx = localUsers.findIndex((u: any) => u.id === localUser.id);
-            if (idx !== -1) {
-              localUsers[idx].password = newPassword;
-              localStorage.setItem('local_users', JSON.stringify(localUsers));
-              return;
-            }
-          }
-        } catch (err) {
-          console.error('Failed to update local password', err);
-        }
-      }
-    }
-    throw e;
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (error) {
+    console.error('[changePassword] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      status: error.status
+    });
+    throw error;
   }
 }
 
 export async function changeEmail(newEmail: string): Promise<void> {
-  try {
-    const { error } = await supabase.auth.updateUser({ email: newEmail });
-    if (error) throw error;
-  } catch (e: any) {
-    // Offline fallback: update local user email
-    if (e.message?.includes('fetch') || e.message?.includes('Failed to fetch')) {
-      if (typeof window !== 'undefined') {
-        try {
-          const localUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-          if (localUser) {
-            localUser.email = newEmail;
-            localStorage.setItem('local_session_user', JSON.stringify(localUser));
-            
-            const localUsers = JSON.parse(localStorage.getItem('local_users') || '[]');
-            const idx = localUsers.findIndex((u: any) => u.id === localUser.id);
-            if (idx !== -1) {
-              localUsers[idx].email = newEmail;
-              localStorage.setItem('local_users', JSON.stringify(localUsers));
-            }
-            return;
-          }
-        } catch (err) {
-          console.error('Failed to update local email', err);
-        }
-      }
-    }
-    throw e;
+  const { error } = await supabase.auth.updateUser({ email: newEmail });
+  if (error) {
+    console.error('[changeEmail] Supabase error:', {
+      message: error.message,
+      code: error.code,
+      status: error.status
+    });
+    throw error;
   }
 }
+

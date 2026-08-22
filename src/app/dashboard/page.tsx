@@ -2,73 +2,58 @@
 import { useEffect, useState } from 'react';
 import { useAppStore } from '@/store';
 import { useRouter } from 'next/navigation';
-import { getUserItineraries, deleteItinerary, getPlacesByCity } from '@/lib/api';
-import { 
-  Sparkles, Calendar, Compass, Trash2, ArrowRight, MapPin, 
-  User, Loader2, LogOut, Heart, Plus, BookOpen, Clock
+import { getUserItineraries, deleteItinerary } from '@/lib/api';
+import {
+  Sparkles, Compass, ArrowRight, MapPin,
+  User, Loader2, LogOut, Heart, Plus, BookOpen
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { NavDock } from '@/components/dock/NavDock';
+import { ItineraryCard } from '@/components/ui/ItineraryCard';
 import type { SavedItinerary, Place } from '@/types';
 import { places as staticPlaces } from '@/data/travelData';
+import toast from 'react-hot-toast';
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { user, setUser, profile, setProfile, savedPlaces, setGeneratedItinerary, setItineraryConfig } = useAppStore();
+  const {
+    user, setUser, profile, setProfile, authReady,
+    savedPlaces, setGeneratedItinerary, setItineraryConfig, setCurrentItineraryId
+  } = useAppStore();
   const [itineraries, setItineraries] = useState<SavedItinerary[]>([]);
   const [loading, setLoading] = useState(true);
   const [wishlistPlaces, setWishlistPlaces] = useState<Place[]>([]);
 
-  // 1. Authenticate user — check Zustand store first, then Supabase session
+  // Wait for authReady, then load data
   useEffect(() => {
-    const initDashboard = async () => {
-      let activeUserId = user?.id;
+    if (!authReady) return;
 
-      if (!activeUserId) {
-        try {
-          const { data } = await supabase.auth.getUser();
-          if (data?.user) {
-            activeUserId = data.user.id;
-            setUser(data.user);
-          }
-        } catch (e) {
-          console.warn('Supabase session check failed:', e);
+    let cancelled = false;
+
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+        if (!authUser) {
+          router.push('/auth');
+          return;
         }
+        const trips = await getUserItineraries(authUser.id);
+        if (!cancelled) setItineraries(trips);
+      } catch (e) {
+        console.error('Failed to load itineraries:', e);
+        if (!cancelled) toast.error('Failed to load your itineraries.');
+      } finally {
+        if (!cancelled) setLoading(false);
       }
-
-      if (!activeUserId && typeof window !== 'undefined') {
-        try {
-          const localUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-          if (localUser?.id) {
-            activeUserId = localUser.id;
-            setUser(localUser);
-          }
-        } catch (e) {
-          console.warn('Local session check failed:', e);
-        }
-      }
-
-      await loadDashboardData(activeUserId);
     };
-    initDashboard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  // Load itineraries and wishlist places
-  const loadDashboardData = async (userId: string) => {
-    setLoading(true);
-    try {
-      const userItits = await getUserItineraries(userId);
-      setItineraries(userItits);
-    } catch (e) {
-      console.error('Failed to load itineraries', e);
-    } finally {
-      setLoading(false);
-    }
-  };
+    loadData();
+    return () => { cancelled = true; };
+  }, [authReady, router]);
 
-  // Populate wishlist from static places based on local storage saved IDs
+  // Populate wishlist from static places based on saved IDs
   useEffect(() => {
     if (savedPlaces.length > 0) {
       const items = staticPlaces.filter((p) => savedPlaces.includes(p.id));
@@ -85,16 +70,18 @@ export default function DashboardPage() {
 
     try {
       await deleteItinerary(id);
-      setItineraries(itineraries.filter((i) => i.id !== id));
-    } catch (err) {
-      console.error('Delete failed', err);
-      alert('Failed to delete itinerary. Please try again.');
+      setItineraries(prev => prev.filter((i) => i.id !== id));
+      toast.success('Itinerary deleted.');
+    } catch (err: any) {
+      console.error('Delete failed:', err);
+      toast.error(err?.message || 'Failed to delete itinerary. Please try again.');
     }
   };
 
   const handleOpenItinerary = (itinerary: SavedItinerary) => {
     setItineraryConfig(itinerary.config);
     setGeneratedItinerary(itinerary.itinerary_data);
+    setCurrentItineraryId(itinerary.id);
     router.push('/itinerary');
   };
 
@@ -102,10 +89,12 @@ export default function DashboardPage() {
     await supabase.auth.signOut();
     setUser(null);
     setProfile(null);
+    toast.success('Signed out successfully');
     router.push('/');
   };
 
-  if (loading && !user) {
+  // Show loading while auth is initializing
+  if (!authReady || (loading && !user)) {
     return (
       <main className="min-h-screen bg-[#0B1914] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
@@ -125,14 +114,15 @@ export default function DashboardPage() {
           <div className="flex items-center gap-4">
             <Link href="/profile" className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C69234] hover:underline transition-colors">
               <User size={14} />
-              <span>Profile Settings</span>
+              <span className="hidden sm:inline">Profile Settings</span>
             </Link>
             <button
               onClick={handleLogout}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-800/40 hover:bg-rose-950/30 text-rose-400 text-xs font-semibold transition-all"
+              aria-label="Sign out"
             >
               <LogOut size={13} />
-              <span>Logout</span>
+              <span className="hidden sm:inline">Logout</span>
             </button>
           </div>
         </div>
@@ -149,28 +139,35 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* Dashboard Stats */}
+        {/* Dashboard Stats — Equal visual weight */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md">
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px]">
             <div className="w-10 h-10 rounded-2xl bg-[#1B432C] text-[#C69234] border border-[#2C5E3B] flex items-center justify-center mb-4">
               <Compass size={20} />
             </div>
-            <p className="text-2xs font-extrabold uppercase tracking-widest text-[#A3C2B2]">Saved Itineraries</p>
-            <p className="text-3xl font-black text-[#C69234] mt-1">{itineraries.length}</p>
+            <div>
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#A3C2B2]">Saved Itineraries</p>
+              <p className="text-3xl font-black text-[#C69234] mt-1">{itineraries.length}</p>
+            </div>
           </div>
 
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md">
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px]">
             <div className="w-10 h-10 rounded-2xl bg-[#1B432C] text-[#A65D29] border border-[#2C5E3B] flex items-center justify-center mb-4">
               <Heart size={20} />
             </div>
-            <p className="text-2xs font-extrabold uppercase tracking-widest text-[#A3C2B2]">Wishlist Sights</p>
-            <p className="text-3xl font-black text-[#A65D29] mt-1">{wishlistPlaces.length}</p>
+            <div>
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#A3C2B2]">Wishlist Sights</p>
+              <p className="text-3xl font-black text-[#A65D29] mt-1">{wishlistPlaces.length}</p>
+            </div>
           </div>
 
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between">
+          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px]">
+            <div className="w-10 h-10 rounded-2xl bg-[#1B432C] text-[#C69234] border border-[#2C5E3B] flex items-center justify-center mb-4">
+              <Sparkles size={20} />
+            </div>
             <div>
               <p className="text-xs font-semibold text-white">Ready for a new adventure?</p>
-              <p className="text-2xs text-[#A3C2B2] mt-1">Let AI craft your next custom trip itinerary.</p>
+              <p className="text-[10px] text-[#A3C2B2] mt-1">Let AI craft your next custom trip itinerary.</p>
             </div>
             <Link
               href="/#explore"
@@ -207,56 +204,14 @@ export default function DashboardPage() {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {itineraries.map((itinerary) => (
-                  <div
+                  <ItineraryCard
                     key={itinerary.id}
-                    onClick={() => handleOpenItinerary(itinerary)}
-                    className="bg-[#143028] border border-[#2C5E3B] rounded-2xl overflow-hidden hover:border-[#C69234] transition-all cursor-pointer group shadow-lg"
-                  >
-                    {itinerary.itinerary_data?.config?.cityId && (
-                      <div
-                        className="h-28 bg-cover bg-center shrink-0"
-                        style={{
-                          backgroundImage: `url(${
-                            staticPlaces.find(p => p.city_id === itinerary.itinerary_data.config.cityId)?.cover_image || 
-                            'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800'
-                          })`
-                        }}
-                      />
-                    )}
-                    <div className="p-4.5 flex flex-col justify-between h-40">
-                      <div>
-                        <div className="flex justify-between items-start gap-2">
-                          <span className="text-[9px] font-bold uppercase tracking-wider text-[#C69234]">
-                            {itinerary.config?.stateName}
-                          </span>
-                          <span className="text-[9px] font-semibold text-[#A3C2B2]/80">
-                            {itinerary.created_at ? new Date(itinerary.created_at).toLocaleDateString() : ''}
-                          </span>
-                        </div>
-                        <h3 className="font-extrabold text-base text-white mt-1 group-hover:text-[#C69234] transition-colors">
-                          Trip to {itinerary.config?.cityName || itinerary.title}
-                        </h3>
-                        <div className="flex gap-3 text-2xs font-semibold uppercase tracking-wider text-[#A3C2B2] mt-2">
-                          <span className="flex items-center gap-1"><Calendar size={10} /> {itinerary.config?.days} Days</span>
-                          <span className="flex items-center gap-1"><Sparkles size={10} /> {itinerary.config?.travelStyle}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-between items-center border-t border-[#2C5E3B]/60 pt-3">
-                        <span className="text-xs font-bold text-[#C69234] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                          View Details <ArrowRight size={12} />
-                        </span>
-                        <button
-                          onClick={(e) => handleDelete(itinerary.id, e)}
-                          className="p-1.5 text-[#A3C2B2] hover:text-rose-400 transition-colors rounded-lg hover:bg-rose-950/30"
-                        >
-                          <Trash2 size={13} />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                    itinerary={itinerary}
+                    onOpen={handleOpenItinerary}
+                    onDelete={handleDelete}
+                  />
                 ))}
               </div>
             )}
@@ -272,10 +227,10 @@ export default function DashboardPage() {
             {wishlistPlaces.length === 0 ? (
               <div className="bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl p-6 text-center">
                 <p className="text-xs text-[#A3C2B2]">Your wishlist is empty.</p>
-                <p className="text-2xs text-[#A3C2B2]/60 mt-1 mb-4">Click the heart icon on any tourist place to save it here.</p>
+                <p className="text-[10px] text-[#A3C2B2]/60 mt-1 mb-4">Click the heart icon on any tourist place to save it here.</p>
                 <Link
                   href="/"
-                  className="inline-flex px-4 py-2 bg-[#C69234] text-[#0B1914] rounded-lg text-2xs font-black uppercase tracking-wider"
+                  className="inline-flex px-4 py-2 bg-[#C69234] text-[#0B1914] rounded-lg text-[10px] font-black uppercase tracking-wider"
                 >
                   Browse Sights
                 </Link>

@@ -114,139 +114,31 @@ export default function AuthPage() {
 
     try {
       if (mode === 'signup') {
-        try {
-          const { error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-              data: { full_name: name },
-              emailRedirectTo: `${window.location.origin}/auth/callback`,
-            },
-          });
-          if (error) throw error;
-          setSuccess('Account created successfully! Please check your email to confirm your account. (Note: If testing locally without email SMTP, you can disable "Confirm email" in Supabase Auth Settings, or manually confirm the user using the SQL query helper at the bottom of schema.sql.)');
-          setEmail('');
-          setPassword('');
-          setConfirmPassword('');
-          setName('');
-        } catch (authErr: any) {
-          // Fallback to local sandbox signup if Supabase server is unreachable
-          if (authErr.message?.includes('failed to fetch') || authErr.message?.includes('Failed to fetch') || authErr.message?.includes('fetch')) {
-            console.warn('Supabase offline. Initiating offline signup.');
-            const localUsers = JSON.parse(localStorage.getItem('local_users') || '[]');
-            if (localUsers.some((u: any) => u.email === email)) {
-              throw new Error('An account with this email already exists in local sandbox.');
-            }
-            const localUser = {
-              id: `local-user-${Date.now()}`,
-              email,
-              password,
-              user_metadata: { full_name: name }
-            };
-            localUsers.push(localUser);
-            localStorage.setItem('local_users', JSON.stringify(localUsers));
-
-            // Create profile
-            const localProfile = {
-              id: localUser.id,
-              full_name: name,
-              username: email.split('@')[0],
-              travel_style: 'explorer',
-              created_at: new Date().toISOString()
-            };
-            const localProfiles = JSON.parse(localStorage.getItem('local_profiles') || '{}');
-            localProfiles[localUser.id] = localProfile;
-            localStorage.setItem('local_profiles', JSON.stringify(localProfiles));
-
-            // Persist session
-            localStorage.setItem('local_session_user', JSON.stringify(localUser));
-            localStorage.setItem('local_session_profile', JSON.stringify(localProfile));
-
-            setUser(localUser as any);
-            setProfile(localProfile);
-            setSuccess('Offline Sandbox Mode: Account created successfully! Logging you in...');
-            
-            setTimeout(() => {
-              router.push('/dashboard');
-            }, 1500);
-            return;
-          }
-          throw authErr;
-        }
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: name },
+            emailRedirectTo: `${window.location.origin}/auth/callback`,
+          },
+        });
+        if (error) throw error;
+        setSuccess('Account created successfully! Please check your email to confirm your account.');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setName('');
       } else if (mode === 'signin') {
-        try {
-          const { error } = await supabase.auth.signInWithPassword({ email, password });
-          if (error) throw error;
-          router.push('/dashboard');
-        } catch (authErr: any) {
-          // Fallback to local sandbox signin if Supabase server is unreachable
-          if (authErr.message?.includes('failed to fetch') || authErr.message?.includes('Failed to fetch') || authErr.message?.includes('fetch')) {
-            console.warn('Supabase offline. Initiating offline login check.');
-            const localUsers = JSON.parse(localStorage.getItem('local_users') || '[]');
-            const foundUser = localUsers.find((u: any) => u.email === email && u.password === password);
-            
-            if (!foundUser) {
-              // Standard fallback demo login
-              if (email === 'demo@example.com' && password === 'password') {
-                const demoUser = {
-                  id: 'local-demo-user',
-                  email: 'demo@example.com',
-                  user_metadata: { full_name: 'Demo Traveler' }
-                };
-                const demoProfile = {
-                  id: 'local-demo-user',
-                  full_name: 'Demo Traveler',
-                  username: 'demotraveler',
-                  travel_style: 'explorer',
-                  created_at: new Date().toISOString()
-                };
-                localStorage.setItem('local_session_user', JSON.stringify(demoUser));
-                localStorage.setItem('local_session_profile', JSON.stringify(demoProfile));
-                
-                setUser(demoUser as any);
-                setProfile(demoProfile);
-                setSuccess('Signed in using Demo Sandbox account!');
-                setTimeout(() => router.push('/dashboard'), 1000);
-                return;
-              }
-              throw new Error('Invalid credentials. If offline, try email "demo@example.com" with password "password" to log in.');
-            }
-
-            // Log in with found user details
-            const localProfiles = JSON.parse(localStorage.getItem('local_profiles') || '{}');
-            const userProfile = localProfiles[foundUser.id] || {
-              id: foundUser.id,
-              full_name: foundUser.user_metadata?.full_name || email.split('@')[0],
-              username: email.split('@')[0],
-              travel_style: 'explorer',
-              created_at: new Date().toISOString()
-            };
-
-            localStorage.setItem('local_session_user', JSON.stringify(foundUser));
-            localStorage.setItem('local_session_profile', JSON.stringify(userProfile));
-
-            setUser(foundUser as any);
-            setProfile(userProfile);
-            setSuccess('Signed in successfully in Offline Sandbox mode!');
-            setTimeout(() => router.push('/dashboard'), 1000);
-            return;
-          }
-          throw authErr;
-        }
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        router.push('/dashboard');
       } else if (mode === 'forgot') {
-        try {
-          const { error } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: `${window.location.origin}/auth/reset-password`,
-          });
-          if (error) throw error;
-          setSuccess('Password reset link sent! Check your email for further instructions.');
-          setEmail('');
-        } catch (authErr: any) {
-          if (authErr.message?.includes('failed to fetch') || authErr.message?.includes('Failed to fetch') || authErr.message?.includes('fetch')) {
-            throw new Error('Cannot send reset email while database server is offline.');
-          }
-          throw authErr;
-        }
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/auth/reset-password`,
+        });
+        if (error) throw error;
+        setSuccess('Password reset link sent! Check your email for further instructions.');
+        setEmail('');
       }
     } catch (err: any) {
       setError(getFriendlyError(err.message || 'Something went wrong. Please try again.'));

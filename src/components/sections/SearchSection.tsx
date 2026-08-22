@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ChevronDown, Navigation, Sparkles, Clock, Compass, DollarSign, SlidersHorizontal, Loader2, Eye, ArrowRight } from 'lucide-react';
 import { getStates, getCitiesByState, getNearbyCities, createItinerary } from '@/lib/api';
+import { supabase } from '@/lib/supabase';
 import { generateItinerary } from '@/lib/itineraryEngine';
 import { useAppStore } from '@/store';
 import { useRouter } from 'next/navigation';
@@ -97,16 +98,19 @@ export function SearchSection() {
         
         // Auto-save to user's account
         try {
-          const payload: Partial<SavedItinerary> = {
-            user_id: user.id,
-            title: `Trip to ${config.cityName}`,
-            config: config,
-            itinerary_data: itinerary,
-            is_public: false
-          };
-          const saved = await createItinerary(payload);
-          setCurrentItineraryId(saved.id);
-          toast.success('Itinerary created & saved!');
+          const { data: { user: authUser } } = await supabase.auth.getUser();
+          if (authUser) {
+            const payload: Partial<SavedItinerary> = {
+              user_id: authUser.id,
+              title: `Trip to ${config.cityName}`,
+              config: config,
+              itinerary_data: itinerary,
+              is_public: false
+            };
+            const saved = await createItinerary(payload);
+            setCurrentItineraryId(saved.id);
+            toast.success('Itinerary created & saved!');
+          }
         } catch (saveErr) {
           console.warn('Auto-save failed, itinerary still available:', saveErr);
           setCurrentItineraryId(null);
@@ -150,7 +154,7 @@ export function SearchSection() {
           setOpenDropdown(openDropdown === dropdownKey ? null : dropdownKey);
           setSearchQuery('');
         }}
-        className={`w-full flex items-center justify-between gap-3 px-6 py-4.5 rounded-2xl bg-[#1B432C]/80 border backdrop-blur-md transition-all duration-300 text-left ${
+        className={`w-full flex items-center justify-between gap-3 px-6 py-5 rounded-2xl bg-[#1B432C]/80 border backdrop-blur-md transition-all duration-300 text-left ${
           disabled ? 'opacity-40 cursor-not-allowed border-[#2C5E3B]/20' : 'border-[#2C5E3B]/60 hover:border-[#C69234] cursor-pointer'
         } ${openDropdown === dropdownKey ? 'border-[#C69234] ring-1 ring-[#C69234]/30 bg-[#1B432C]' : ''}`}
       >
@@ -274,7 +278,7 @@ export function SearchSection() {
               type="button"
               onClick={() => setShowPreferences(!showPreferences)}
               disabled={!selCity}
-              className={`flex items-center justify-center p-4.5 rounded-2xl border transition-all ${
+              className={`flex items-center justify-center p-5 rounded-2xl border transition-all ${
                 showPreferences 
                   ? 'border-[#C69234] bg-[#C69234] text-[#0B1914]' 
                   : 'border-[#2C5E3B] bg-[#1B432C] text-[#C69234] hover:border-[#C69234]'
@@ -289,7 +293,7 @@ export function SearchSection() {
               type="button"
               onClick={handleExplore}
               disabled={!selCity}
-              className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-4.5 rounded-2xl bg-[#1B432C] border border-[#2C5E3B] text-white font-bold uppercase tracking-widest text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#2C5E3B] transition-all"
+              className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-5 rounded-2xl bg-[#1B432C] border border-[#2C5E3B] text-white font-bold uppercase tracking-widest text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#2C5E3B] transition-all"
             >
               <Search size={14} className="text-[#C69234]" />
               <span>Explore</span>
@@ -306,7 +310,7 @@ export function SearchSection() {
                 }
               }}
               disabled={!selCity || generating}
-              className="flex-2 md:flex-none flex items-center justify-center gap-2 px-8 py-4.5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#b07f2a] transition-all shadow-md shadow-[#C69234]/20"
+              className="flex-[2] md:flex-none flex items-center justify-center gap-2 px-8 py-5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#b07f2a] transition-all shadow-md shadow-[#C69234]/20"
             >
               {generating ? (
                 <>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/store';
 import { useRouter } from 'next/navigation';
 import { createItinerary, updateItinerary } from '@/lib/api';
+import { supabase } from '@/lib/supabase';
 import { getPlaceImageUrl } from '@/lib/placeImages';
 import { cityTransportInfo } from '@/data/travelData';
 import { 
@@ -31,7 +32,7 @@ const LeafletMap = dynamic(() => import('@/components/map/LeafletMap'), {
 
 export default function ItineraryPage() {
   const router = useRouter();
-  const { generatedItinerary, user, setGeneratedItinerary, currentItineraryId, setCurrentItineraryId } = useAppStore();
+  const { generatedItinerary, user, authReady, setGeneratedItinerary, currentItineraryId, setCurrentItineraryId } = useAppStore();
   const [activeDay, setActiveDay] = useState(1);
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState('');
@@ -51,25 +52,14 @@ export default function ItineraryPage() {
   const [editingDurationIndex, setEditingDurationIndex] = useState<number | null>(null);
   const [editDurationValue, setEditDurationValue] = useState('');
 
-  // Auth check: redirect to auth if not logged in
+  // Auth check: wait for authReady, then redirect if not logged in
   useEffect(() => {
+    if (!authReady) return;
     if (!user) {
-      // Check for local session fallback
-      if (typeof window !== 'undefined') {
-        try {
-          const localUser = JSON.parse(localStorage.getItem('local_session_user') || 'null');
-          if (!localUser) {
-            toast.error('Please sign in to view itineraries');
-            router.push('/auth');
-            return;
-          }
-        } catch {
-          router.push('/auth');
-          return;
-        }
-      }
+      toast.error('Please sign in to view itineraries');
+      router.push('/auth');
     }
-  }, [user, router]);
+  }, [authReady, user, router]);
 
   // If no itinerary generated, show message
   if (!generatedItinerary) {
@@ -190,18 +180,21 @@ export default function ItineraryPage() {
   };
 
   const handleSave = async () => {
-    if (!user) {
-      router.push('/auth');
-      return;
-    }
     setSaving(true);
     setSaveError('');
     setSaveSuccess('');
 
     try {
+      const { data: { user: authUser }, error: authErr } = await supabase.auth.getUser();
+      if (authErr || !authUser) {
+        toast.error('Please sign in to save your itinerary');
+        router.push('/auth');
+        return;
+      }
+
       if (currentItineraryId) {
         await updateItinerary(currentItineraryId, {
-          title: `Trip to ${config.cityName}`,
+          title: editTitleValue || `Trip to ${config.cityName}`,
           config: config,
           itinerary_data: generatedItinerary,
         });
@@ -209,19 +202,29 @@ export default function ItineraryPage() {
         toast.success('Changes saved!');
       } else {
         const payload: Partial<SavedItinerary> = {
-          user_id: user.id,
-          title: `Trip to ${config.cityName}`,
+          user_id: authUser.id,
+          title: editTitleValue || `Trip to ${config.cityName}`,
           config: config,
           itinerary_data: generatedItinerary,
           is_public: true
         };
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[DIAGNOSTICS] Before Itinerary INSERT:', {
+            authUserId: authUser.id,
+            itinerary_user_id: payload.user_id,
+            isMatch: authUser.id === payload.user_id,
+            title: payload.title
+          });
+        }
+
         const saved = await createItinerary(payload);
         setCurrentItineraryId(saved.id);
         setSaveSuccess('Itinerary saved to your dashboard!');
         toast.success('Itinerary saved!');
       }
     } catch (err: any) {
-      console.error(err);
+      console.error('[handleSave] Error:', err);
       setSaveError(err.message || 'Failed to save itinerary. Please try again.');
       toast.error('Save failed');
     } finally {
@@ -330,7 +333,7 @@ export default function ItineraryPage() {
               <ArrowLeft size={16} />
             </Link>
             <div>
-              <div className="flex items-center gap-2 text-2xs uppercase font-extrabold tracking-widest text-[#C69234]">
+              <div className="flex items-center gap-2 text-[10px] uppercase font-extrabold tracking-widest text-[#C69234]">
                 <span>{config.stateName}</span>
                 <span>•</span>
                 <span className="text-[#A65D29] flex items-center gap-0.5">
@@ -364,7 +367,7 @@ export default function ItineraryPage() {
           <div className="flex flex-wrap gap-2.5">
             <button
               onClick={handleShare}
-              className="flex items-center gap-1.5 px-4.5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all"
+              className="flex items-center gap-1.5 px-5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all"
             >
               <Share2 size={13} />
               <span>{shareText}</span>
@@ -372,7 +375,7 @@ export default function ItineraryPage() {
             <button
               onClick={handleDownloadPDF}
               disabled={downloading}
-              className="flex items-center gap-1.5 px-4.5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all disabled:opacity-50"
+              className="flex items-center gap-1.5 px-5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all disabled:opacity-50"
             >
               {downloading ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
               <span>{downloading ? 'Generating...' : 'Download PDF'}</span>
@@ -475,7 +478,7 @@ export default function ItineraryPage() {
               <div className="relative border-l-2 border-[#2C5E3B] ml-4 pl-6 space-y-8 py-2">
                 {currentDayData.slots.map((slot, index) => (
                   <div key={`${slot.place.id}-${index}`} className="relative group">
-                    <span className="absolute -left-[33px] top-1.5 w-4.5 h-4.5 rounded-full border-2 border-[#C69234] bg-[#0B1914] flex items-center justify-center">
+                    <span className="absolute -left-[33px] top-1.5 w-[18px] h-[18px] rounded-full border-2 border-[#C69234] bg-[#0B1914] flex items-center justify-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#C69234]" />
                     </span>
 
