@@ -352,8 +352,7 @@ function ProfileContent() {
               <button
                 type="button"
                 onClick={handleAvatarClick}
-                className="relative group block rounded-full focus:outline-none focus:ring-2 mb-4"
-                style={{ focusRingColor: 'var(--ws-accent)' }}
+                className="relative group block rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--ws-accent)] mb-4"
                 aria-label="View or change profile picture"
               >
                 <div className="w-28 h-28 rounded-full ws-glass border-2 flex items-center justify-center overflow-hidden shadow-xl group-hover:border-[var(--ws-accent)] transition-all">
@@ -495,10 +494,10 @@ function ProfileContent() {
                       <ItineraryCard
                         key={trip.id}
                         itinerary={trip}
-                        onSelect={() => {
-                          setGeneratedItinerary(trip.data);
-                          setItineraryConfig(trip.config);
-                          setCurrentItineraryId(trip.id);
+                        onOpen={(itinerary) => {
+                          setGeneratedItinerary(itinerary.itinerary_data);
+                          setItineraryConfig(itinerary.config);
+                          setCurrentItineraryId(itinerary.id);
                           router.push('/itinerary');
                         }}
                         onDelete={handleDeleteTrip}
