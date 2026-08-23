@@ -260,14 +260,18 @@ export default function ItineraryPage() {
       };
 
       let y = margin;
-      doc.setFillColor(11, 25, 20);
+      // Header block — Deep Ocean Navy
+      doc.setFillColor(6, 52, 91);
       doc.rect(0, 0, pageWidth, 40, 'F');
-      doc.setTextColor(198, 146, 52);
+      
+      // Title — Ocean Aqua/Cyan
+      doc.setTextColor(76, 201, 232);
       doc.setFontSize(22);
       doc.setFont('helvetica', 'bold');
       doc.text(`WANDERSPHERE: ${config.cityName.toUpperCase()}`, margin, 20);
 
-      doc.setTextColor(240, 247, 244);
+      // Subtitle — Soft Ocean Mist
+      doc.setTextColor(220, 244, 250);
       doc.setFontSize(10);
       doc.text(`${days.length} Days · ${config.travelStyle.toUpperCase()} · ${config.budget.toUpperCase()} BUDGET`, margin, 28);
       y = 48;
@@ -278,9 +282,10 @@ export default function ItineraryPage() {
           y = margin;
         }
 
-        doc.setFillColor(20, 48, 40);
+        // Day bar — Ocean Blue
+        doc.setFillColor(14, 110, 168);
         doc.rect(margin, y, pageWidth - margin * 2, 10, 'F');
-        doc.setTextColor(198, 146, 52);
+        doc.setTextColor(255, 255, 255);
         doc.setFontSize(11);
         doc.setFont('helvetica', 'bold');
         doc.text(`DAY ${day.dayNumber}: ${day.title}`, margin + 4, y + 7);
@@ -292,15 +297,17 @@ export default function ItineraryPage() {
             y = margin;
           }
 
+          // Slot time & place title
           doc.setFontSize(9);
           doc.setFont('helvetica', 'bold');
-          doc.setTextColor(198, 146, 52);
+          doc.setTextColor(22, 143, 208);
           doc.text(`${slot.time} - ${slot.place.name}`, margin + 4, y);
           y += 5;
 
+          // Slot description — Deep Slate
           doc.setFontSize(8);
           doc.setFont('helvetica', 'normal');
-          doc.setTextColor(163, 194, 178);
+          doc.setTextColor(53, 93, 120);
           y = addWrappedText(slot.place.description || '', margin + 4, y, pageWidth - margin * 2 - 8, 8);
           y += 6;
         }
@@ -389,23 +396,27 @@ export default function ItineraryPage() {
           <div className="flex flex-wrap gap-2.5">
             <button
               onClick={handleShare}
-              className="flex items-center gap-1.5 px-5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs ws-glass hover:border-[var(--ws-accent)] font-bold uppercase tracking-wider transition-all"
+              style={{ color: 'var(--ws-text)' }}
             >
-              <Share2 size={13} />
+              <Share2 size={13} style={{ color: 'var(--ws-accent)' }} />
               <span>{shareText}</span>
             </button>
+
             <button
               onClick={handleDownloadPDF}
               disabled={downloading}
-              className="flex items-center gap-1.5 px-5 py-2.5 border border-[#2C5E3B] rounded-xl bg-[#1B432C] text-[#F0F7F4] text-xs font-bold uppercase tracking-wider hover:border-[#C69234] transition-all disabled:opacity-50"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs ws-glass hover:border-[var(--ws-accent)] font-bold uppercase tracking-wider transition-all disabled:opacity-50"
+              style={{ color: 'var(--ws-text)' }}
             >
-              {downloading ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
+              {downloading ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} style={{ color: 'var(--ws-accent)' }} />}
               <span>{downloading ? 'Generating...' : 'Download PDF'}</span>
             </button>
+
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-wider hover:bg-[#b07f2a] transition-all disabled:opacity-50 shadow-md"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs ws-ocean-btn-primary font-bold uppercase tracking-wider transition-all disabled:opacity-50 shadow-md"
             >
               <Save size={13} />
               <span>{saving ? 'Saving...' : currentItineraryId ? 'Update' : 'Save'}</span>
@@ -423,7 +434,7 @@ export default function ItineraryPage() {
               exit={{ height: 0, opacity: 0 }}
               className={`rounded-2xl p-4 text-xs font-semibold border ${
                 saveSuccess 
-                  ? 'bg-[#143028] border-[#2C5E3B] text-[#C69234]' 
+                  ? 'ws-glass border-[var(--ws-accent)] text-[var(--ws-accent)]' 
                   : 'bg-rose-950/40 border-rose-800 text-rose-300'
               }`}
             >
@@ -435,32 +446,32 @@ export default function ItineraryPage() {
 
       <div className="max-w-6xl mx-auto px-6 mt-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 print:hidden">
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
-            <Calendar className="text-[#C69234] shrink-0" size={20} />
+          <div className="ws-glass border rounded-2xl p-4 flex items-center gap-3 shadow-md">
+            <Calendar style={{ color: 'var(--ws-accent)' }} className="shrink-0" size={20} />
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Duration</p>
-              <p className="text-sm font-extrabold text-white">{days.length} Days</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--ws-text-secondary)' }}>Duration</p>
+              <p className="text-sm font-extrabold" style={{ color: 'var(--ws-text)' }}>{days.length} Days</p>
             </div>
           </div>
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
-            <Clock className="text-[#A65D29] shrink-0" size={20} />
+          <div className="ws-glass border rounded-2xl p-4 flex items-center gap-3 shadow-md">
+            <Clock style={{ color: 'var(--ws-accent)' }} className="shrink-0" size={20} />
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Sights Planned</p>
-              <p className="text-sm font-extrabold text-white">{totalPlaces} Places</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--ws-text-secondary)' }}>Sights Planned</p>
+              <p className="text-sm font-extrabold" style={{ color: 'var(--ws-text)' }}>{totalPlaces} Places</p>
             </div>
           </div>
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
-            <Sparkles className="text-[#C69234] shrink-0" size={20} />
+          <div className="ws-glass border rounded-2xl p-4 flex items-center gap-3 shadow-md">
+            <Sparkles style={{ color: 'var(--ws-accent)' }} className="shrink-0" size={20} />
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Hidden Gems</p>
-              <p className="text-sm font-extrabold text-white">{hiddenGemsCount} Sights</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--ws-text-secondary)' }}>Hidden Gems</p>
+              <p className="text-sm font-extrabold" style={{ color: 'var(--ws-text)' }}>{hiddenGemsCount} Sights</p>
             </div>
           </div>
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl p-4 flex items-center gap-3">
-            <Compass className="text-[#C69234] shrink-0" size={20} />
+          <div className="ws-glass border rounded-2xl p-4 flex items-center gap-3 shadow-md">
+            <Compass style={{ color: 'var(--ws-accent)' }} className="shrink-0" size={20} />
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#A3C2B2]">Est. Budget</p>
-              <p className="text-sm font-extrabold text-white">₹{estimatedBudget?.toLocaleString('en-IN')}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--ws-text-secondary)' }}>Est. Budget</p>
+              <p className="text-sm font-extrabold" style={{ color: 'var(--ws-text)' }}>₹{estimatedBudget?.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -470,10 +481,15 @@ export default function ItineraryPage() {
             <button
               key={d.dayNumber}
               onClick={() => setActiveDay(d.dayNumber)}
-              className={`px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shrink-0 ${
+              style={{
+                backgroundColor: activeDay === d.dayNumber ? 'rgba(25, 167, 224, 0.18)' : undefined,
+                borderColor: activeDay === d.dayNumber ? 'rgba(25, 167, 224, 0.35)' : undefined,
+                color: activeDay === d.dayNumber ? 'var(--ws-accent)' : 'var(--ws-text-secondary)',
+              }}
+              className={`px-5 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all shrink-0 ${
                 activeDay === d.dayNumber
-                  ? 'bg-[#C69234] text-[#0B1914] font-black shadow-md'
-                  : 'bg-[#143028] border border-[#2C5E3B]/60 text-[#A3C2B2] hover:text-white hover:border-[#C69234]'
+                  ? 'border shadow-md font-black'
+                  : 'ws-glass hover:border-[var(--ws-accent)]'
               }`}
             >
               Day {d.dayNumber}
@@ -484,31 +500,31 @@ export default function ItineraryPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-7 space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-black uppercase tracking-wider text-white">
+              <h2 className="text-lg font-black uppercase tracking-wider" style={{ color: 'var(--ws-text)' }}>
                 {currentDayData.title}
               </h2>
-              <span className="text-xs text-[#C69234] font-bold bg-[#143028] border border-[#2C5E3B] px-3 py-1 rounded-full print:hidden">
+              <span className="text-xs font-bold ws-glass border px-3 py-1 rounded-full print:hidden" style={{ color: 'var(--ws-accent)' }}>
                 Day distance: {currentDayData.totalDistance} km
               </span>
             </div>
 
             {currentDayData.slots.length === 0 ? (
-              <div className="text-center py-12 bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl">
-                <p className="text-[#A3C2B2] text-sm">All slots removed for this day. Regenerate or add from home planner.</p>
+              <div className="text-center py-12 ws-glass rounded-3xl border">
+                <p className="text-sm" style={{ color: 'var(--ws-text-secondary)' }}>All slots removed for this day. Regenerate or add from home planner.</p>
               </div>
             ) : (
-              <div className="relative border-l-2 border-[#2C5E3B] ml-4 pl-6 space-y-8 py-2">
+              <div className="relative border-l-2 ml-4 pl-6 space-y-8 py-2" style={{ borderColor: 'rgba(25, 167, 224, 0.3)' }}>
                 {currentDayData.slots.map((slot, index) => (
                   <div key={`${slot.place.id}-${index}`} className="relative group">
-                    <span className="absolute -left-[33px] top-1.5 w-[18px] h-[18px] rounded-full border-2 border-[#C69234] bg-[#0B1914] flex items-center justify-center">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C69234]" />
+                    <span className="absolute -left-[33px] top-1.5 w-[18px] h-[18px] rounded-full border-2 ws-glass flex items-center justify-center" style={{ borderColor: 'var(--ws-accent)' }}>
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--ws-accent)' }} />
                     </span>
 
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md bg-[#1B432C] border border-[#2C5E3B] text-[#C69234]">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md ws-glass-soft border" style={{ color: 'var(--ws-accent)' }}>
                         {slot.time}
                       </span>
-                      <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#A3C2B2]">
+                      <span className="text-[9px] uppercase tracking-wider font-extrabold" style={{ color: 'var(--ws-text-secondary)' }}>
                         {slot.label}
                       </span>
 
@@ -516,7 +532,8 @@ export default function ItineraryPage() {
                         <button
                           onClick={() => handleMoveSlot(currentDayData.dayNumber, index, 'up')}
                           disabled={index === 0}
-                          className="p-1 rounded-md hover:bg-[#1B432C] text-[#A3C2B2] disabled:opacity-30 transition-all"
+                          className="p-1 rounded-md hover:text-[var(--ws-accent)] disabled:opacity-30 transition-all"
+                          style={{ color: 'var(--ws-text-secondary)' }}
                           title="Move up"
                         >
                           <ChevronUp size={14} />
@@ -524,14 +541,15 @@ export default function ItineraryPage() {
                         <button
                           onClick={() => handleMoveSlot(currentDayData.dayNumber, index, 'down')}
                           disabled={index === currentDayData.slots.length - 1}
-                          className="p-1 rounded-md hover:bg-[#1B432C] text-[#A3C2B2] disabled:opacity-30 transition-all"
+                          className="p-1 rounded-md hover:text-[var(--ws-accent)] disabled:opacity-30 transition-all"
+                          style={{ color: 'var(--ws-text-secondary)' }}
                           title="Move down"
                         >
                           <ChevronDown size={14} />
                         </button>
                         <button
                           onClick={() => handleDeleteSlot(currentDayData.dayNumber, index)}
-                          className="p-1 rounded-md hover:bg-rose-950/40 text-rose-400 transition-all"
+                          className="p-1 rounded-md hover:bg-rose-500/20 text-rose-400 transition-all"
                           title="Remove slot"
                         >
                           <Trash2 size={13} />
@@ -539,27 +557,30 @@ export default function ItineraryPage() {
                       </div>
                     </div>
 
-                    <div className="bg-[#143028] border border-[#2C5E3B] rounded-2xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+                    <div className="ws-glass rounded-2xl border overflow-hidden shadow-sm flex flex-col sm:flex-row hover:border-[var(--ws-accent)] transition-all">
                       <div
-                        className="w-full sm:w-36 h-32 sm:h-auto bg-cover bg-center shrink-0"
-                        style={{ backgroundImage: `url(${getPlaceImageUrl(slot.place.name, slot.place.category, slot.place.cover_image)})` }}
+                        className="w-full sm:w-36 h-32 sm:h-auto bg-cover bg-center shrink-0 border-r"
+                        style={{
+                          backgroundImage: `url(${getPlaceImageUrl(slot.place.name, slot.place.category, slot.place.cover_image)})`,
+                          borderColor: 'var(--ws-border)',
+                        }}
                       />
                       <div className="p-4 flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between gap-2">
-                            <span className="text-[9px] font-bold uppercase tracking-widest text-[#A65D29]">
+                            <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
                               {slot.place.category}
                             </span>
                             {slot.place.is_hidden_gem && (
-                              <span className="inline-flex items-center gap-0.5 text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[#1B432C] text-[#C69234] border border-[#2C5E3B]">
+                              <span className="inline-flex items-center gap-0.5 text-[8px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full ws-glass border" style={{ color: 'var(--ws-accent)' }}>
                                 <Sparkles size={8} /> Hidden Gem
                               </span>
                             )}
                           </div>
-                          <h3 className="font-extrabold text-base text-white mt-1">
+                          <h3 className="font-extrabold text-base mt-1" style={{ color: 'var(--ws-text)' }}>
                             {slot.place.name}
                           </h3>
-                          <p className="text-[#A3C2B2] text-xs leading-relaxed mt-1.5 mb-2">
+                          <p className="text-xs leading-relaxed mt-1.5 mb-2" style={{ color: 'var(--ws-text-secondary)' }}>
                             {slot.place.description}
                           </p>
 
@@ -570,7 +591,8 @@ export default function ItineraryPage() {
                                 value={editNoteValue}
                                 onChange={(e) => setEditNoteValue(e.target.value)}
                                 placeholder="Add a personal note..."
-                                className="flex-1 bg-[#0B1914] border border-[#2C5E3B] rounded-lg py-1.5 px-3 text-xs text-white placeholder-[#A3C2B2]/40 focus:outline-none focus:border-[#C69234]"
+                                className="flex-1 ws-glass rounded-lg py-1.5 px-3 text-xs outline-none border focus:border-[var(--ws-accent)]"
+                                style={{ color: 'var(--ws-text)' }}
                                 autoFocus
                               />
                               <button
@@ -591,14 +613,16 @@ export default function ItineraryPage() {
                               {slot.notes ? (
                                 <button
                                   onClick={() => handleStartEditNote(index, slot.notes || '')}
-                                  className="text-[10px] text-[#C69234] hover:underline italic flex items-center gap-1 mb-2 transition-colors"
+                                  className="text-[10px] hover:underline italic flex items-center gap-1 mb-2 transition-colors"
+                                  style={{ color: 'var(--ws-accent)' }}
                                 >
                                   <Pencil size={9} /> {slot.notes}
                                 </button>
                               ) : (
                                 <button
                                   onClick={() => handleStartEditNote(index, '')}
-                                  className="text-[10px] text-[#A3C2B2]/60 hover:text-[#C69234] flex items-center gap-1 mb-2 transition-colors"
+                                  className="text-[10px] opacity-60 hover:opacity-100 flex items-center gap-1 mb-2 transition-opacity"
+                                  style={{ color: 'var(--ws-text-secondary)' }}
                                 >
                                   <Pencil size={9} /> Add note
                                 </button>
@@ -607,16 +631,17 @@ export default function ItineraryPage() {
                           )}
                         </div>
 
-                        <div className="flex items-center justify-between border-t border-[#2C5E3B]/60 pt-3 text-[11px] text-[#A3C2B2]">
+                        <div className="flex items-center justify-between border-t pt-3 text-[11px]" style={{ borderColor: 'var(--ws-border)', color: 'var(--ws-text-secondary)' }}>
                           <div className="flex gap-4">
                             {editingDurationIndex === index ? (
                               <span className="flex items-center gap-1 print:hidden">
-                                <Clock size={11} />
+                                <Clock size={11} style={{ color: 'var(--ws-accent)' }} />
                                 <input
                                   type="number"
                                   value={editDurationValue}
                                   onChange={(e) => setEditDurationValue(e.target.value)}
-                                  className="w-12 bg-[#0B1914] border border-[#2C5E3B] rounded px-1 py-0.5 text-[10px] text-white outline-none"
+                                  className="w-12 ws-glass rounded px-1 py-0.5 text-[10px] outline-none border"
+                                  style={{ color: 'var(--ws-text)' }}
                                   autoFocus
                                   min={10}
                                   max={480}
@@ -627,10 +652,10 @@ export default function ItineraryPage() {
                               </span>
                             ) : (
                               <span
-                                className="flex items-center gap-1 cursor-pointer hover:text-[#C69234] transition-colors print:cursor-default"
+                                className="flex items-center gap-1 cursor-pointer hover:text-[var(--ws-accent)] transition-colors print:cursor-default"
                                 onClick={() => handleStartEditDuration(index, slot.duration)}
                               >
-                                <Clock size={11} />
+                                <Clock size={11} style={{ color: 'var(--ws-accent)' }} />
                                 {slot.duration} mins
                                 <Pencil size={8} className="opacity-0 group-hover:opacity-50 print:hidden" />
                               </span>
@@ -646,7 +671,8 @@ export default function ItineraryPage() {
                             href={`https://www.google.com/maps/dir/?api=1&destination=${slot.place.latitude},${slot.place.longitude}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#C69234] hover:underline font-bold uppercase tracking-widest text-[10px] flex items-center gap-1.5"
+                            className="hover:underline font-extrabold uppercase tracking-widest text-[10px] flex items-center gap-1.5"
+                            style={{ color: 'var(--ws-accent)' }}
                           >
                             Directions
                             <ArrowRight size={10} />
@@ -661,12 +687,12 @@ export default function ItineraryPage() {
           </div>
 
           <div className="lg:col-span-5 h-[450px] lg:h-[580px] lg:sticky lg:top-28 print:hidden">
-            <div className="h-full bg-[#143028] border border-[#2C5E3B] rounded-3xl overflow-hidden shadow-xl p-3 flex flex-col">
+            <div className="h-full ws-glass-strong rounded-3xl overflow-hidden shadow-xl p-3 flex flex-col border">
               <div className="flex items-center gap-2 mb-3 px-2">
-                <MapPin size={16} className="text-[#C69234]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-white">Day {activeDay} Route Visualization</span>
+                <MapPin size={16} style={{ color: 'var(--ws-accent)' }} />
+                <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--ws-text)' }}>Day {activeDay} Route Visualization</span>
               </div>
-              <div className="flex-1 rounded-2xl overflow-hidden border border-[#2C5E3B]/60">
+              <div className="flex-1 rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--ws-border)' }}>
                 <LeafletMap
                   items={mapItems}
                   center={routePoints[0] || [20.5937, 78.9629]}

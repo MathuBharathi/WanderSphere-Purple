@@ -330,7 +330,7 @@ export function SearchSection() {
                 }
               }}
               disabled={!selCity || generating}
-              className="flex-[2] md:flex-none flex items-center justify-center gap-2 px-8 py-5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#b07f2a] transition-all shadow-md shadow-[#C69234]/20"
+              className="flex-[2] md:flex-none flex items-center justify-center gap-2 px-8 py-5 rounded-2xl ws-ocean-btn-primary font-black uppercase tracking-widest text-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg"
             >
               {generating ? (
                 <>
@@ -339,7 +339,7 @@ export function SearchSection() {
                 </>
               ) : (
                 <>
-                  <Sparkles size={14} className="text-[#0B1914]" />
+                  <Sparkles size={14} />
                   <span>AI Plan</span>
                 </>
               )}
@@ -355,12 +355,13 @@ export function SearchSection() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="overflow-hidden border-t border-[#2C5E3B]/40 mt-4 pt-4 space-y-4 text-white"
+              className="overflow-hidden border-t mt-4 pt-4 space-y-4"
+              style={{ borderColor: 'var(--ws-border)', color: 'var(--ws-text)' }}
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Days Selector */}
                 <div>
-                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C69234] mb-2">
+                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--ws-accent)' }}>
                     <Clock size={12} />
                     Trip Duration
                   </label>
@@ -371,9 +372,9 @@ export function SearchSection() {
                       max="7"
                       value={days}
                       onChange={(e) => setDays(Number(e.target.value))}
-                      className="w-full accent-[#C69234]"
+                      className="w-full accent-[var(--ws-accent)]"
                     />
-                    <span className="font-extrabold text-sm text-white bg-[#1B432C] border border-[#2C5E3B] px-3 py-1.5 rounded-xl min-w-[60px] text-center">
+                    <span className="font-extrabold text-sm ws-glass border px-3 py-1.5 rounded-xl min-w-[60px] text-center" style={{ color: 'var(--ws-text)' }}>
                       {days} {days === 1 ? 'Day' : 'Days'}
                     </span>
                   </div>
@@ -381,11 +382,11 @@ export function SearchSection() {
 
                 {/* Budget Selector */}
                 <div>
-                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C69234] mb-2">
+                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--ws-accent)' }}>
                     <DollarSign size={12} />
                     Budget Level
                   </label>
-                  <div className="flex items-center bg-[#1B432C] p-1 rounded-xl border border-[#2C5E3B]/40 w-full overflow-hidden">
+                  <div className="flex items-center ws-glass p-1 rounded-xl border w-full overflow-hidden">
                     {(['budget', 'moderate', 'luxury'] as BudgetLevel[]).map((level) => (
                       <button
                         key={level}
@@ -393,9 +394,10 @@ export function SearchSection() {
                         onClick={() => setBudget(level)}
                         className={`flex-1 py-2 px-1 text-[10px] sm:text-xs font-extrabold uppercase tracking-tight text-center rounded-lg transition-all truncate ${
                           budget === level
-                            ? 'bg-[#C69234] text-[#0B1914] shadow-md'
-                            : 'text-[#A3C2B2] hover:bg-[#2C5E3B]/50 hover:text-white'
+                            ? 'ws-ocean-btn-primary shadow-md'
+                            : 'hover:text-[var(--ws-accent)]'
                         }`}
+                        style={{ color: budget === level ? undefined : 'var(--ws-text-secondary)' }}
                       >
                         {level}
                       </button>
@@ -405,7 +407,7 @@ export function SearchSection() {
 
                 {/* Travel Style Selector */}
                 <div>
-                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C69234] mb-2">
+                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--ws-accent)' }}>
                     <Compass size={12} />
                     Travel Style
                   </label>
@@ -413,15 +415,16 @@ export function SearchSection() {
                     <select
                       value={travelStyle}
                       onChange={(e) => setTravelStyle(e.target.value as TravelStyle)}
-                      className="w-full bg-[#1B432C] border border-[#2C5E3B] rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-wider outline-none text-white accent-[#C69234] cursor-pointer"
+                      className="w-full ws-glass border rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-wider outline-none cursor-pointer"
+                      style={{ color: 'var(--ws-text)' }}
                     >
-                      <option value="adventure" className="bg-[#143028]">Adventure</option>
-                      <option value="spiritual" className="bg-[#143028]">Spiritual</option>
-                      <option value="family" className="bg-[#143028]">Family</option>
-                      <option value="couple" className="bg-[#143028]">Couple</option>
-                      <option value="solo" className="bg-[#143028]">Solo</option>
-                      <option value="luxury" className="bg-[#143028]">Luxury</option>
-                      <option value="budget" className="bg-[#143028]">Budget</option>
+                      <option value="adventure" className="bg-[#06243E] text-white">Adventure</option>
+                      <option value="spiritual" className="bg-[#06243E] text-white">Spiritual</option>
+                      <option value="family" className="bg-[#06243E] text-white">Family</option>
+                      <option value="couple" className="bg-[#06243E] text-white">Couple</option>
+                      <option value="solo" className="bg-[#06243E] text-white">Solo</option>
+                      <option value="luxury" className="bg-[#06243E] text-white">Luxury</option>
+                      <option value="budget" className="bg-[#06243E] text-white">Budget</option>
                     </select>
                   </div>
                 </div>
@@ -433,7 +436,8 @@ export function SearchSection() {
                   <button
                     type="button"
                     onClick={() => router.push('/itinerary')}
-                    className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1B432C] border border-[#C69234] text-[#C69234] text-xs font-extrabold uppercase tracking-wider hover:bg-[#C69234] hover:text-[#0B1914] transition-all shadow-md"
+                    className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl ws-glass border text-xs font-extrabold uppercase tracking-wider hover:border-[var(--ws-accent)] transition-all shadow-md"
+                    style={{ color: 'var(--ws-accent)' }}
                   >
                     <Eye size={14} />
                     <span>View Itinerary</span>
@@ -445,7 +449,7 @@ export function SearchSection() {
                   type="button"
                   onClick={handleGenerate}
                   disabled={generating}
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-widest hover:bg-[#b07f2a] transition-all shadow-md shadow-[#C69234]/20"
+                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl ws-ocean-btn-primary text-xs font-black uppercase tracking-widest transition-all shadow-md"
                 >
                   {generating ? (
                     <>
@@ -454,7 +458,7 @@ export function SearchSection() {
                     </>
                   ) : (
                     <>
-                      <Sparkles size={12} className="text-[#0B1914] animate-pulse" />
+                      <Sparkles size={12} className="animate-pulse" />
                       <span>Generate My {days}-Day Plan</span>
                     </>
                   )}
@@ -470,9 +474,10 @@ export function SearchSection() {
         <button
           type="button"
           onClick={handleNearMe}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#2C5E3B] bg-[#143028] text-[#A3C2B2] hover:text-white hover:border-[#C69234] transition-all text-xs font-bold uppercase tracking-widest shadow-md"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full ws-glass border hover:border-[var(--ws-accent)] transition-all text-xs font-bold uppercase tracking-widest shadow-md"
+          style={{ color: 'var(--ws-text)' }}
         >
-          <Navigation size={12} className="text-[#C69234]" />
+          <Navigation size={12} style={{ color: 'var(--ws-accent)' }} />
           <span>Use My Location</span>
         </button>
       </div>

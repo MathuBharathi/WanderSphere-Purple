@@ -109,7 +109,7 @@ export default function MapPage() {
   const mapItems = getMapItems();
 
   return (
-    <main className="relative w-full h-screen bg-[#0B1914] overflow-hidden text-[#F0F7F4]">
+    <main className="relative w-full h-screen overflow-hidden" style={{ color: 'var(--ws-text)', backgroundColor: 'var(--ws-bg)' }}>
       {/* Map component */}
       <div className="absolute inset-0 z-0">
         <LeafletMap
@@ -134,9 +134,10 @@ export default function MapPage() {
       <div className="absolute top-0 left-0 right-0 z-10 p-4 flex items-center justify-between pointer-events-none">
         <Link
           href="/"
-          className="flex items-center gap-2 bg-[#143028]/90 border border-[#2C5E3B] rounded-full px-4 py-2 text-white hover:text-[#C69234] transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg pointer-events-auto"
+          className="flex items-center gap-2 ws-glass-strong border rounded-full px-4 py-2 hover:border-[var(--ws-accent)] transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg pointer-events-auto"
+          style={{ color: 'var(--ws-text)' }}
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={14} style={{ color: 'var(--ws-accent)' }} />
           Home
         </Link>
 
@@ -146,9 +147,10 @@ export default function MapPage() {
               onClick={() => setMapView(mapView === 'all' ? 'nearby' : 'all')}
               className={`flex items-center gap-2 border rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg transition-all duration-300 ${
                 mapView === 'nearby'
-                  ? 'border-[#C69234] text-[#C69234] bg-[#143028]'
-                  : 'border-[#2C5E3B] bg-[#143028]/90 text-white hover:border-[#C69234]'
+                  ? 'border-[var(--ws-accent)] text-[var(--ws-accent)] ws-glass-strong'
+                  : 'ws-glass-strong hover:border-[var(--ws-accent)]'
               }`}
+              style={{ color: mapView === 'nearby' ? 'var(--ws-accent)' : 'var(--ws-text)' }}
             >
               {mapView === 'nearby' ? <Navigation size={14} /> : <Layers size={14} />}
               {mapView === 'nearby' ? 'Nearby' : 'All Cities'}
@@ -163,7 +165,8 @@ export default function MapPage() {
               setPlaces([]);
               setSelectedPlace(null);
             }}
-            className="flex items-center gap-2 bg-[#143028]/90 border border-[#2C5E3B] rounded-full px-4 py-2 text-white hover:text-[#C69234] transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg pointer-events-auto"
+            className="flex items-center gap-2 ws-glass-strong border rounded-full px-4 py-2 hover:border-[var(--ws-accent)] transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg pointer-events-auto"
+            style={{ color: 'var(--ws-text)' }}
           >
             <X size={14} />
             Show All Cities
@@ -173,12 +176,12 @@ export default function MapPage() {
 
       {/* Badges / Stats */}
       <div className="absolute top-20 left-4 z-10 pointer-events-none">
-        <div className="bg-[#143028]/90 border border-[#2C5E3B] rounded-2xl px-4 py-3 backdrop-blur-md shadow-lg flex flex-col items-center text-white">
-          <p className="text-[9px] font-bold uppercase tracking-widest text-[#C69234]">Showing</p>
-          <p className="font-extrabold text-2xl text-white">
+        <div className="ws-glass-strong border rounded-2xl px-4 py-3 backdrop-blur-md shadow-lg flex flex-col items-center">
+          <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>Showing</p>
+          <p className="font-extrabold text-2xl" style={{ color: 'var(--ws-text)' }}>
             {selectedCity ? places.length : cities.length}
           </p>
-          <p className="text-[9px] font-bold uppercase tracking-widest text-[#A3C2B2]">
+          <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'var(--ws-text-secondary)' }}>
             {selectedCity ? 'Places' : 'Cities'}
           </p>
         </div>
@@ -186,10 +189,10 @@ export default function MapPage() {
 
       {/* Loading overlay */}
       {loading && (
-        <div className="absolute inset-0 z-[500] bg-[#0B1914]/60 backdrop-blur-xs flex items-center justify-center">
+        <div className="absolute inset-0 z-[500] bg-[#020B18]/60 backdrop-blur-xs flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 rounded-full border-4 border-[#C69234] border-t-transparent animate-spin" />
-            <p className="text-[#C69234] text-xs uppercase tracking-widest font-semibold">
+            <div className="w-8 h-8 rounded-full border-4 border-[var(--ws-accent)] border-t-transparent animate-spin" />
+            <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-accent)' }}>
               Loading destinations...
             </p>
           </div>
@@ -204,7 +207,8 @@ export default function MapPage() {
             initial={{ x: 340, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 340, opacity: 0 }}
-            className="absolute top-4 right-4 bottom-24 w-80 z-10 bg-[#143028]/95 backdrop-blur-xl border border-[#2C5E3B] rounded-3xl overflow-hidden shadow-2xl flex flex-col text-white"
+            className="absolute top-4 right-4 bottom-24 w-80 z-10 ws-glass-strong backdrop-blur-xl border rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+            style={{ color: 'var(--ws-text)' }}
           >
             {selectedCity.cover_image && (
               <div
@@ -214,25 +218,25 @@ export default function MapPage() {
             )}
             <div className="p-5 flex-1 flex flex-col justify-between overflow-y-auto">
               <div>
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#C69234]">
+                <span className="text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
                   {selectedCity.state_name || 'India'}
                 </span>
-                <h3 className="font-extrabold text-2xl text-white mt-1 mb-2">
+                <h3 className="font-extrabold text-2xl mt-1 mb-2" style={{ color: 'var(--ws-text)' }}>
                   {selectedCity.name}
                 </h3>
                 {selectedCity.description && (
-                  <p className="text-[#A3C2B2] text-xs leading-relaxed mb-4">
+                  <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--ws-text-secondary)' }}>
                     {selectedCity.description}
                   </p>
                 )}
-                <div className="bg-[#1B432C] rounded-2xl p-4 border border-[#2C5E3B] space-y-2 mb-4">
+                <div className="ws-glass rounded-2xl p-4 border space-y-2 mb-4">
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A3C2B2]">Best Season:</span>
-                    <span className="font-semibold text-white">{selectedCity.best_season || 'Anytime'}</span>
+                    <span style={{ color: 'var(--ws-text-secondary)' }}>Best Season:</span>
+                    <span className="font-semibold" style={{ color: 'var(--ws-text)' }}>{selectedCity.best_season || 'Anytime'}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A3C2B2]">Avg Temp:</span>
-                    <span className="font-semibold text-white">{selectedCity.avg_temp_celsius || 26}°C</span>
+                    <span style={{ color: 'var(--ws-text-secondary)' }}>Avg Temp:</span>
+                    <span className="font-semibold" style={{ color: 'var(--ws-text)' }}>{selectedCity.avg_temp_celsius || 26}°C</span>
                   </div>
                 </div>
               </div>
@@ -240,7 +244,7 @@ export default function MapPage() {
               <div className="space-y-2 mt-4 shrink-0">
                 <Link
                   href={`/city/${selectedCity.id}`}
-                  className="w-full inline-flex items-center justify-center py-3 rounded-xl bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-widest hover:bg-[#b07f2a] transition-all shadow-md"
+                  className="w-full inline-flex items-center justify-center py-3 rounded-xl ws-ocean-btn-primary text-xs font-black uppercase tracking-widest shadow-md"
                 >
                   Explore in Detail
                 </Link>
@@ -249,7 +253,8 @@ export default function MapPage() {
                     setSelectedCity(null);
                     setPlaces([]);
                   }}
-                  className="w-full py-2 text-[#A3C2B2] hover:text-white text-xs transition-colors"
+                  className="w-full py-2 hover:underline text-xs transition-colors"
+                  style={{ color: 'var(--ws-text-secondary)' }}
                 >
                   Back to All Cities
                 </button>
@@ -264,7 +269,8 @@ export default function MapPage() {
             initial={{ x: 340, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 340, opacity: 0 }}
-            className="absolute top-4 right-4 bottom-24 w-80 z-10 bg-[#143028]/95 backdrop-blur-xl border border-[#2C5E3B] rounded-3xl overflow-hidden shadow-2xl flex flex-col text-white"
+            className="absolute top-4 right-4 bottom-24 w-80 z-10 ws-glass-strong backdrop-blur-xl border rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+            style={{ color: 'var(--ws-text)' }}
           >
             {selectedPlace.cover_image && (
               <div
@@ -275,37 +281,37 @@ export default function MapPage() {
             <div className="p-5 flex-1 flex flex-col justify-between overflow-y-auto">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#A65D29]">
+                  <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
                     {selectedPlace.category}
                   </span>
                   {selectedPlace.is_hidden_gem && (
-                    <span className="flex items-center gap-0.5 text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[#1B432C] text-[#C69234] border border-[#2C5E3B]">
+                    <span className="flex items-center gap-0.5 text-[8px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full ws-glass border" style={{ color: 'var(--ws-accent)' }}>
                       <Sparkles size={8} />
                       Hidden Gem
                     </span>
                   )}
                 </div>
-                <h3 className="font-extrabold text-2xl text-white mt-1 mb-2">
+                <h3 className="font-extrabold text-2xl mt-1 mb-2" style={{ color: 'var(--ws-text)' }}>
                   {selectedPlace.name}
                 </h3>
-                <p className="text-[#A3C2B2] text-xs leading-relaxed mb-4">
+                <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--ws-text-secondary)' }}>
                   {selectedPlace.description}
                 </p>
 
-                <div className="bg-[#1B432C] rounded-2xl p-4 border border-[#2C5E3B] space-y-2 mb-4">
+                <div className="ws-glass rounded-2xl p-4 border space-y-2 mb-4">
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A3C2B2]">Entry Fee:</span>
-                    <span className="font-semibold text-white">
+                    <span style={{ color: 'var(--ws-text-secondary)' }}>Entry Fee:</span>
+                    <span className="font-semibold" style={{ color: 'var(--ws-text)' }}>
                       {selectedPlace.entry_fee === 0 ? 'Free' : `₹${selectedPlace.entry_fee}`}
                     </span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A3C2B2]">Visit Duration:</span>
-                    <span className="font-semibold text-white">{selectedPlace.avg_visit_duration} mins</span>
+                    <span style={{ color: 'var(--ws-text-secondary)' }}>Visit Duration:</span>
+                    <span className="font-semibold" style={{ color: 'var(--ws-text)' }}>{selectedPlace.avg_visit_duration} mins</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A3C2B2]">Rating:</span>
-                    <span className="font-semibold text-[#C69234]">★ {selectedPlace.avg_rating || '4.5'}</span>
+                    <span style={{ color: 'var(--ws-text-secondary)' }}>Rating:</span>
+                    <span className="font-semibold" style={{ color: 'var(--ws-accent)' }}>★ {selectedPlace.avg_rating || '4.5'}</span>
                   </div>
                 </div>
               </div>
@@ -315,13 +321,14 @@ export default function MapPage() {
                   href={`https://www.google.com/maps/dir/?api=1&destination=${selectedPlace.latitude},${selectedPlace.longitude}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center py-3 rounded-xl bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-widest hover:bg-[#b07f2a] transition-all shadow-md"
+                  className="w-full inline-flex items-center justify-center py-3 rounded-xl ws-ocean-btn-primary text-xs font-black uppercase tracking-widest shadow-md"
                 >
                   Get Directions
                 </a>
                 <button
                   onClick={() => setSelectedPlace(null)}
-                  className="w-full py-2 text-[#A3C2B2] hover:text-white text-xs transition-colors"
+                  className="w-full py-2 hover:underline text-xs transition-colors"
+                  style={{ color: 'var(--ws-text-secondary)' }}
                 >
                   Back to City places
                 </button>

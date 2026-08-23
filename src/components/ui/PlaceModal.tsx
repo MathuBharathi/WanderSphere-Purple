@@ -100,7 +100,7 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 bg-[#0B1914]/90 backdrop-blur-xl z-[100] overflow-y-auto"
+      className="fixed inset-0 bg-[#020B18]/80 backdrop-blur-xl z-[100] overflow-y-auto"
     >
       <motion.div
         initial={{ y: '100%', opacity: 0 }}
@@ -108,7 +108,7 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
         exit={{ y: '100%', opacity: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="min-h-screen md:min-h-0 md:my-8 md:mx-auto md:max-w-5xl bg-[#143028] border border-[#2C5E3B] md:rounded-4xl overflow-hidden shadow-2xl"
+        className="min-h-screen md:min-h-0 md:my-8 md:mx-auto md:max-w-5xl ws-glass-strong border md:rounded-4xl overflow-hidden shadow-2xl"
       >
         {/* Header image */}
         <div className="relative h-64 md:h-80 overflow-hidden">
@@ -116,14 +116,15 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#143028] via-[#143028]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-transparent to-transparent" />
 
           {/* Close */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 bg-[#0B1914]/80 border border-[#2C5E3B] rounded-full p-2 hover:border-[#C69234] transition-colors backdrop-blur-lg"
+            className="absolute top-5 right-5 ws-glass-strong border rounded-full p-2 hover:border-[var(--ws-accent)] transition-colors backdrop-blur-lg"
+            style={{ color: 'var(--ws-text)' }}
           >
-            <X size={18} className="text-white" />
+            <X size={18} />
           </button>
 
           {/* Actions */}
@@ -132,69 +133,71 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
               onClick={handleToggleSave}
               className={`border rounded-full p-2 transition-all duration-300 backdrop-blur-lg ${
                 saved
-                  ? 'border-[#A65D29]/80 bg-[#A65D29]/20'
-                  : 'bg-[#0B1914]/80 border-[#2C5E3B] hover:border-[#C69234]'
+                  ? 'border-[var(--ws-accent)] bg-[var(--ws-accent)]/20'
+                  : 'ws-glass-strong border hover:border-[var(--ws-accent)]'
               }`}
             >
               <Heart
                 size={16}
-                className={`transition-colors ${
-                  saved ? 'text-[#A65D29] fill-current' : 'text-white'
-                }`}
+                style={{
+                  color: saved ? 'var(--ws-accent)' : 'var(--ws-text)',
+                  fill: saved ? 'var(--ws-accent)' : 'transparent',
+                }}
               />
             </button>
             <button
               onClick={handleShare}
-              className="bg-[#0B1914]/80 border border-[#2C5E3B] rounded-full p-2 hover:border-[#C69234] transition-colors backdrop-blur-lg"
+              className="ws-glass-strong border rounded-full p-2 hover:border-[var(--ws-accent)] transition-colors backdrop-blur-lg"
+              style={{ color: 'var(--ws-text)' }}
             >
-              <Share2 size={16} className="text-white" />
+              <Share2 size={16} />
             </button>
           </div>
 
           {/* Category badge */}
           <div className="absolute bottom-5 left-5">
-            <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#C69234] bg-[#0B1914]/90 border border-[#2C5E3B] backdrop-blur-md px-3 py-1 rounded-full">
+            <span className="text-[9px] font-extrabold uppercase tracking-[0.4em] ws-glass-strong border backdrop-blur-md px-3 py-1 rounded-full" style={{ color: 'var(--ws-accent)' }}>
               {place.category.replace('_', ' ')}
             </span>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6 md:p-10 text-white">
+        <div className="p-6 md:p-10" style={{ color: 'var(--ws-text)' }}>
           {/* Title + rating */}
           <div className="flex items-start justify-between mb-6">
             <div>
-              <h2 className="font-display text-4xl md:text-5xl text-white" style={{ letterSpacing: '-0.02em' }}>
+              <h2 className="font-display text-4xl md:text-5xl" style={{ letterSpacing: '-0.02em', color: 'var(--ws-text)' }}>
                 {place.name}
               </h2>
               {place.address && (
-                <p className="text-[#A3C2B2] text-sm mt-2 flex items-center gap-1">
-                  <MapPin size={12} className="text-[#C69234]" /> {place.address}
+                <p className="text-sm mt-2 flex items-center gap-1 font-medium" style={{ color: 'var(--ws-text-secondary)' }}>
+                  <MapPin size={12} style={{ color: 'var(--ws-accent)' }} /> {place.address}
                 </p>
               )}
             </div>
             {place.avg_rating && (
-              <div className="flex items-center gap-1 bg-[#1B432C] border border-[#2C5E3B] rounded-full px-3 py-2 flex-shrink-0">
-                <Star size={14} className="text-[#C69234] fill-[#C69234]" />
-                <span className="text-[#C69234] font-bold text-sm">{place.avg_rating}</span>
+              <div className="flex items-center gap-1 ws-glass border rounded-full px-3 py-2 flex-shrink-0">
+                <Star size={14} style={{ color: 'var(--ws-accent)', fill: 'var(--ws-accent)' }} />
+                <span className="font-bold text-sm" style={{ color: 'var(--ws-accent)' }}>{place.avg_rating}</span>
               </div>
             )}
           </div>
 
           {/* Description */}
           {place.description && (
-            <p className="text-[#A3C2B2] leading-relaxed mb-8 text-sm md:text-base">{place.description}</p>
+            <p className="leading-relaxed mb-8 text-sm md:text-base font-medium" style={{ color: 'var(--ws-text-secondary)' }}>{place.description}</p>
           )}
 
           {/* Info grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
             {infoItems.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="bg-[#1B432C]/70 border border-[#2C5E3B]/60 rounded-2xl p-4">
+              <div key={label} className="ws-glass border rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-1">
-                  <Icon size={12} className="text-[#C69234]" />
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#A3C2B2]">{label}</span>
+                  <Icon size={12} style={{ color: 'var(--ws-accent)' }} />
+                  <span className="text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-text-secondary)' }}>{label}</span>
                 </div>
-                <p className="text-sm font-semibold text-white">{value}</p>
+                <p className="text-sm font-semibold" style={{ color: 'var(--ws-text)' }}>{value}</p>
               </div>
             ))}
           </div>
@@ -203,7 +206,7 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
           {place.tags && place.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-10">
               {place.tags.map((tag) => (
-                <span key={tag} className="bg-[#1B432C] border border-[#2C5E3B]/60 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#A3C2B2]">
+                <span key={tag} className="ws-glass border rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
                   #{tag}
                 </span>
               ))}
@@ -213,11 +216,11 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
           {/* Photo Gallery — Masonry */}
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <Loader2 size={24} className="text-[#C69234] animate-spin" />
+              <Loader2 size={24} className="animate-spin" style={{ color: 'var(--ws-accent)' }} />
             </div>
           ) : masonryItems.length > 0 ? (
             <div className="mb-10">
-              <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-6 flex items-center gap-2">
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-6 flex items-center gap-2" style={{ color: 'var(--ws-accent)' }}>
                 <Camera size={12} />
                 Photo Gallery
               </p>
@@ -241,31 +244,38 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
           {/* Reviews */}
           {reviews.length > 0 && (
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-6 flex items-center gap-2">
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-6 flex items-center gap-2" style={{ color: 'var(--ws-accent)' }}>
                 <Star size={12} />
                 Recent Reviews ({reviews.length})
               </p>
               <div className="space-y-4">
                 {reviews.slice(0, 5).map((review) => (
-                  <div key={review.id} className="bg-[#1B432C]/70 border border-[#2C5E3B]/60 rounded-2xl p-5">
+                  <div key={review.id} className="ws-glass border rounded-2xl p-5">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#C69234]/20 border border-[#C69234]/50 flex items-center justify-center text-[#C69234] text-xs font-bold">
+                        <div className="w-8 h-8 rounded-full ws-glass-soft border flex items-center justify-center text-xs font-bold" style={{ color: 'var(--ws-accent)' }}>
                           {review.profiles?.full_name?.[0] || 'U'}
                         </div>
                         <div>
-                          <p className="text-white text-sm font-semibold">{review.profiles?.full_name || 'Traveler'}</p>
-                          <p className="text-[#A3C2B2]/60 text-[10px]">{review.visit_date || ''}</p>
+                          <p className="text-sm font-semibold" style={{ color: 'var(--ws-text)' }}>{review.profiles?.full_name || 'Traveler'}</p>
+                          <p className="text-[10px]" style={{ color: 'var(--ws-text-secondary)' }}>{review.visit_date || ''}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} size={10} className={i < review.rating ? 'text-[#C69234] fill-[#C69234]' : 'text-[#2C5E3B]'} />
+                          <Star
+                            key={i}
+                            size={10}
+                            style={{
+                              color: i < review.rating ? 'var(--ws-accent)' : 'var(--ws-text-secondary)',
+                              fill: i < review.rating ? 'var(--ws-accent)' : 'transparent',
+                            }}
+                          />
                         ))}
                       </div>
                     </div>
-                    {review.title && <p className="text-white text-sm font-semibold mb-1">{review.title}</p>}
-                    {review.content && <p className="text-[#A3C2B2] text-sm leading-relaxed">{review.content}</p>}
+                    {review.title && <p className="text-sm font-semibold mb-1" style={{ color: 'var(--ws-text)' }}>{review.title}</p>}
+                    {review.content && <p className="text-sm leading-relaxed" style={{ color: 'var(--ws-text-secondary)' }}>{review.content}</p>}
                   </div>
                 ))}
               </div>

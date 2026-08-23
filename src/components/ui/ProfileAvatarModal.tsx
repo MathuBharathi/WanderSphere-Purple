@@ -82,7 +82,7 @@ export function ProfileAvatarModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-[#0B1914]/90 backdrop-blur-md"
+            className="absolute inset-0 bg-[#020B18]/80 backdrop-blur-xl"
             onClick={onClose}
           />
 
@@ -97,7 +97,8 @@ export function ProfileAvatarModal({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute -top-2 -right-2 md:top-0 md:right-0 p-2.5 rounded-full bg-[#143028] border border-[#2C5E3B] text-[#A3C2B2] hover:text-white hover:border-[#C69234] transition-all z-20 shadow-lg"
+              className="absolute -top-2 -right-2 md:top-0 md:right-0 p-2.5 rounded-full ws-glass border hover:border-[var(--ws-accent)] transition-all z-20 shadow-lg"
+              style={{ color: 'var(--ws-text)' }}
               aria-label="Close photo preview"
             >
               <X size={18} />
@@ -109,7 +110,8 @@ export function ProfileAvatarModal({
               <img
                 src={avatarUrl}
                 alt="Profile photo"
-                className="max-h-[65vh] max-w-[85vw] md:max-h-[70vh] md:max-w-[70vw] object-contain rounded-2xl shadow-2xl border border-[#2C5E3B]/40"
+                className="max-h-[65vh] max-w-[85vw] md:max-h-[70vh] md:max-w-[70vw] object-contain rounded-2xl shadow-2xl border"
+                style={{ borderColor: 'var(--ws-border)' }}
               />
             </div>
 
@@ -118,7 +120,7 @@ export function ProfileAvatarModal({
               <button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#C69234] hover:bg-[#b07f2a] text-[#0B1914] text-xs font-black uppercase tracking-widest transition-all shadow-md disabled:opacity-50"
+                className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl ws-ocean-btn-primary text-xs font-black uppercase tracking-widest transition-all shadow-md disabled:opacity-50"
               >
                 <Upload size={14} />
                 {uploading ? 'Uploading...' : 'Upload New Photo'}
@@ -127,7 +129,7 @@ export function ProfileAvatarModal({
               <button
                 onClick={onDelete}
                 disabled={deleting}
-                className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#143028] border border-rose-800/40 hover:bg-rose-950/30 text-rose-400 text-xs font-bold uppercase tracking-widest transition-all disabled:opacity-50"
+                className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl ws-glass border border-rose-500/30 hover:bg-rose-500/20 text-rose-400 text-xs font-bold uppercase tracking-widest transition-all disabled:opacity-50"
               >
                 <Trash2 size={14} />
                 {deleting ? 'Deleting...' : 'Delete Photo'}

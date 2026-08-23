@@ -22,11 +22,11 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
 
   if (!user) {
     return (
-      <div className="bg-[#1B432C]/70 border border-[#2C5E3B]/60 rounded-2xl p-6 text-center text-white">
-        <p className="text-[#A3C2B2] text-sm mb-3">Sign in to write a review</p>
+      <div className="ws-glass border rounded-2xl p-6 text-center shadow-lg">
+        <p className="text-sm mb-3" style={{ color: 'var(--ws-text-secondary)' }}>Sign in to write a review</p>
         <a
           href="/auth"
-          className="inline-block px-6 py-2 rounded-full bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-widest hover:bg-[#b07f2a] transition-colors"
+          className="inline-block px-6 py-2 rounded-full ws-ocean-btn-primary text-xs font-black uppercase tracking-widest transition-transform hover:scale-105 shadow-md"
         >
           Sign In
         </a>
@@ -38,7 +38,8 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
     return (
       <button
         onClick={() => setShowForm(true)}
-        className="w-full py-4 rounded-2xl bg-[#143028] border border-[#2C5E3B] text-[#C69234] text-xs font-bold uppercase tracking-widest hover:bg-[#1B432C] hover:border-[#C69234] transition-all duration-300 shadow-md"
+        className="w-full py-4 rounded-2xl ws-glass border text-xs font-bold uppercase tracking-widest hover:border-[var(--ws-accent)] transition-all duration-300 shadow-md"
+        style={{ color: 'var(--ws-accent)' }}
       >
         ✦ Write a Review ✦
       </button>
@@ -83,9 +84,9 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       onSubmit={handleSubmit}
-      className="bg-[#1B432C]/70 border border-[#2C5E3B]/60 rounded-2xl p-6 space-y-4 text-white"
+      className="ws-glass border rounded-2xl p-6 space-y-4 shadow-xl"
     >
-      <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-2">
+      <p className="text-[10px] font-bold uppercase tracking-[0.5em] mb-2" style={{ color: 'var(--ws-accent)' }}>
         Your Review
       </p>
 
@@ -102,15 +103,15 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
           >
             <Star
               size={24}
-              className={`transition-colors ${
-                star <= (hoverRating || rating)
-                  ? 'text-[#C69234] fill-[#C69234]'
-                  : 'text-[#2C5E3B]'
-              }`}
+              style={{
+                color: star <= (hoverRating || rating) ? 'var(--ws-accent)' : 'var(--ws-text-secondary)',
+                fill: star <= (hoverRating || rating) ? 'var(--ws-accent)' : 'transparent',
+              }}
+              className="transition-colors"
             />
           </button>
         ))}
-        <span className="text-[#A3C2B2] text-xs ml-2">
+        <span className="text-xs ml-2" style={{ color: 'var(--ws-text-secondary)' }}>
           {rating > 0 ? `${rating}/5` : 'Select rating'}
         </span>
       </div>
@@ -121,7 +122,8 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
         placeholder="Review title (optional)"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full bg-[#0B1914] border border-[#2C5E3B] rounded-xl py-3 px-4 text-white placeholder-[#A3C2B2]/40 text-sm focus:outline-none focus:border-[#C69234] transition-colors"
+        className="w-full ws-glass border rounded-xl py-3 px-4 text-sm focus:outline-none focus:border-[var(--ws-accent)] transition-colors"
+        style={{ color: 'var(--ws-text)' }}
       />
 
       {/* Content */}
@@ -130,14 +132,15 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={3}
-        className="w-full bg-[#0B1914] border border-[#2C5E3B] rounded-xl py-3 px-4 text-white placeholder-[#A3C2B2]/40 text-sm focus:outline-none focus:border-[#C69234] transition-colors resize-none"
+        className="w-full ws-glass border rounded-xl py-3 px-4 text-sm focus:outline-none focus:border-[var(--ws-accent)] transition-colors resize-none"
+        style={{ color: 'var(--ws-text)' }}
       />
 
       <div className="flex gap-3">
         <button
           type="submit"
           disabled={loading || rating === 0}
-          className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#b07f2a] transition-all duration-300 shadow-md"
+          className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl ws-ocean-btn-primary font-black uppercase tracking-widest text-xs disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300 shadow-md"
         >
           {loading ? (
             <Loader2 size={14} className="animate-spin" />
@@ -149,7 +152,8 @@ export function ReviewForm({ placeId, onReviewSubmitted }: ReviewFormProps) {
         <button
           type="button"
           onClick={() => setShowForm(false)}
-          className="px-6 py-3 rounded-xl bg-[#143028] border border-[#2C5E3B] text-[#A3C2B2] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+          className="px-6 py-3 rounded-xl ws-glass border text-xs font-bold uppercase tracking-widest hover:border-[var(--ws-accent)] transition-colors"
+          style={{ color: 'var(--ws-text-secondary)' }}
         >
           Cancel
         </button>
