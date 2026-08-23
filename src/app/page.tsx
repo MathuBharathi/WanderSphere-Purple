@@ -13,7 +13,7 @@ export default function HomePage() {
   useGeolocation();
 
   return (
-    <main className="relative min-h-screen bg-[#0B1914] text-[#F0F7F4]">
+    <main className="relative min-h-screen transition-colors duration-800" style={{ color: 'var(--ws-text)' }}>
       <Navbar />
       <HeroSection />
       <SearchSection />

@@ -133,7 +133,8 @@ export function NearbySection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-4"
+            style={{ color: 'var(--ws-primary)' }}
+            className="flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.5em] mb-4"
           >
             {showNearbyMode ? (
               <>
@@ -153,8 +154,8 @@ export function NearbySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[8vw] md:text-[5vw] text-white leading-none font-bold"
-            style={{ letterSpacing: '-0.03em' }}
+            style={{ color: 'var(--ws-text)' }}
+            className="font-display text-[8vw] md:text-[5vw] leading-none font-bold"
           >
             {showNearbyMode ? 'EXPLORE NEARBY' : 'BEST PLACES IN INDIA'}
           </motion.h2>
@@ -163,16 +164,17 @@ export function NearbySection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[#A3C2B2] text-xs mt-3 flex items-center justify-center gap-1.5"
+            style={{ color: 'var(--ws-text-muted)' }}
+            className="text-xs mt-3 flex items-center justify-center gap-1.5"
           >
             {showNearbyMode ? (
               <>
-                <MapPin size={12} className="text-[#C69234]" />
+                <MapPin size={12} style={{ color: 'var(--ws-primary)' }} />
                 Showing handpicked cities and places near you
               </>
             ) : (
               <>
-                <Compass size={12} className="text-[#C69234]" />
+                <Compass size={12} style={{ color: 'var(--ws-primary)' }} />
                 Location access unavailable. Displaying India&apos;s iconic treasures and destinations.
               </>
             )}
@@ -182,8 +184,8 @@ export function NearbySection() {
         {/* Loading Indicator */}
         {loading && !showNearbyMode && featuredCities.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-3">
-            <Loader2 size={32} className="text-[#C69234] animate-spin" />
-            <p className="text-[#A3C2B2] text-sm">Discovering destinations...</p>
+            <Loader2 size={32} style={{ color: 'var(--ws-primary)' }} className="animate-spin" />
+            <p className="text-sm" style={{ color: 'var(--ws-text-muted)' }}>Discovering destinations...</p>
           </div>
         )}
 
@@ -192,24 +194,30 @@ export function NearbySection() {
           <>
             {/* Tab Switcher */}
             <div className="flex justify-center mb-10">
-              <div className="inline-flex p-1 bg-[#143028] backdrop-blur-xl border border-[#2C5E3B]/60 rounded-full shadow-inner">
+              <div 
+                style={{
+                  backgroundColor: 'var(--ws-surface-elevated)',
+                  borderColor: 'var(--ws-border)',
+                }}
+                className="inline-flex p-1 backdrop-blur-xl border rounded-full shadow-inner"
+              >
                 <button
                   onClick={() => setActiveTab('cities')}
-                  className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                    activeTab === 'cities'
-                      ? 'bg-[#C69234] text-[#0B1914] font-black shadow-md shadow-[#C69234]/20'
-                      : 'text-[#A3C2B2] hover:text-white'
-                  }`}
+                  style={{
+                    backgroundColor: activeTab === 'cities' ? 'var(--ws-primary)' : 'transparent',
+                    color: activeTab === 'cities' ? '#FFFFFF' : 'var(--ws-text-muted)',
+                  }}
+                  className="px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm"
                 >
                   {showNearbyMode ? 'Nearby Cities' : 'Featured Cities'}
                 </button>
                 <button
                   onClick={() => setActiveTab('places')}
-                  className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                    activeTab === 'places'
-                      ? 'bg-[#C69234] text-[#0B1914] font-black shadow-md shadow-[#C69234]/20'
-                      : 'text-[#A3C2B2] hover:text-white'
-                  }`}
+                  style={{
+                    backgroundColor: activeTab === 'places' ? 'var(--ws-primary)' : 'transparent',
+                    color: activeTab === 'places' ? '#FFFFFF' : 'var(--ws-text-muted)',
+                  }}
+                  className="px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm"
                 >
                   {showNearbyMode ? 'Nearby Attractions' : 'Top Attractions'}
                 </button>

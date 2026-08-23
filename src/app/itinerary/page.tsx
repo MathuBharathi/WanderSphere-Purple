@@ -64,22 +64,31 @@ export default function ItineraryPage() {
   // If no itinerary generated, show message
   if (!generatedItinerary) {
     return (
-      <main className="min-h-screen bg-[#0B1914] flex flex-col items-center justify-center px-6 text-center">
+      <main className="min-h-screen flex flex-col items-center justify-center px-6 text-center" style={{ color: 'var(--ws-text)' }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md bg-[#143028] border border-[#2C5E3B] rounded-3xl p-8 shadow-xl text-white"
+          style={{
+            backgroundColor: 'var(--ws-surface)',
+            borderColor: 'var(--ws-border)',
+            boxShadow: 'var(--ws-shadow)',
+          }}
+          className="max-w-md border rounded-3xl p-8 shadow-xl"
         >
-          <AlertCircle size={40} className="text-[#C69234] mx-auto mb-4" />
-          <h2 className="text-2xl font-extrabold text-white uppercase tracking-tight">No Itinerary Found</h2>
-          <p className="text-[#A3C2B2] text-sm mt-2 mb-6">
+          <AlertCircle size={40} style={{ color: 'var(--ws-primary)' }} className="mx-auto mb-4" />
+          <h2 className="text-2xl font-extrabold uppercase tracking-tight" style={{ color: 'var(--ws-text)' }}>No Itinerary Found</h2>
+          <p style={{ color: 'var(--ws-text-muted)' }} className="text-sm mt-2 mb-6">
             Generate a custom travel plan on our home search panel to view it here.
           </p>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#C69234] hover:bg-[#b07f2a] text-[#0B1914] font-black uppercase tracking-widest text-xs transition-all shadow-md"
+            style={{
+              backgroundColor: 'var(--ws-primary)',
+              color: '#FFFFFF',
+            }}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-md"
           >
-            Go to Planner
+            Start Exploring
           </Link>
         </motion.div>
       </main>
@@ -322,18 +331,29 @@ export default function ItineraryPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0B1914] pb-24 text-[#F0F7F4] transition-colors duration-300">
-      <header className="relative py-8 px-6 bg-[#143028]/80 border-b border-[#2C5E3B]/60 backdrop-blur-xl shrink-0 print:hidden">
+    <main className="min-h-screen pb-24 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+      <header 
+        style={{
+          backgroundColor: 'var(--ws-navbar-bg)',
+          borderColor: 'var(--ws-border)',
+        }}
+        className="relative py-8 px-6 border-b backdrop-blur-xl shrink-0 print:hidden"
+      >
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex items-center gap-4">
             <Link
               href="/"
-              className="p-3 bg-[#0B1914] border border-[#2C5E3B] hover:border-[#C69234] rounded-full transition-all text-[#C69234]"
+              style={{
+                backgroundColor: 'var(--ws-surface-elevated)',
+                borderColor: 'var(--ws-border)',
+                color: 'var(--ws-primary)',
+              }}
+              className="p-3 border hover:border-[var(--ws-primary)] rounded-full transition-all"
             >
               <ArrowLeft size={16} />
             </Link>
             <div>
-              <div className="flex items-center gap-2 text-[10px] uppercase font-extrabold tracking-widest text-[#C69234]">
+              <div className="flex items-center gap-2 text-[10px] uppercase font-extrabold tracking-widest" style={{ color: 'var(--ws-primary)' }}>
                 <span>{config.stateName}</span>
                 <span>•</span>
                 <span className="text-[#A65D29] flex items-center gap-0.5">

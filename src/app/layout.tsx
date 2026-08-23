@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from '@/components/providers/AuthProvider';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { WebGLBackground } from '@/components/WebGLBackground';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -24,30 +26,36 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased`}>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            duration: 3500,
-            style: {
-              background: '#143028',
-              color: '#F0F7F4',
-              border: '1px solid #2C5E3B',
-              borderRadius: '16px',
-              fontSize: '13px',
-            },
-            success: {
-              iconTheme: { primary: '#C69234', secondary: '#0B1914' },
-            },
-            error: {
-              iconTheme: { primary: '#A65D29', secondary: '#0B1914' },
-            },
-          }}
-        />
+    <html lang="en" className={inter.variable} data-theme="light">
+      <body className={`${inter.className} antialiased min-h-screen relative`}>
+        <ThemeProvider>
+          <WebGLBackground />
+          <AuthProvider>
+            <div className="relative z-10">
+              {children}
+            </div>
+          </AuthProvider>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              duration: 3500,
+              style: {
+                background: 'var(--ws-surface)',
+                color: 'var(--ws-text)',
+                border: '1px solid var(--ws-border)',
+                borderRadius: '16px',
+                fontSize: '13px',
+                boxShadow: 'var(--ws-shadow)',
+              },
+              success: {
+                iconTheme: { primary: 'var(--ws-primary)', secondary: 'var(--ws-bg)' },
+              },
+              error: {
+                iconTheme: { primary: '#EF4444', secondary: 'var(--ws-bg)' },
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );

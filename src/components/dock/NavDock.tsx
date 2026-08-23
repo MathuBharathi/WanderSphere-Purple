@@ -39,11 +39,16 @@ function DockItem({ children, onClick, mouseX, spring, distance, magnification, 
   return (
     <motion.div
       ref={ref}
-      style={{ width: size, height: size }}
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: 'var(--ws-surface-elevated)',
+        borderColor: 'var(--ws-border)',
+      }}
       onHoverStart={() => isHovered.set(1)}
       onHoverEnd={() => isHovered.set(0)}
       onClick={onClick}
-      className="relative inline-flex items-center justify-center rounded-full cursor-pointer bg-[#1B432C]/80 border border-[#2C5E3B] hover:border-[#C69234] transition-colors"
+      className="relative inline-flex items-center justify-center rounded-full cursor-pointer border hover:border-[var(--ws-primary)] transition-colors shadow-sm"
     >
       {Children.map(children, (child) =>
         // @ts-ignore
@@ -67,8 +72,13 @@ function DockLabel({ children, isHovered }: { children: React.ReactNode; isHover
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: -10 }}
           exit={{ opacity: 0, y: 0 }}
-          className="absolute -top-9 left-1/2 whitespace-nowrap rounded-lg bg-[#143028] border border-[#2C5E3B] px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#C69234] shadow-xl"
-          style={{ x: '-50%' }}
+          style={{
+            backgroundColor: 'var(--ws-surface)',
+            borderColor: 'var(--ws-border)',
+            color: 'var(--ws-primary)',
+            x: '-50%',
+          }}
+          className="absolute -top-9 left-1/2 whitespace-nowrap rounded-lg border px-3 py-1 text-[10px] font-bold uppercase tracking-widest shadow-xl"
         >
           {children}
         </motion.div>
@@ -78,7 +88,7 @@ function DockLabel({ children, isHovered }: { children: React.ReactNode; isHover
 }
 
 function DockIcon({ children, isHovered }: { children: React.ReactNode; isHovered?: MotionValue<number> }) {
-  return <div className="flex items-center justify-center text-[#A3C2B2] hover:text-[#C69234] transition-colors">{children}</div>;
+  return <div style={{ color: 'var(--ws-text-muted)' }} className="flex items-center justify-center hover:text-[var(--ws-primary)] transition-colors">{children}</div>;
 }
 
 export function NavDock() {
@@ -123,8 +133,13 @@ export function NavDock() {
         <motion.div
           onMouseMove={({ pageX }) => { isHovered.set(1); mouseX.set(pageX); }}
           onMouseLeave={() => { isHovered.set(0); mouseX.set(Infinity); }}
-          className="flex items-end gap-2 rounded-3xl bg-[#143028]/90 border border-[#2C5E3B]/60 pb-2 px-4 shadow-2xl backdrop-blur-xl"
-          style={{ height: panelHeight }}
+          style={{
+            backgroundColor: 'var(--ws-surface-translucent)',
+            borderColor: 'var(--ws-border)',
+            boxShadow: 'var(--ws-shadow)',
+            height: panelHeight,
+          }}
+          className="flex items-end gap-2 rounded-3xl border pb-2 px-4 shadow-2xl backdrop-blur-xl"
         >
           {items.map((item, i) => (
             <DockItem

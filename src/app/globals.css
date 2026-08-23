@@ -1,46 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import '../styles/theme.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Green & Gold palette from image swatches:
-     #0B1914 (Darkest Charcoal Forest Green - Main background)
-     #143028 (Dark Pine Green - Container / Card background)
-     #1B432C (Deep Forest Green - Surface / Hover background)
-     #2C5E3B (Emerald Green - Borders / Sub-elements)
-     #C69234 (Warm Amber Gold - Highlights / Primary CTAs)
-     #A65D29 (Warm Copper Rust - Secondary accents / Badges)
-  */
-  --darkest-forest: #0B1914;
-  --dark-pine: #143028;
-  --forest-green: #1B432C;
-  --emerald-green: #2C5E3B;
-  --amber-gold: #C69234;
-  --copper-terracotta: #A65D29;
+  --darkest-forest: var(--ws-bg);
+  --dark-pine: var(--ws-surface);
+  --forest-green: var(--ws-surface-elevated);
+  --emerald-green: var(--ws-border);
+  --amber-gold: var(--ws-primary);
+  --copper-terracotta: var(--ws-secondary);
 
-  --deep-violet: #0B1914;
-  --violet: #C69234;
-  --mauve: #2C5E3B;
-  --lavender: #A3C2B2;
+  --deep-violet: var(--ws-bg);
+  --violet: var(--ws-primary);
+  --mauve: var(--ws-secondary);
+  --lavender: var(--ws-text-muted);
   --white: #FFFFFF;
 
-  /* Accent / interactive */
-  --neon-violet: #C69234;
-  --neon-purple: #C69234;
-  --neon-lavender: #A3C2B2;
-  --soft-pink: #A65D29;
-
   /* Aliases for theme consistency */
-  --forest: #0B1914;
-  --sage: #A3C2B2;
-  --olive: #2C5E3B;
-  --cream: #E8F3EE;
-  --moss: #1B432C;
-  --neon-teal: #C69234;
-  --neon-gold: #C69234;
-  --neon-rose: #A65D29;
+  --forest: var(--ws-bg);
+  --sage: var(--ws-text-muted);
+  --olive: var(--ws-border);
+  --cream: var(--ws-text);
+  --moss: var(--ws-surface);
+  --neon-teal: var(--ws-primary);
+  --neon-gold: var(--ws-secondary);
+  --neon-rose: var(--ws-primary-hover);
 }
 
 * {
@@ -49,14 +36,15 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #0B1914;
+  background-color: var(--ws-bg);
 }
 
 body {
   font-family: 'Figtree', sans-serif;
-  background-color: #0B1914;
-  color: #F0F7F4;
+  background-color: var(--ws-bg);
+  color: var(--ws-text);
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* Subtle noise overlay */

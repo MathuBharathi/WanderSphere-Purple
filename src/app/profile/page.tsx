@@ -306,20 +306,26 @@ function ProfileContent() {
 
   if (!authReady || loading) {
     return (
-      <div className="min-h-screen bg-[#0B1914] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ color: 'var(--ws-text)' }}>
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 text-[#C69234] animate-spin" />
-          <p className="text-[#A3C2B2] text-xs uppercase tracking-widest font-semibold">Loading profile...</p>
+          <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--ws-primary)' }} />
+          <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-text-muted)' }}>Loading profile...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#0B1914] pb-32 text-[#F0F7F4] transition-colors duration-300">
+    <main className="min-h-screen pb-32 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
 
       {/* Header Banner — Redesigned with centered avatar */}
-      <div className="relative overflow-hidden bg-[#143028]/60 border-b border-[#2C5E3B]/60 backdrop-blur-xl">
+      <div 
+        style={{
+          backgroundColor: 'var(--ws-surface-translucent)',
+          borderColor: 'var(--ws-border)',
+        }}
+        className="relative overflow-hidden border-b backdrop-blur-xl"
+      >
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1B432C]/40 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-5xl mx-auto w-full px-6 pt-6 pb-10">

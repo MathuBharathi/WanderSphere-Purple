@@ -17,11 +17,11 @@ export function HiddenGemsSection() {
   }, []);
 
   return (
-    <section id="gems" className="relative py-24 px-6 overflow-hidden bg-[#0B1914]">
-      {/* Earthy tinted bg */}
+    <section id="gems" className="relative py-24 px-6 overflow-hidden transition-colors duration-500">
+      {/* Background tint overlay */}
       <div
-        className="absolute inset-0 rounded-t-[5rem]"
-        style={{ background: 'linear-gradient(180deg, #143028 0%, #0B1914 100%)' }}
+        className="absolute inset-0 rounded-t-[5rem] pointer-events-none"
+        style={{ background: 'linear-gradient(180deg, var(--ws-surface-translucent) 0%, transparent 100%)' }}
       />
 
       <div className="relative max-w-7xl mx-auto z-10">
@@ -31,7 +31,8 @@ export function HiddenGemsSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-4"
+            style={{ color: 'var(--ws-primary)' }}
+            className="text-[10px] font-bold uppercase tracking-[0.5em] mb-4"
           >
             ✦ Off the beaten path ✦
           </motion.p>
@@ -40,8 +41,8 @@ export function HiddenGemsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[10vw] md:text-[6vw] leading-none text-white"
-            style={{ letterSpacing: '-0.03em' }}
+            style={{ color: 'var(--ws-text)' }}
+            className="font-display text-[10vw] md:text-[6vw] leading-none"
           >
             HIDDEN GEMS
           </motion.h2>
@@ -50,7 +51,8 @@ export function HiddenGemsSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-[#A3C2B2] text-sm mt-4 max-w-md mx-auto"
+            style={{ color: 'var(--ws-text-muted)' }}
+            className="text-sm mt-4 max-w-md mx-auto"
           >
             Curated secret spots that most travelers miss. Discover the extraordinary.
           </motion.p>
@@ -58,7 +60,7 @@ export function HiddenGemsSection() {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 size={32} className="text-[#C69234] animate-spin" />
+            <Loader2 size={32} style={{ color: 'var(--ws-primary)' }} className="animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -70,7 +72,12 @@ export function HiddenGemsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => router.push(`/city/${place.city_id}?place=${place.id}`)}
-                className="group cursor-pointer bg-[#143028] border border-[#2C5E3B]/60 rounded-4xl overflow-hidden hover:border-[#C69234] transition-all duration-300 card-hover"
+                style={{
+                  backgroundColor: 'var(--ws-surface)',
+                  borderColor: 'var(--ws-border)',
+                  boxShadow: 'var(--ws-shadow)',
+                }}
+                className="group cursor-pointer border rounded-4xl overflow-hidden hover:border-[var(--ws-primary)] transition-all duration-300 card-hover"
               >
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden">
@@ -80,35 +87,52 @@ export function HiddenGemsSection() {
                       backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})`,
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1914]/90 to-transparent" />
+                  <div 
+                    style={{
+                      background: 'linear-gradient(to top, var(--ws-bg) 0%, transparent 100%)',
+                    }}
+                    className="absolute inset-0" 
+                  />
 
                   {/* Hidden gem badge */}
-                  <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-[#1B432C]/90 border border-[#2C5E3B] rounded-full px-3 py-1 backdrop-blur-md">
-                    <Sparkles size={10} className="text-[#C69234]" />
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#C69234]">Hidden Gem</span>
+                  <div 
+                    style={{
+                      backgroundColor: 'var(--ws-surface-translucent)',
+                      borderColor: 'var(--ws-border)',
+                    }}
+                    className="absolute top-4 left-4 flex items-center gap-1.5 border rounded-full px-3 py-1 backdrop-blur-md shadow-sm"
+                  >
+                    <Sparkles size={10} style={{ color: 'var(--ws-primary)' }} />
+                    <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'var(--ws-primary)' }}>Hidden Gem</span>
                   </div>
 
                   {/* Rating */}
                   {place.avg_rating && (
-                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-[#0B1914]/80 border border-[#2C5E3B] rounded-full px-2 py-1 backdrop-blur-md">
-                      <Star size={10} className="text-[#C69234] fill-[#C69234]" />
-                      <span className="text-[10px] text-white font-bold">{place.avg_rating}</span>
+                    <div 
+                      style={{
+                        backgroundColor: 'var(--ws-surface-translucent)',
+                        borderColor: 'var(--ws-border)',
+                      }}
+                      className="absolute top-4 right-4 flex items-center gap-1 border rounded-full px-2 py-1 backdrop-blur-md shadow-sm"
+                    >
+                      <Star size={10} style={{ color: 'var(--ws-primary)', fill: 'var(--ws-primary)' }} />
+                      <span className="text-[10px] font-bold" style={{ color: 'var(--ws-text)' }}>{place.avg_rating}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Info */}
                 <div className="p-5">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#A65D29]">
+                  <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: 'var(--ws-secondary)' }}>
                     {place.category.replace('_', ' ')}
                   </span>
-                  <h3 className="font-display text-xl text-white mt-1 group-hover:text-[#C69234] transition-colors">
+                  <h3 className="font-display text-xl mt-1 group-hover:text-[var(--ws-primary)] transition-colors" style={{ color: 'var(--ws-text)' }}>
                     {place.name}
                   </h3>
-                  <p className="text-[#A3C2B2] text-xs mt-2 leading-relaxed line-clamp-2">{place.description}</p>
+                  <p className="text-xs mt-2 leading-relaxed line-clamp-2" style={{ color: 'var(--ws-text-muted)' }}>{place.description}</p>
 
                   {/* Meta row */}
-                  <div className="flex items-center gap-4 mt-4 text-[10px] text-[#A3C2B2]/70 uppercase tracking-widest font-semibold">
+                  <div className="flex items-center gap-4 mt-4 text-[10px] uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-text-muted)' }}>
                     {place.entry_fee !== undefined && (
                       <span>{place.entry_fee === 0 ? 'Free Entry' : `₹${place.entry_fee}`}</span>
                     )}
@@ -129,7 +153,14 @@ export function HiddenGemsSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <button className="px-8 py-4 rounded-full bg-[#143028] border border-[#2C5E3B] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#1B432C] hover:border-[#C69234] transition-all duration-300 shadow-lg">
+          <button 
+            style={{
+              backgroundColor: 'var(--ws-surface-elevated)',
+              borderColor: 'var(--ws-border)',
+              color: 'var(--ws-text)',
+            }}
+            className="px-8 py-4 rounded-full border text-xs font-bold uppercase tracking-widest hover:border-[var(--ws-primary)] transition-all duration-300 shadow-md"
+          >
             View All Hidden Gems
           </button>
         </motion.div>

@@ -96,19 +96,25 @@ export default function DashboardPage() {
   // Show loading while auth is initializing
   if (!authReady || (loading && !user)) {
     return (
-      <main className="min-h-screen bg-[#0B1914] flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center" style={{ color: 'var(--ws-text)' }}>
         <div className="flex flex-col items-center gap-3">
-          <Loader2 size={32} className="animate-spin text-[#C69234]" />
-          <p className="text-[#A3C2B2] text-xs uppercase tracking-widest font-semibold">Loading Dashboard...</p>
+          <Loader2 size={32} style={{ color: 'var(--ws-primary)' }} className="animate-spin" />
+          <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-text-muted)' }}>Loading Dashboard...</p>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#0B1914] pb-32 text-[#F0F7F4] transition-colors duration-300">
+    <main className="min-h-screen pb-32 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       {/* Top Navbar */}
-      <nav className="border-b border-[#2C5E3B]/60 bg-[#143028]/80 backdrop-blur-xl py-5 px-6">
+      <nav 
+        style={{
+          backgroundColor: 'var(--ws-navbar-bg)',
+          borderColor: 'var(--ws-border)',
+        }}
+        className="border-b backdrop-blur-xl py-5 px-6"
+      >
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <Link href="/" className="font-extrabold text-lg text-white tracking-widest">—WANDERSPHERE</Link>
           <div className="flex items-center gap-4">

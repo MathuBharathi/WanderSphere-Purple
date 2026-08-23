@@ -1,0 +1,94 @@
+:root {
+  /* Global DAY Theme Variables */
+  --ws-bg: #F7FAFC;
+  --ws-surface: #FFFFFF;
+  --ws-surface-elevated: #FFFFFF;
+  --ws-surface-translucent: rgba(255, 255, 255, 0.82);
+  --ws-text: #10233F;
+  --ws-text-muted: #64748B;
+  --ws-primary: #1677C8;
+  --ws-primary-hover: #125FA2;
+  --ws-secondary: #38A3DB;
+  --ws-border: rgba(15, 50, 90, 0.12);
+  --ws-shadow: 0 12px 40px rgba(20, 60, 100, 0.10);
+  --ws-navbar-bg: rgba(255, 255, 255, 0.85);
+  --ws-navbar-border: rgba(15, 50, 90, 0.10);
+  --ws-input-bg: #FFFFFF;
+  --ws-input-border: rgba(15, 50, 90, 0.15);
+  --ws-card-bg: #FFFFFF;
+  --ws-icon-color: #1677C8;
+  --ws-overlay-gradient: linear-gradient(to bottom, rgba(247, 250, 252, 0.6), rgba(247, 250, 252, 0.95));
+}
+
+[data-theme="dark"] {
+  /* Global NIGHT Theme Variables */
+  --ws-bg: #050B18;
+  --ws-surface: #0B1426;
+  --ws-surface-elevated: #101D33;
+  --ws-surface-translucent: rgba(11, 20, 38, 0.82);
+  --ws-text: #F4F8FF;
+  --ws-text-muted: #9FB2C9;
+  --ws-primary: #58A6FF;
+  --ws-primary-hover: #3B82F6;
+  --ws-secondary: #7DD3FC;
+  --ws-border: rgba(150, 190, 230, 0.15);
+  --ws-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+  --ws-navbar-bg: rgba(11, 20, 38, 0.85);
+  --ws-navbar-border: rgba(150, 190, 230, 0.12);
+  --ws-input-bg: #0B1426;
+  --ws-input-border: rgba(150, 190, 230, 0.2);
+  --ws-card-bg: rgba(11, 20, 38, 0.85);
+  --ws-icon-color: #58A6FF;
+  --ws-overlay-gradient: linear-gradient(to bottom, rgba(5, 11, 24, 0.6), rgba(5, 11, 24, 0.95));
+}
+
+/* Global Fixed WebGL Canvas Stacking */
+#webgl_canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Smooth UI Theme Transitions for core structural elements */
+body,
+button,
+input,
+textarea,
+select,
+.ws-card,
+.ws-navbar,
+.ws-surface,
+section {
+  transition:
+    background-color 0.8s ease,
+    color 0.8s ease,
+    border-color 0.8s ease,
+    box-shadow 0.8s ease;
+}
+
+/* Custom utility classes referencing WanderSphere theme variables */
+.ws-glass {
+  background: var(--ws-surface-translucent);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--ws-border);
+  box-shadow: var(--ws-shadow);
+}
+
+.ws-glass-card {
+  background: var(--ws-card-bg);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--ws-border);
+  box-shadow: var(--ws-shadow);
+}
+
+.ws-gradient-text {
+  background: linear-gradient(135deg, var(--ws-primary) 0%, var(--ws-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
