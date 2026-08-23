@@ -319,16 +319,8 @@ function ProfileContent() {
     <main className="relative min-h-[100svh] flex flex-col transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
 
       <div className="flex-1 pb-16">
-        {/* Header Banner — Lightweight Ocean Glass */}
-        <div className="relative overflow-hidden ws-glass border-b">
-          <div 
-            style={{
-              background: 'linear-gradient(180deg, rgba(25, 167, 224, 0.08) 0%, transparent 100%)',
-            }}
-            className="absolute inset-0 z-0 pointer-events-none" 
-          />
-
-          <div className="relative z-10 max-w-5xl mx-auto w-full px-6 pt-6 pb-10">
+        {/* Header Banner — Completely Transparent Identity Floating over Ocean */}
+        <div className="relative z-10 max-w-5xl mx-auto w-full px-6 pt-8 pb-12 bg-transparent border-none shadow-none">
             {/* Top row: back + sign out */}
             <div className="flex justify-between items-center mb-8">
               <Link href="/dashboard" className="flex items-center gap-2 hover:underline transition-colors text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
@@ -399,7 +391,6 @@ function ProfileContent() {
               </span>
             </div>
           </div>
-        </div>
 
         {/* Profile stats */}
         <div className="max-w-5xl mx-auto px-6 -mt-5 mb-8 relative z-10">
