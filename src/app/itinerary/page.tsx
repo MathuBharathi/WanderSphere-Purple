@@ -15,6 +15,8 @@ import {
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import dynamic from 'next/dynamic';
+import { Footer } from '@/components/ui/Footer';
+import { NavDock } from '@/components/dock/NavDock';
 import type { GeneratedItinerary, SavedItinerary, TimeSlot, ItineraryDay } from '@/types';
 
 // Dynamic import of LeafletMap (client-only)
@@ -331,7 +333,7 @@ export default function ItineraryPage() {
   };
 
   return (
-    <main className="min-h-screen pb-24 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+    <main className="relative min-h-[100svh] flex flex-col transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       <header 
         style={{
           backgroundColor: 'var(--ws-navbar-bg)',
@@ -677,6 +679,8 @@ export default function ItineraryPage() {
 
         </div>
       </div>
+      <Footer className="mt-auto" />
+      <NavDock />
     </main>
   );
 }

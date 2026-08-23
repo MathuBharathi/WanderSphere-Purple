@@ -13,16 +13,16 @@ export default function HomePage() {
   useGeolocation();
 
   return (
-    <main className="relative min-h-screen transition-colors duration-800" style={{ color: 'var(--ws-text)' }}>
+    <main className="relative min-h-[100svh] flex flex-col transition-colors duration-800" style={{ color: 'var(--ws-text)' }}>
       <Navbar />
-      <HeroSection />
-      <SearchSection />
-      <NearbySection />
-      <TrendingSection />
-      <HiddenGemsSection />
-      <Footer />
-      {/* Bottom padding for dock */}
-      <div className="h-24" />
+      <div className="flex-1">
+        <HeroSection />
+        <SearchSection />
+        <NearbySection />
+        <TrendingSection />
+        <HiddenGemsSection />
+      </div>
+      <Footer className="mt-auto" />
       <NavDock />
     </main>
   );

@@ -228,15 +228,15 @@ export function NearbySection() {
               {/* Left arrow button */}
               <button
                 onClick={() => handleScroll('left')}
-                className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#143028] backdrop-blur-md border border-[#2C5E3B] items-center justify-center text-white shadow-xl opacity-0 group-hover/scroll:opacity-100 transition-opacity duration-300 z-20 hover:scale-105 hover:bg-[#1B432C] active:scale-95 hidden md:flex"
+                className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full ws-glass-strong items-center justify-center text-white shadow-xl opacity-0 group-hover/scroll:opacity-100 transition-opacity duration-300 z-20 hover:scale-105 active:scale-95 hidden md:flex"
               >
-                <ChevronLeft size={20} className="text-[#C69234]" />
+                <ChevronLeft size={20} style={{ color: 'var(--ws-accent)' }} />
               </button>
 
               {/* Scroll Container */}
               <div
                 ref={scrollRef}
-                className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 scrollbar-none"
+                className="flex gap-6 overflow-x-auto snap-x snap-proximity scroll-smooth pb-6 no-scrollbar"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {listToUse.map((item, idx) => {
@@ -255,11 +255,11 @@ export function NearbySection() {
                   return (
                     <motion.div
                       key={item.id}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: idx * 0.04, duration: 0.5 }}
-                      className="flex-shrink-0 w-[260px] md:w-[320px] aspect-[3/4] rounded-3xl overflow-hidden relative snap-start cursor-pointer group ws-glass card-hover hover:border-[var(--ws-accent)]"
+                      transition={{ delay: idx * 0.03, duration: 0.4 }}
+                      className="flex-shrink-0 w-[260px] md:w-[320px] aspect-[3/4] rounded-3xl overflow-hidden relative snap-start cursor-pointer group ws-glass transition-all duration-300 hover:scale-[1.015] hover:border-[var(--ws-accent)] shadow-lg"
                       onClick={() => handleItemClick(item.id)}
                     >
                       {/* Image tag */}
@@ -267,7 +267,7 @@ export function NearbySection() {
                       <img
                         src={imgUrl}
                         alt={title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                         loading="lazy"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600';
@@ -306,80 +306,6 @@ export function NearbySection() {
               >
                 <ChevronRight size={20} style={{ color: 'var(--ws-accent)' }} />
               </button>
-            </div>
-
-            {/* Quick List Section below Slider */}
-            <div className="mt-12">
-              <div className="flex items-center justify-between mb-5 border-b pb-2" style={{ borderColor: 'var(--ws-border)' }}>
-                <h3 className="font-bold text-md tracking-tight" style={{ color: 'var(--ws-text)' }}>
-                  {isCitiesTab ? 'Trending Destinations' : 'Must-Visit Places'}
-                </h3>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider" style={{ color: 'var(--ws-accent)' }}>Top selections</span>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-                {isCitiesTab ? (
-                  citiesList.slice(0, 4).map((city, i) => (
-                    <motion.button
-                      key={city.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      onClick={() => router.push(`/city/${city.id}`)}
-                      className="ws-glass rounded-2xl p-4 text-left hover:border-[var(--ws-accent)] transition-all duration-300 card-hover group"
-                    >
-                      <div
-                        className="w-full h-28 rounded-xl bg-cover bg-center mb-3 overflow-hidden shadow-sm"
-                        style={{ backgroundImage: `url(${city.cover_image || 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400'})` }}
-                      />
-                      <p className="text-xs font-bold group-hover:text-[var(--ws-accent)] transition-colors line-clamp-1" style={{ color: 'var(--ws-text)' }}>
-                        {city.name}
-                      </p>
-                      <p className="text-[10px] mt-1 flex items-center gap-1 font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>
-                        {city.distance_km ? (
-                          <>
-                            <Navigation size={9} style={{ color: 'var(--ws-accent)' }} />
-                            <span>{Math.round(city.distance_km)} km away</span>
-                          </>
-                        ) : (
-                          <span>{city.state_name}</span>
-                        )}
-                      </p>
-                    </motion.button>
-                  ))
-                ) : (
-                  placesList.slice(0, 4).map((place, i) => (
-                    <motion.button
-                      key={place.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      onClick={() => router.push(`/place/${place.id}`)}
-                      className="ws-glass rounded-2xl p-4 text-left hover:border-[var(--ws-accent)] transition-all duration-300 card-hover group"
-                    >
-                      <div
-                        className="w-full h-28 rounded-xl bg-cover bg-center mb-3 overflow-hidden shadow-sm"
-                        style={{ backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400'})` }}
-                      />
-                      <p className="text-xs font-bold group-hover:text-[var(--ws-accent)] transition-colors line-clamp-1" style={{ color: 'var(--ws-text)' }}>
-                        {place.name}
-                      </p>
-                      <p className="text-[10px] mt-1 flex items-center gap-1 font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>
-                        {place.distance_km ? (
-                          <>
-                            <Navigation size={9} style={{ color: 'var(--ws-accent)' }} />
-                            <span>{Math.round(place.distance_km)} km away</span>
-                          </>
-                        ) : (
-                          <span>{place.city_name}</span>
-                        )}
-                      </p>
-                    </motion.button>
-                  ))
-                )}
-              </div>
             </div>
           </>
         )}

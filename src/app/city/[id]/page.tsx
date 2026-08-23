@@ -204,7 +204,7 @@ function CityContent() {
   }
 
   return (
-    <main className="min-h-screen pb-24 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+    <main className="relative min-h-[100svh] flex flex-col transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       {/* Back Link */}
       <Link
         href="/"
@@ -541,8 +541,7 @@ function CityContent() {
       {/* Weather widget */}
       {weather && <WeatherWidget weather={weather} />}
 
-      <Footer />
-      <div className="h-28" />
+      <Footer className="mt-auto" />
       <NavDock />
     </main>
   );

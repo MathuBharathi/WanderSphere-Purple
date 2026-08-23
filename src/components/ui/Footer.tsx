@@ -2,9 +2,9 @@
 import { Globe, Heart, MapPin, Compass, Mail, Github, Twitter } from 'lucide-react';
 import Link from 'next/link';
 
-export function Footer() {
+export function Footer({ className = '' }: { className?: string }) {
   return (
-    <footer className="relative mt-20 border-t ws-glass transition-colors duration-500">
+    <footer className={`relative mt-20 border-t ws-glass transition-colors duration-500 w-full ${className}`}>
       {/* Accent gradient line */}
       <div 
         style={{

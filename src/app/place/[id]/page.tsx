@@ -115,7 +115,7 @@ export default function PlacePage() {
   ];
 
   return (
-    <main className="min-h-screen pb-24 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+    <main className="relative min-h-[100svh] flex flex-col transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       {/* Hero Banner */}
       <div className="relative h-[60vh] overflow-hidden">
         <div
@@ -339,10 +339,7 @@ export default function PlacePage() {
         )}
       </div>
 
-      <Footer />
-
-      {/* Bottom padding for dock */}
-      <div className="h-28" />
+      <Footer className="mt-auto" />
       <NavDock />
     </main>
   );

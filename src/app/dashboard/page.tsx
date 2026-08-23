@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { NavDock } from '@/components/dock/NavDock';
+import { Footer } from '@/components/ui/Footer';
 import { ItineraryCard } from '@/components/ui/ItineraryCard';
 import type { SavedItinerary, Place } from '@/types';
 import { places as staticPlaces } from '@/data/travelData';
@@ -106,116 +107,90 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen pb-32 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+    <main className="relative min-h-[100svh] flex flex-col transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       {/* Top Navbar */}
-      <nav 
-        style={{
-          backgroundColor: 'var(--ws-navbar-bg)',
-          borderColor: 'var(--ws-border)',
-        }}
-        className="border-b backdrop-blur-xl py-5 px-6"
-      >
+      <nav className="ws-glass-strong border-b backdrop-blur-xl py-5 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <Link href="/" className="font-extrabold text-lg text-white tracking-widest">—WANDERSPHERE</Link>
+          <Link href="/" className="font-extrabold text-lg tracking-widest" style={{ color: 'var(--ws-text)' }}>—WANDERSPHERE</Link>
           <div className="flex items-center gap-4">
-            <Link href="/profile" className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C69234] hover:underline transition-colors">
+            <Link href="/profile" className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider hover:underline transition-colors" style={{ color: 'var(--ws-accent)' }}>
               <User size={14} />
               <span className="hidden sm:inline">Profile Settings</span>
             </Link>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-800/40 hover:bg-rose-950/30 text-rose-400 text-xs font-semibold transition-all"
-              aria-label="Sign out"
+              className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider hover:text-rose-400 transition-colors"
+              style={{ color: 'var(--ws-text-secondary)' }}
             >
-              <LogOut size={13} />
-              <span className="hidden sm:inline">Logout</span>
+              <LogOut size={14} />
+              <span className="hidden sm:inline">Sign Out</span>
             </button>
           </div>
         </div>
       </nav>
 
-      <div className="max-w-6xl mx-auto px-6 mt-10">
-        {/* Welcome message */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-black tracking-tight text-white uppercase">
-            Hello, {profile?.full_name || user?.email?.split('@')[0] || 'Explorer'}
+      <div className="flex-1 max-w-6xl mx-auto px-6 py-10 w-full">
+        {/* Welcome Section */}
+        <div className="mb-10">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.3em] mb-1" style={{ color: 'var(--ws-accent)' }}>
+            Welcome back
+          </p>
+          <h1 className="font-extrabold text-3xl md:text-4xl uppercase tracking-tight" style={{ color: 'var(--ws-text)' }}>
+            {profile?.full_name || user?.email?.split('@')[0] || 'Traveler'}&apos;s Hub
           </h1>
-          <p className="text-[#A3C2B2] text-sm mt-1">
-            Manage your saved Indian travel plans and wishlist destinations.
+          <p className="text-xs mt-2 max-w-xl leading-relaxed" style={{ color: 'var(--ws-text-secondary)' }}>
+            Manage your saved trips, explore wishlist places, and plan your next Indian adventure.
           </p>
         </div>
 
-        {/* Dashboard Stats — Equal visual weight */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px]">
-            <div className="w-10 h-10 rounded-2xl bg-[#1B432C] text-[#C69234] border border-[#2C5E3B] flex items-center justify-center mb-4">
-              <Compass size={20} />
-            </div>
-            <div>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#A3C2B2]">Saved Itineraries</p>
-              <p className="text-3xl font-black text-[#C69234] mt-1">{itineraries.length}</p>
-            </div>
-          </div>
-
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px]">
-            <div className="w-10 h-10 rounded-2xl bg-[#1B432C] text-[#A65D29] border border-[#2C5E3B] flex items-center justify-center mb-4">
-              <Heart size={20} />
-            </div>
-            <div>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#A3C2B2]">Wishlist Sights</p>
-              <p className="text-3xl font-black text-[#A65D29] mt-1">{wishlistPlaces.length}</p>
-            </div>
-          </div>
-
-          <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px]">
-            <div className="w-10 h-10 rounded-2xl bg-[#1B432C] text-[#C69234] border border-[#2C5E3B] flex items-center justify-center mb-4">
-              <Sparkles size={20} />
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-white">Ready for a new adventure?</p>
-              <p className="text-[10px] text-[#A3C2B2] mt-1">Let AI craft your next custom trip itinerary.</p>
-            </div>
-            <Link
-              href="/#explore"
-              className="mt-4 inline-flex items-center justify-center gap-1.5 py-3 rounded-xl bg-[#C69234] hover:bg-[#b07f2a] text-[#0B1914] text-xs font-black uppercase tracking-wider transition-all shadow-md"
-            >
-              <Plus size={14} />
-              <span>Generate New Itinerary</span>
-            </Link>
-          </div>
-        </div>
-
+        {/* Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Saved Itineraries List */}
-          <div className="lg:col-span-2 space-y-5">
-            <h2 className="text-lg font-black uppercase tracking-wider text-white flex items-center gap-2">
-              <BookOpen size={18} className="text-[#C69234]" />
-              Saved Travel Plans
-            </h2>
+          {/* Main Column — Itineraries */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-black uppercase tracking-wider flex items-center gap-2" style={{ color: 'var(--ws-text)' }}>
+                <Sparkles size={18} style={{ color: 'var(--ws-accent)' }} />
+                My Saved Trips ({itineraries.length})
+              </h2>
+              <Link
+                href="/#explore"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs ws-ocean-btn-primary shadow-md"
+              >
+                <Plus size={14} />
+                New Trip
+              </Link>
+            </div>
 
             {loading ? (
-              <div className="py-12 flex justify-center">
-                <Loader2 className="animate-spin text-[#C69234]" />
+              <div className="py-12 text-center ws-glass rounded-3xl">
+                <Loader2 size={24} className="animate-spin mx-auto mb-2" style={{ color: 'var(--ws-accent)' }} />
+                <p className="text-xs font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>Loading your saved itineraries...</p>
               </div>
             ) : itineraries.length === 0 ? (
-              <div className="bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl p-8 text-center">
-                <Compass size={36} className="text-[#A3C2B2]/40 mx-auto mb-3" />
-                <p className="font-extrabold text-sm text-white">No itineraries saved yet</p>
-                <p className="text-[#A3C2B2] text-xs mt-1 mb-5">Plans generated on our site can be saved directly here.</p>
+              <div className="ws-glass rounded-3xl p-8 text-center border">
+                <Compass size={36} className="mx-auto mb-3 opacity-40" style={{ color: 'var(--ws-accent)' }} />
+                <p className="font-bold text-sm" style={{ color: 'var(--ws-text)' }}>No trips planned yet</p>
+                <p className="text-xs mt-1 mb-4" style={{ color: 'var(--ws-text-secondary)' }}>Use the search tool on the home page to generate an AI itinerary.</p>
                 <Link
                   href="/#explore"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#C69234] text-[#0B1914] text-xs font-black uppercase tracking-wider shadow-md hover:bg-[#b07f2a]"
+                  className="inline-flex items-center gap-1.5 py-3 px-5 rounded-xl text-xs ws-ocean-btn-primary shadow-md"
                 >
-                  <Plus size={12} /> Plan a Trip
+                  <Sparkles size={14} />
+                  <span>Generate Itinerary</span>
                 </Link>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {itineraries.map((itinerary) => (
+                {itineraries.map((trip) => (
                   <ItineraryCard
-                    key={itinerary.id}
-                    itinerary={itinerary}
-                    onOpen={handleOpenItinerary}
+                    key={trip.id}
+                    itinerary={trip}
+                    onOpen={(itinerary) => {
+                      setItineraryConfig(itinerary.config);
+                      setGeneratedItinerary(itinerary.itinerary_data);
+                      setCurrentItineraryId(itinerary.id);
+                      router.push('/itinerary');
+                    }}
                     onDelete={handleDelete}
                   />
                 ))}
@@ -225,18 +200,18 @@ export default function DashboardPage() {
 
           {/* Wishlist Sights */}
           <div className="space-y-5">
-            <h2 className="text-lg font-black uppercase tracking-wider text-white flex items-center gap-2">
-              <Heart size={18} className="text-[#A65D29]" />
+            <h2 className="text-lg font-black uppercase tracking-wider flex items-center gap-2" style={{ color: 'var(--ws-text)' }}>
+              <Heart size={18} style={{ color: 'var(--ws-accent)' }} />
               My Wishlist
             </h2>
 
             {wishlistPlaces.length === 0 ? (
-              <div className="bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl p-6 text-center">
-                <p className="text-xs text-[#A3C2B2]">Your wishlist is empty.</p>
-                <p className="text-[10px] text-[#A3C2B2]/60 mt-1 mb-4">Click the heart icon on any tourist place to save it here.</p>
+              <div className="ws-glass rounded-3xl p-6 text-center border">
+                <p className="text-xs" style={{ color: 'var(--ws-text-secondary)' }}>Your wishlist is empty.</p>
+                <p className="text-[10px] opacity-70 mt-1 mb-4" style={{ color: 'var(--ws-text-secondary)' }}>Click the heart icon on any tourist place to save it here.</p>
                 <Link
                   href="/"
-                  className="inline-flex px-4 py-2 bg-[#C69234] text-[#0B1914] rounded-lg text-[10px] font-black uppercase tracking-wider"
+                  className="inline-flex px-4 py-2 rounded-lg text-[10px] ws-ocean-btn-primary shadow-md"
                 >
                   Browse Sights
                 </Link>
@@ -246,7 +221,7 @@ export default function DashboardPage() {
                 {wishlistPlaces.map((place) => (
                   <div
                     key={place.id}
-                    className="bg-[#143028] border border-[#2C5E3B] p-3.5 rounded-2xl flex gap-3.5 hover:border-[#C69234] transition-all"
+                    className="ws-glass p-3.5 rounded-2xl flex gap-3.5 hover:border-[var(--ws-accent)] transition-all"
                   >
                     {place.cover_image && (
                       <div
@@ -256,17 +231,18 @@ export default function DashboardPage() {
                     )}
                     <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
                       <div>
-                        <h4 className="font-extrabold text-sm text-white truncate">
+                        <h4 className="font-extrabold text-sm truncate" style={{ color: 'var(--ws-text)' }}>
                           {place.name}
                         </h4>
-                        <p className="text-[10px] text-[#A3C2B2] font-semibold uppercase tracking-wider flex items-center gap-1 mt-0.5">
-                          <MapPin size={10} className="text-[#C69234]" />
+                        <p className="text-[10px] font-semibold uppercase tracking-wider flex items-center gap-1 mt-0.5" style={{ color: 'var(--ws-text-secondary)' }}>
+                          <MapPin size={10} style={{ color: 'var(--ws-accent)' }} />
                           {place.city_name}, {place.state_name}
                         </p>
                       </div>
                       <Link
                         href={`/city/${place.city_id}`}
-                        className="text-[9px] font-bold text-[#C69234] hover:underline uppercase tracking-wider inline-flex items-center gap-0.5"
+                        className="text-[9px] font-bold hover:underline uppercase tracking-wider inline-flex items-center gap-0.5"
+                        style={{ color: 'var(--ws-accent)' }}
                       >
                         Explore City <ArrowRight size={8} />
                       </Link>
@@ -278,6 +254,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+      <Footer className="mt-auto" />
       <NavDock />
     </main>
   );
