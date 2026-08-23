@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <WebGLBackground />
           <AuthProvider>
-            <div className="relative z-10">
+            <div className="relative z-10 w-full min-h-screen flex flex-col">
               {children}
             </div>
           </AuthProvider>

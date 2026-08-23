@@ -85,7 +85,7 @@ export function TrendingSection() {
             <Loader2 size={32} style={{ color: 'var(--ws-accent)' }} className="animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {cities.map((city, i) => (
               <motion.div
                 key={city.id}
@@ -94,10 +94,7 @@ export function TrendingSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => router.push(`/city/${city.id}`)}
-                style={{
-                  height: i % 3 === 0 ? 400 : 300,
-                }}
-                className="group relative cursor-pointer rounded-4xl overflow-hidden ws-glass card-hover hover:border-[var(--ws-accent)]"
+                className={`group relative cursor-pointer rounded-2xl sm:rounded-3xl md:rounded-4xl overflow-hidden ws-glass card-hover hover:border-[var(--ws-accent)] h-64 sm:h-72 ${i % 3 === 0 ? 'md:h-[400px]' : 'md:h-[300px]'}`}
               >
                 {/* Image */}
                 <div
@@ -116,24 +113,24 @@ export function TrendingSection() {
                 />
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-5 md:p-6 z-10">
                   {/* Tags */}
                   {city.tags && city.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-3">
+                    <div className="flex flex-wrap gap-1 mb-2 sm:mb-3">
                       {city.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
                           style={{
                             color: 'var(--ws-accent)',
                           }}
-                          className="text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full ws-glass-soft"
+                          className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded-full ws-glass-soft"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
                   )}
-                  <h3 style={{ color: '#FFFFFF' }} className="font-display text-2xl group-hover:text-[var(--ws-accent)] transition-colors drop-shadow-md">
+                  <h3 style={{ color: '#FFFFFF' }} className="font-display text-base sm:text-xl md:text-2xl group-hover:text-[var(--ws-accent)] transition-colors drop-shadow-md truncate">
                     {city.name}
                   </h3>
                   <p style={{ color: '#A9DFF4' }} className="text-xs mt-1 drop-shadow">{city.state_name}</p>

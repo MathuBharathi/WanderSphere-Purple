@@ -444,22 +444,22 @@ function ProfileContent() {
                     <Link href="/" className="inline-flex px-5 py-2.5 rounded-xl text-xs ws-ocean-btn-primary shadow-md">Start Exploring</Link>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                     {wishlistPlaces.map((place) => (
                       <div
                         key={place.id}
-                        className="ws-glass rounded-3xl overflow-hidden hover:border-[var(--ws-accent)] transition-all cursor-pointer shadow-md group"
+                        className="ws-glass rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[var(--ws-accent)] transition-all cursor-pointer shadow-md group"
                         onClick={() => place.city_id && router.push(`/city/${place.city_id}?place=${place.id}`)}
                       >
                         <div
-                          className="h-44 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                          className="h-28 sm:h-36 md:h-44 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                           style={{ backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400'})` }}
                         />
-                        <div className="p-5">
-                          <span className="text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>{place.category}</span>
-                          <h3 className="font-extrabold text-base mt-1 line-clamp-1" style={{ color: 'var(--ws-text)' }}>{place.name}</h3>
-                          <p className="text-xs mt-1.5 flex items-center gap-1 font-medium" style={{ color: 'var(--ws-text-secondary)' }}>
-                            <MapPin size={11} style={{ color: 'var(--ws-accent)' }} /> {place.city_name}, {place.state_name}
+                        <div className="p-3 sm:p-4 md:p-5">
+                          <span className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>{place.category}</span>
+                          <h3 className="font-extrabold text-xs sm:text-sm md:text-base mt-0.5 sm:mt-1 truncate" style={{ color: 'var(--ws-text)' }}>{place.name}</h3>
+                          <p className="text-[10px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 font-medium truncate" style={{ color: 'var(--ws-text-secondary)' }}>
+                            <MapPin size={11} className="shrink-0" style={{ color: 'var(--ws-accent)' }} /> <span className="truncate">{place.city_name}, {place.state_name}</span>
                           </p>
                         </div>
                       </div>
@@ -480,7 +480,7 @@ function ProfileContent() {
                     <Link href="/" className="inline-flex px-5 py-2.5 rounded-xl text-xs ws-ocean-btn-primary shadow-md">Create a Plan</Link>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
                     {itineraries.map((trip) => (
                       <ItineraryCard
                         key={trip.id}

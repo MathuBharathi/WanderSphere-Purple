@@ -330,8 +330,8 @@ export default function PlacePage() {
                       ))}
                     </div>
                   </div>
-                  {review.title && <p className="text-white text-sm font-semibold mb-1">{review.title}</p>}
-                  {review.content && <p className="text-[#A3C2B2] text-sm leading-relaxed">{review.content}</p>}
+                  {review.title && <p className="text-sm font-semibold mb-1" style={{ color: 'var(--ws-text)' }}>{review.title}</p>}
+                  {review.content && <p className="text-sm leading-relaxed" style={{ color: 'var(--ws-text-secondary)' }}>{review.content}</p>}
                 </motion.div>
               ))}
             </div>

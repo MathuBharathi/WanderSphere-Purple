@@ -63,7 +63,7 @@ export function HiddenGemsSection() {
             <Loader2 size={32} style={{ color: 'var(--ws-accent)' }} className="animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {gems.map((place, i) => (
               <motion.div
                 key={place.id}
@@ -72,10 +72,10 @@ export function HiddenGemsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => router.push(`/city/${place.city_id}?place=${place.id}`)}
-                className="group cursor-pointer rounded-4xl overflow-hidden ws-glass hover:border-[var(--ws-accent)] transition-all duration-300 card-hover"
+                className="group cursor-pointer rounded-2xl sm:rounded-3xl md:rounded-4xl overflow-hidden ws-glass hover:border-[var(--ws-accent)] transition-all duration-300 card-hover"
               >
                 {/* Image */}
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-36 sm:h-44 md:h-56 overflow-hidden">
                   <div
                     className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{
@@ -90,26 +90,26 @@ export function HiddenGemsSection() {
                   />
 
                   {/* Hidden gem badge */}
-                  <div className="absolute top-4 left-4 flex items-center gap-1.5 ws-glass-soft rounded-full px-3 py-1 shadow-sm">
-                    <Sparkles size={10} style={{ color: 'var(--ws-accent)' }} />
-                    <span className="text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>Hidden Gem</span>
+                  <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex items-center gap-1 sm:gap-1.5 ws-glass-soft rounded-full px-2 py-0.5 sm:px-3 sm:py-1 shadow-sm">
+                    <Sparkles size={8} className="sm:w-2.5 sm:h-2.5" style={{ color: 'var(--ws-accent)' }} />
+                    <span className="text-[7px] sm:text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>Hidden Gem</span>
                   </div>
 
                   {/* Rating */}
                   {place.avg_rating && (
-                    <div className="absolute top-4 right-4 flex items-center gap-1 ws-glass-soft rounded-full px-2.5 py-1 shadow-sm">
-                      <Star size={10} style={{ color: 'var(--ws-accent)', fill: 'var(--ws-accent)' }} />
-                      <span className="text-[10px] font-extrabold" style={{ color: '#FFFFFF' }}>{place.avg_rating}</span>
+                    <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-0.5 sm:gap-1 ws-glass-soft rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-sm">
+                      <Star size={8} className="sm:w-2.5 sm:h-2.5" style={{ color: 'var(--ws-accent)', fill: 'var(--ws-accent)' }} />
+                      <span className="text-[8px] sm:text-[10px] font-extrabold" style={{ color: '#FFFFFF' }}>{place.avg_rating}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Info */}
-                <div className="p-5">
-                  <span className="text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
+                <div className="p-3 sm:p-4 md:p-5">
+                  <span className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
                     {place.category.replace('_', ' ')}
                   </span>
-                  <h3 className="font-display text-xl mt-1 group-hover:text-[var(--ws-accent)] transition-colors" style={{ color: 'var(--ws-text)' }}>
+                  <h3 className="font-display text-sm sm:text-lg md:text-xl mt-0.5 sm:mt-1 group-hover:text-[var(--ws-accent)] transition-colors truncate" style={{ color: 'var(--ws-text)' }}>
                     {place.name}
                   </h3>
                   <p className="text-xs mt-2 leading-relaxed line-clamp-2" style={{ color: 'var(--ws-text-secondary)' }}>{place.description}</p>

@@ -36,7 +36,7 @@ export function ItineraryCard({ itinerary, onOpen, onDelete }: ItineraryCardProp
       whileHover={{ y: -4 }}
       transition={{ duration: 0.3 }}
       onClick={() => onOpen(itinerary)}
-      className="ws-glass rounded-3xl overflow-hidden hover:border-[var(--ws-accent)] transition-all cursor-pointer group shadow-xl flex flex-col border"
+      className="ws-glass rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[var(--ws-accent)] transition-all cursor-pointer group shadow-xl flex flex-col border min-w-0"
     >
       {/* Cover Image or Ocean Glass Placeholder */}
       <div className="relative aspect-[16/9] overflow-hidden">
@@ -60,49 +60,49 @@ export function ItineraryCard({ itinerary, onOpen, onDelete }: ItineraryCardProp
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#020B18]/80 via-transparent to-transparent" />
         {/* Travel style badge */}
-        <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[8px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full ws-glass-strong text-[var(--ws-accent)] border backdrop-blur-md shadow-sm">
-          <Sparkles size={8} />
-          {travelStyle}
+        <span className="absolute top-2 right-2 sm:top-3 sm:right-3 inline-flex items-center gap-0.5 sm:gap-1 text-[7px] sm:text-[8px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full ws-glass-strong text-[var(--ws-accent)] border backdrop-blur-md shadow-sm truncate max-w-[80%]">
+          <Sparkles size={8} className="shrink-0" />
+          <span className="truncate">{travelStyle}</span>
         </span>
       </div>
 
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-2 mb-1">
-          <span className="text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>
+      <div className="p-3 sm:p-4 md:p-5 flex flex-col flex-1 min-w-0">
+        <div className="flex items-start justify-between gap-1 mb-1 min-w-0">
+          <span className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-widest truncate" style={{ color: 'var(--ws-accent)' }}>
             {stateName}
           </span>
-          <span className="text-[9px] font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>
+          <span className="text-[8px] sm:text-[9px] font-semibold shrink-0" style={{ color: 'var(--ws-text-secondary)' }}>
             {createdDate}
           </span>
         </div>
 
-        <h3 className="font-extrabold text-base mt-0.5 group-hover:text-[var(--ws-accent)] transition-colors line-clamp-1" style={{ color: 'var(--ws-text)' }}>
+        <h3 className="font-extrabold text-xs sm:text-sm md:text-base mt-0.5 group-hover:text-[var(--ws-accent)] transition-colors truncate" style={{ color: 'var(--ws-text)' }}>
           Trip to {cityName}
         </h3>
 
-        <div className="flex gap-3 text-[10px] font-bold uppercase tracking-wider mt-2.5" style={{ color: 'var(--ws-text-secondary)' }}>
-          <span className="flex items-center gap-1">
-            <Calendar size={10} style={{ color: 'var(--ws-accent)' }} /> {days} {days === 1 ? 'Day' : 'Days'}
+        <div className="flex flex-wrap gap-1.5 sm:gap-3 text-[8px] sm:text-[10px] font-bold uppercase tracking-wider mt-2" style={{ color: 'var(--ws-text-secondary)' }}>
+          <span className="flex items-center gap-0.5">
+            <Calendar size={9} className="shrink-0" style={{ color: 'var(--ws-accent)' }} /> {days} {days === 1 ? 'Day' : 'Days'}
           </span>
-          <span>•</span>
-          <span className="flex items-center gap-1">
-            <MapPin size={10} style={{ color: 'var(--ws-accent)' }} /> {totalPlaces} {totalPlaces === 1 ? 'Place' : 'Places'}
+          <span className="hidden sm:inline">•</span>
+          <span className="flex items-center gap-0.5">
+            <MapPin size={9} className="shrink-0" style={{ color: 'var(--ws-accent)' }} /> {totalPlaces} {totalPlaces === 1 ? 'Place' : 'Places'}
           </span>
         </div>
 
         {/* Footer */}
-        <div className="flex justify-between items-center border-t pt-3.5 mt-auto" style={{ borderColor: 'var(--ws-border)' }}>
-          <span className="text-xs font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1" style={{ color: 'var(--ws-accent)' }}>
-            View Details <ArrowRight size={12} />
+        <div className="flex justify-between items-center border-t pt-2.5 sm:pt-3.5 mt-auto" style={{ borderColor: 'var(--ws-border)' }}>
+          <span className="text-[10px] sm:text-xs font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5 sm:gap-1" style={{ color: 'var(--ws-accent)' }}>
+            View Details <ArrowRight size={10} className="sm:w-3 sm:h-3" />
           </span>
           <button
             onClick={(e) => onDelete(itinerary.id, e)}
-            className="p-1.5 transition-colors rounded-lg hover:bg-rose-500/20 hover:text-rose-400"
+            className="p-1 sm:p-1.5 transition-colors rounded-lg hover:bg-rose-500/20 hover:text-rose-400 shrink-0"
             style={{ color: 'var(--ws-text-secondary)' }}
             aria-label="Delete itinerary"
           >
-            <Trash2 size={14} />
+            <Trash2 size={12} className="sm:w-3.5 sm:h-3.5" />
           </button>
         </div>
       </div>

@@ -109,7 +109,7 @@ export default function MapPage() {
   const mapItems = getMapItems();
 
   return (
-    <main className="relative w-full h-screen overflow-hidden" style={{ color: 'var(--ws-text)', backgroundColor: 'var(--ws-bg)' }}>
+    <main className="relative w-full h-[100svh] overflow-hidden" style={{ color: 'var(--ws-text)', backgroundColor: 'var(--ws-bg)' }}>
       {/* Map component */}
       <div className="absolute inset-0 z-0">
         <LeafletMap

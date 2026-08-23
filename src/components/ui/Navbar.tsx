@@ -11,7 +11,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { user } = useAppStore();
+  const { user, profile } = useAppStore();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -35,6 +35,28 @@ export function Navbar() {
     { label: 'Explore', href: '/#explore' },
     { label: 'Map', href: '/map' },
   ];
+
+  const getDisplayName = (): string => {
+    if (profile?.full_name?.trim()) {
+      const first = profile.full_name.trim().split(' ')[0];
+      return first.toUpperCase();
+    }
+    if (user?.user_metadata?.full_name?.trim()) {
+      const first = user.user_metadata.full_name.trim().split(' ')[0];
+      return first.toUpperCase();
+    }
+    if (user?.user_metadata?.name?.trim()) {
+      const first = user.user_metadata.name.trim().split(' ')[0];
+      return first.toUpperCase();
+    }
+    if (user?.email) {
+      const prefix = user.email.split('@')[0];
+      const clean = prefix.replace(/[0-9._-]+/g, '');
+      const name = clean.length >= 3 ? clean : prefix;
+      return name.toUpperCase();
+    }
+    return 'EXPLORER';
+  };
 
   return (
     <>
@@ -122,20 +144,20 @@ export function Navbar() {
           {user ? (
             <div className="flex items-center gap-2">
               <Link 
-                href="/dashboard" 
+                href="/profile" 
                 style={{
                   color: 'var(--ws-text)',
                 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-full ws-glass text-xs font-bold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors shadow-sm"
+                className="flex items-center gap-2 px-4 py-2 rounded-full ws-glass text-xs font-extrabold uppercase tracking-widest hover:border-[var(--ws-accent)] transition-all shadow-sm"
               >
-                <LayoutDashboard size={14} style={{ color: 'var(--ws-accent)' }} />
-                <span className="hidden md:inline">Dashboard</span>
+                <User size={14} style={{ color: 'var(--ws-accent)' }} />
+                <span>{getDisplayName()}</span>
               </Link>
             </div>
           ) : (
             <Link 
               href="/auth" 
-              className="px-5 py-2.5 rounded-full text-xs ws-ocean-btn-primary"
+              className="px-5 py-2.5 rounded-full text-xs ws-ocean-btn-primary shadow-sm"
             >
               Sign In
             </Link>
@@ -170,14 +192,33 @@ export function Navbar() {
                   {l.label}
                 </Link>
               ))}
-              {user && (
-                <Link
-                  href="/dashboard"
+              {user ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                    style={{ color: 'var(--ws-text-secondary)' }}
+                    className="text-sm font-bold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/profile"
+                    onClick={() => setMenuOpen(false)}
+                    style={{ color: 'var(--ws-text)' }}
+                    className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors pt-2 border-t"
+                  >
+                    <User size={16} style={{ color: 'var(--ws-accent)' }} />
+                    <span>{getDisplayName()}</span>
+                  </Link>
+                </>
+              ) : (
+                <Link 
+                  href="/auth" 
                   onClick={() => setMenuOpen(false)}
-                  style={{ color: 'var(--ws-text-secondary)' }}
-                  className="text-sm font-bold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors"
+                  className="px-5 py-2.5 rounded-full text-xs ws-ocean-btn-primary inline-block text-center mt-2"
                 >
-                  Dashboard
+                  Sign In
                 </Link>
               )}
             </motion.div>

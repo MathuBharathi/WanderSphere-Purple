@@ -34,6 +34,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+
 html {
   scroll-behavior: smooth;
   background-color: var(--ws-bg);
@@ -49,8 +55,11 @@ body {
   font-family: 'Figtree', sans-serif;
   background-color: var(--ws-bg);
   color: var(--ws-text);
-  overflow-x: hidden;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
   -ms-overflow-style: none;
 }
 
@@ -97,6 +106,18 @@ body::before {
 
 /* Selection */
 ::selection { background: var(--ws-accent); color: var(--ws-ocean-deep); }
+
+/* Suppress Edge / Internet Explorer / WebKit native password reveal button to avoid duplicate eye icons */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
 
 /* Legacy glass alias fallback */
 .glass {

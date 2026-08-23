@@ -13,7 +13,7 @@ export default function HomePage() {
   useGeolocation();
 
   return (
-    <main className="relative min-h-[100svh] flex flex-col transition-colors duration-800" style={{ color: 'var(--ws-text)' }}>
+    <main className="relative min-h-[100svh] flex flex-col flex-1 transition-colors duration-800" style={{ color: 'var(--ws-text)' }}>
       <Navbar />
       <div className="flex-1">
         <HeroSection />

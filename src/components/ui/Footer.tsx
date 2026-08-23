@@ -3,8 +3,11 @@ import { Globe, Heart, MapPin, Compass, Mail, Github, Twitter } from 'lucide-rea
 import Link from 'next/link';
 
 export function Footer({ className = '' }: { className?: string }) {
+  const hasCustomMargin = className.includes('mt-') || className.includes('my-') || className.includes('m-');
+  const marginClass = hasCustomMargin ? className : `mt-16 ${className}`;
+
   return (
-    <footer className={`relative mt-20 border-t ws-glass transition-colors duration-500 w-full ${className}`}>
+    <footer className={`relative border-t border-b-0 ws-glass transition-colors duration-500 w-full flex-shrink-0 z-20 ${marginClass}`}>
       {/* Accent gradient line */}
       <div 
         style={{

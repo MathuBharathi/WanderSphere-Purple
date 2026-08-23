@@ -86,12 +86,14 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0B1914] flex items-center justify-center px-6 relative overflow-hidden text-[#F0F7F4] transition-colors duration-300">
-      {/* Background effect */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2C5E3B]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C69234]/10 rounded-full blur-3xl" />
-      </div>
+    <main className="relative min-h-[100svh] flex flex-col justify-center items-center px-6 overflow-hidden transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+      {/* Background radial ocean atmosphere overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(circle at 50% 40%, rgba(76, 201, 232, 0.12), transparent 55%)',
+        }}
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -101,92 +103,100 @@ export default function ResetPasswordPage() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-full bg-[#1B432C] border border-[#2C5E3B] flex items-center justify-center">
-              <Globe size={18} className="text-[#C69234]" />
+          <Link href="/" className="inline-flex items-center gap-2 mb-4 group">
+            <div className="w-10 h-10 rounded-full ws-glass-strong border flex items-center justify-center group-hover:scale-110 transition-transform shadow-md">
+              <Globe size={18} style={{ color: 'var(--ws-accent)' }} />
             </div>
-            <span className="font-bold tracking-widest text-white">—WANDERSPHERE</span>
-          </div>
-          <h1 className="font-extrabold text-3xl text-white uppercase tracking-tight">
+            <span className="font-extrabold tracking-widest text-lg uppercase" style={{ color: 'var(--ws-text)' }}>— WANDERSPHERE</span>
+          </Link>
+          <h1 className="font-extrabold text-3xl uppercase tracking-tight" style={{ color: 'var(--ws-text)' }}>
             Reset Your Password
           </h1>
-          <p className="text-[#A3C2B2] text-sm mt-2">
+          <p className="text-sm mt-2 font-medium" style={{ color: 'var(--ws-text-secondary)' }}>
             Please enter and confirm your new password below.
           </p>
         </div>
 
-        {/* Card */}
-        <div className="bg-[#143028] backdrop-blur-xl border border-[#2C5E3B] rounded-3xl p-8 shadow-2xl">
+        {/* Ocean Glass Card */}
+        <div 
+          className="ws-glass-strong rounded-3xl p-8 shadow-2xl border"
+          style={{
+            borderColor: 'rgba(76, 201, 232, 0.25)',
+          }}
+        >
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="relative">
-              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C69234]" />
+              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--ws-accent)' }} />
               <input
                 type={showPass ? 'text' : 'password'}
                 placeholder="New Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-[#0B1914] border border-[#2C5E3B] rounded-2xl py-3.5 pl-12 pr-12 text-white placeholder-[#A3C2B2]/40 text-sm focus:outline-none focus:border-[#C69234] transition-all"
+                className="w-full ws-glass border rounded-2xl py-3.5 pl-12 pr-12 text-sm outline-none transition-all focus:border-[var(--ws-accent)]"
+                style={{ color: 'var(--ws-text)' }}
               />
               <button
                 type="button"
                 onClick={() => setShowPass(!showPass)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#A3C2B2] hover:text-white transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 transition-colors hover:opacity-100 opacity-60"
+                style={{ color: 'var(--ws-text-secondary)' }}
               >
                 {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
 
             <div className="relative">
-              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C69234]" />
+              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--ws-accent)' }} />
               <input
                 type={showPass ? 'text' : 'password'}
                 placeholder="Confirm New Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="w-full bg-[#0B1914] border border-[#2C5E3B] rounded-2xl py-3.5 pl-12 pr-4 text-white placeholder-[#A3C2B2]/40 text-sm focus:outline-none focus:border-[#C69234] transition-all"
+                className="w-full ws-glass border rounded-2xl py-3.5 pl-12 pr-4 text-sm outline-none transition-all focus:border-[var(--ws-accent)]"
+                style={{ color: 'var(--ws-text)' }}
               />
             </div>
 
             {/* Password strength visualizer */}
             {password.length > 0 && (
-              <div className="bg-[#0B1914] rounded-2xl p-4 border border-[#2C5E3B] space-y-2">
-                <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className="text-[#A3C2B2]">Security Score:</span>
+              <div className="ws-glass rounded-2xl p-4 border space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span style={{ color: 'var(--ws-text-secondary)' }}>Security Score:</span>
                   <span className={getStrengthLabel(strength.score).color}>
                     {getStrengthLabel(strength.score).label} ({strength.score}/5)
                   </span>
                 </div>
                 {/* Progress Bar */}
-                <div className="h-1.5 w-full bg-[#1B432C] rounded-full overflow-hidden">
+                <div className="h-1.5 w-full ws-glass-soft rounded-full overflow-hidden border">
                   <div
                     className={`h-full transition-all duration-300 ${
-                      strength.score <= 2 ? 'bg-rose-500' : strength.score <= 4 ? 'bg-[#C69234]' : 'bg-emerald-500'
+                      strength.score <= 2 ? 'bg-rose-500' : strength.score <= 4 ? 'bg-amber-400' : 'bg-emerald-400'
                     }`}
                     style={{ width: `${(strength.score / 5) * 100}%` }}
                   />
                 </div>
                 {/* Requirements Checklist */}
-                <div className="grid grid-cols-2 gap-1 text-[11px] mt-2 text-[#A3C2B2]">
+                <div className="grid grid-cols-2 gap-1 text-[11px] mt-2 font-medium" style={{ color: 'var(--ws-text-secondary)' }}>
                   <div className="flex items-center gap-1.5">
-                    {strength.hasMinLength ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="text-[#A3C2B2]/50" />}
+                    {strength.hasMinLength ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="opacity-40" />}
                     <span>Min 8 characters</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    {strength.hasUpper ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="text-[#A3C2B2]/50" />}
+                    {strength.hasUpper ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="opacity-40" />}
                     <span>Uppercase letter</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    {strength.hasLower ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="text-[#A3C2B2]/50" />}
+                    {strength.hasLower ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="opacity-40" />}
                     <span>Lowercase letter</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    {strength.hasNumber ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="text-[#A3C2B2]/50" />}
+                    {strength.hasNumber ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="opacity-40" />}
                     <span>One digit (0-9)</span>
                   </div>
                   <div className="flex items-center col-span-2 gap-1.5">
-                    {strength.hasSpecial ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="text-[#A3C2B2]/50" />}
+                    {strength.hasSpecial ? <Check size={10} className="text-emerald-400" /> : <X size={10} className="opacity-40" />}
                     <span>Special character (!@#$%^&*)</span>
                   </div>
                 </div>
@@ -199,7 +209,7 @@ export default function ResetPasswordPage() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="text-rose-300 text-xs bg-rose-950/40 border border-rose-800 rounded-xl px-4 py-3"
+                  className="text-rose-300 text-xs bg-rose-950/40 border border-rose-800 rounded-xl px-4 py-3 font-semibold"
                 >
                   {error}
                 </motion.p>
@@ -210,7 +220,7 @@ export default function ResetPasswordPage() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="text-emerald-300 text-xs bg-emerald-950/40 border border-emerald-800 rounded-xl px-4 py-3"
+                  className="text-emerald-300 text-xs bg-emerald-950/40 border border-emerald-800 rounded-xl px-4 py-3 font-semibold"
                 >
                   {success}
                 </motion.p>
@@ -220,7 +230,7 @@ export default function ResetPasswordPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#b07f2a] shadow-lg shadow-[#C69234]/20"
+              className="w-full py-3.5 rounded-2xl ws-ocean-btn-primary font-black uppercase tracking-widest text-xs transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             >
               {loading ? 'Please wait...' : 'Reset Password'}
             </button>

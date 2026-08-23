@@ -2,13 +2,17 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Compass, MapPin, Sparkles, Milestone } from 'lucide-react';
 
+import { getDatasetStatistics } from '@/data/travelData';
+
 const LETTERS = 'WANDERSPHERE'.split('');
 
+const datasetStats = getDatasetStatistics();
+
 const stats = [
-  { value: '20+', label: 'States', icon: MapPin },
-  { value: '40+', label: 'Cities', icon: Milestone },
-  { value: '200+', label: 'Attractions', icon: Compass },
-  { value: '50+', label: 'Hidden Gems', icon: Sparkles },
+  { value: `${datasetStats.states}`, label: 'States', icon: MapPin },
+  { value: `${datasetStats.cities}`, label: 'Cities', icon: Milestone },
+  { value: `${datasetStats.attractions.toLocaleString('en-IN')}`, label: 'Attractions', icon: Compass },
+  { value: `${datasetStats.hiddenGems.toLocaleString('en-IN')}`, label: 'Hidden Gems', icon: Sparkles },
 ];
 
 export function HeroSection() {

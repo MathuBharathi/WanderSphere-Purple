@@ -180,7 +180,7 @@ export default function DashboardPage() {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
                 {itineraries.map((trip) => (
                   <ItineraryCard
                     key={trip.id}
@@ -217,7 +217,7 @@ export default function DashboardPage() {
                 </Link>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
                 {wishlistPlaces.map((place) => (
                   <div
                     key={place.id}
