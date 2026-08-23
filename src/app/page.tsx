@@ -8,14 +8,12 @@ import { NavDock } from '@/components/dock/NavDock';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { Navbar } from '@/components/ui/Navbar';
 import { Footer } from '@/components/ui/Footer';
-import { AmbientCursorGlow } from '@/components/effects/AmbientCursorGlow';
 
 export default function HomePage() {
   useGeolocation();
 
   return (
-    <main className="relative min-h-screen bg-[#0B1914] text-[#F0F7F4] overflow-x-hidden">
-      <AmbientCursorGlow />
+    <main className="relative min-h-screen bg-[#0B1914] text-[#F0F7F4]">
       <Navbar />
       <HeroSection />
       <SearchSection />
