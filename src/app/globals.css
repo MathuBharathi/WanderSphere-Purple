@@ -37,7 +37,6 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--ws-bg);
-  scrollbar-width: none;
 }
 
 html::-webkit-scrollbar {
@@ -53,13 +52,21 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
+}
+
+/* Feature query for Firefox / modern browsers to satisfy CSS linter */
+@supports (scrollbar-width: none) {
+  html,
+  body,
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
 }
 
 /* Subtle noise overlay */
@@ -86,7 +93,6 @@ body::before {
 
 .no-scrollbar {
   -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 /* Selection */
