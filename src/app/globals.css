@@ -60,32 +60,34 @@ body::before {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0B1914; }
-::-webkit-scrollbar-thumb { background: #2C5E3B; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #C69234; }
+::-webkit-scrollbar-track { background: var(--ws-ocean-deep); }
+::-webkit-scrollbar-thumb { background: var(--ws-primary); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ws-accent); }
 
 /* Selection */
-::selection { background: #C69234; color: #0B1914; }
+::selection { background: var(--ws-accent); color: var(--ws-ocean-deep); }
 
-/* Glass card — rich pine green frost */
+/* Legacy glass alias fallback */
 .glass {
-  background: rgba(20, 48, 40, 0.65);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(44, 94, 59, 0.4);
+  background: var(--ws-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(125%);
+  backdrop-filter: blur(20px) saturate(125%);
+  border: 1px solid var(--ws-border);
+  box-shadow: var(--ws-shadow);
 }
 
 .glass-dark {
-  background: rgba(11, 25, 20, 0.8);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(44, 94, 59, 0.3);
+  background: var(--ws-glass-strong);
+  -webkit-backdrop-filter: blur(24px) saturate(135%);
+  backdrop-filter: blur(24px) saturate(135%);
+  border: 1px solid var(--ws-border);
+  box-shadow: var(--ws-shadow);
 }
 
 /* Glow utilities */
-.neon-teal { color: #C69234; }
-.neon-glow { text-shadow: 0 0 20px rgba(198, 146, 52, 0.5), 0 0 40px rgba(198, 146, 52, 0.2); }
-.neon-border { box-shadow: 0 0 20px rgba(198, 146, 52, 0.25), inset 0 0 20px rgba(198, 146, 52, 0.05); }
+.neon-teal { color: var(--ws-accent); }
+.neon-glow { text-shadow: 0 0 20px rgba(25, 167, 224, 0.4), 0 0 40px rgba(25, 167, 224, 0.2); }
+.neon-border { box-shadow: 0 0 20px rgba(25, 167, 224, 0.25), inset 0 0 20px rgba(25, 167, 224, 0.05); }
 
 /* Anton display font */
 .font-display { font-family: 'Anton', sans-serif; }
@@ -103,9 +105,9 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Gradient text — Gold to Copper */
+/* Ocean gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #F5D77F 0%, #C69234 50%, #A65D29 100%);
+  background: linear-gradient(135deg, var(--ws-text) 0%, var(--ws-accent) 50%, var(--ws-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -115,8 +117,8 @@ body::before {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(198, 146, 52, 0.2);
-  border-top-color: #C69234;
+  border: 3px solid rgba(25, 167, 224, 0.2);
+  border-top-color: var(--ws-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -128,9 +130,9 @@ body::before {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
 }
 .card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 60px rgba(11, 25, 20, 0.6);
-  border-color: rgba(198, 146, 52, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(3, 42, 70, 0.25);
+  border-color: var(--ws-accent);
 }
 
 /* Print layout optimizations for Itinerary PDF downloads */

@@ -15,11 +15,8 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       type="button"
       aria-label={`Switch to ${isDark ? 'Day (Light)' : 'Night (Dark)'} Mode`}
       title={`Switch to ${isDark ? 'Day' : 'Night'} Mode`}
-      className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 ${
-        isDark
-          ? 'bg-[#101D33]/90 border border-[rgba(150,190,230,0.2)] text-[#7DD3FC] hover:border-[#58A6FF] shadow-[0_0_15px_rgba(88,166,255,0.15)]'
-          : 'bg-white/90 border border-[rgba(15,50,90,0.15)] text-[#1677C8] hover:border-[#38A3DB] shadow-[0_4px_12px_rgba(22,119,200,0.12)]'
-      } ${className}`}
+      style={{ color: 'var(--ws-text)' }}
+      className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full ws-glass hover:border-[var(--ws-accent)] transition-all duration-300 ${className}`}
     >
       <motion.div
         key={theme}
@@ -29,13 +26,13 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
         className="flex items-center justify-center"
       >
         {isDark ? (
-          <Moon size={16} className="text-[#7DD3FC] fill-[#7DD3FC]/20" />
+          <Moon size={15} style={{ color: 'var(--ws-accent)', fill: 'var(--ws-accent)' }} />
         ) : (
-          <Sun size={16} className="text-[#1677C8] fill-[#1677C8]/20" />
+          <Sun size={15} style={{ color: 'var(--ws-accent)', fill: 'var(--ws-accent)' }} />
         )}
       </motion.div>
 
-      <span className="text-[10px] font-extrabold uppercase tracking-widest hidden sm:inline-block select-none">
+      <span className="text-[10px] font-extrabold uppercase tracking-widest hidden sm:inline-block select-none" style={{ color: 'var(--ws-text-secondary)' }}>
         {isDark ? 'Night' : 'Day'}
       </span>
     </button>

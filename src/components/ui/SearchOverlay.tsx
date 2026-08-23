@@ -115,7 +115,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          style={{ backgroundColor: 'rgba(5, 11, 24, 0.75)' }}
+          style={{ backgroundColor: 'rgba(2, 11, 24, 0.70)' }}
           className="fixed inset-0 backdrop-blur-2xl z-[200] flex items-start justify-center pt-[15vh]"
         >
           <motion.div
@@ -127,19 +127,12 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             className="w-full max-w-2xl mx-4"
           >
             {/* Search Input */}
-            <div 
-              style={{
-                backgroundColor: 'var(--ws-surface)',
-                borderColor: 'var(--ws-border)',
-                boxShadow: 'var(--ws-shadow)',
-              }}
-              className="border rounded-3xl overflow-hidden shadow-2xl transition-colors duration-500"
-            >
+            <div className="ws-glass-strong rounded-3xl overflow-hidden shadow-2xl transition-colors duration-500">
               <div 
                 style={{ borderColor: 'var(--ws-border)' }}
                 className="flex items-center gap-3 px-6 py-5 border-b"
               >
-                <Search size={20} style={{ color: 'var(--ws-primary)' }} className="flex-shrink-0" />
+                <Search size={18} style={{ color: 'var(--ws-accent)' }} className="flex-shrink-0" />
                 <input
                   ref={inputRef}
                   value={query}

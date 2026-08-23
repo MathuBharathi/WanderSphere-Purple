@@ -27,8 +27,8 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{ color: 'var(--ws-primary)' }}
-          className="text-[10px] font-bold uppercase tracking-[0.5em] mb-6"
+          style={{ color: 'var(--ws-accent)' }}
+          className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-6"
         >
           ✦ Explore the beauty of India ✦
         </motion.p>
@@ -58,7 +58,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{ color: 'var(--ws-text-muted)' }}
+          style={{ color: 'var(--ws-text-secondary)' }}
           className="max-w-xl text-sm md:text-base font-medium leading-relaxed mb-10"
         >
           Discover Indian cities intelligently. Explore hidden gems, plan customized routes, 
@@ -77,16 +77,11 @@ export function HeroSection() {
             return (
               <div 
                 key={idx} 
-                style={{
-                  backgroundColor: 'var(--ws-surface-translucent)',
-                  borderColor: 'var(--ws-border)',
-                  boxShadow: 'var(--ws-shadow)',
-                }}
-                className="border rounded-2xl p-4 flex flex-col items-center backdrop-blur-md transition-all duration-300"
+                className="ws-glass border rounded-2xl p-4 flex flex-col items-center shadow-lg transition-all duration-300 hover:scale-105"
               >
-                <Icon size={16} style={{ color: 'var(--ws-primary)' }} className="mb-1.5" />
+                <Icon size={16} style={{ color: 'var(--ws-accent)' }} className="mb-1.5" />
                 <span className="font-extrabold text-2xl leading-none" style={{ color: 'var(--ws-text)' }}>{stat.value}</span>
-                <span className="text-[9px] font-bold uppercase tracking-wider mt-1" style={{ color: 'var(--ws-text-muted)' }}>{stat.label}</span>
+                <span className="text-[9px] font-bold uppercase tracking-wider mt-1" style={{ color: 'var(--ws-text-secondary)' }}>{stat.label}</span>
               </div>
             );
           })}
@@ -101,22 +96,13 @@ export function HeroSection() {
         >
           <a
             href="#explore"
-            style={{
-              backgroundColor: 'var(--ws-primary)',
-              color: '#FFFFFF',
-            }}
-            className="px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all duration-300 hover:scale-105 shadow-md"
+            className="px-8 py-4 rounded-full text-xs ws-ocean-btn-primary shadow-lg"
           >
             Explore India
           </a>
           <a
             href="#explore"
-            style={{
-              backgroundColor: 'var(--ws-surface-translucent)',
-              borderColor: 'var(--ws-border)',
-              color: 'var(--ws-text)',
-            }}
-            className="px-8 py-4 rounded-full border font-bold uppercase tracking-widest text-xs hover:border-[var(--ws-primary)] transition-all duration-300 backdrop-blur-md"
+            className="px-8 py-4 rounded-full text-xs ws-ocean-btn-secondary"
           >
             Use My Location
           </a>

@@ -183,10 +183,10 @@ function CityContent() {
 
   if (loading && !city) {
     return (
-      <div className="min-h-screen bg-[#0B1914] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ color: 'var(--ws-text)' }}>
         <div className="flex flex-col items-center gap-4">
-          <Loader2 size={32} className="text-[#C69234] animate-spin" />
-          <p className="text-[#A3C2B2] text-xs uppercase tracking-widest font-semibold">Loading city...</p>
+          <Loader2 size={32} style={{ color: 'var(--ws-accent)' }} className="animate-spin" />
+          <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>Loading city...</p>
         </div>
       </div>
     );
@@ -194,21 +194,22 @@ function CityContent() {
 
   if (!city) {
     return (
-      <div className="min-h-screen bg-[#0B1914] flex items-center justify-center text-center px-6">
+      <div className="min-h-screen flex items-center justify-center text-center px-6" style={{ color: 'var(--ws-text)' }}>
         <div>
-          <p className="text-[#A3C2B2] text-lg mb-4">City not found</p>
-          <Link href="/" className="text-[#C69234] text-sm underline font-semibold">Go Home</Link>
+          <p className="text-lg mb-4" style={{ color: 'var(--ws-text-secondary)' }}>City not found</p>
+          <Link href="/" className="text-sm underline font-semibold" style={{ color: 'var(--ws-accent)' }}>Go Home</Link>
         </div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#0B1914] text-[#F0F7F4] transition-colors duration-300">
+    <main className="min-h-screen pb-24 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       {/* Back Link */}
       <Link
         href="/"
-        className="absolute top-6 left-6 z-30 flex items-center gap-2 text-white/80 hover:text-[#C69234] transition-colors text-xs font-bold uppercase tracking-widest bg-[#0B1914]/80 border border-[#2C5E3B]/60 backdrop-blur-md px-4 py-2.5 rounded-full"
+        style={{ color: 'var(--ws-text)' }}
+        className="absolute top-6 left-6 z-30 flex items-center gap-2 ws-glass text-xs font-bold uppercase tracking-widest px-4 py-2.5 rounded-full hover:border-[var(--ws-accent)] transition-all"
       >
         <ArrowLeft size={14} />
         Back
@@ -221,8 +222,8 @@ function CityContent() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${city.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200'})` }}
         />
-        {/* Soft violet radial overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1914] via-black/30 to-black/50" />
+        {/* Dark ocean gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-[#041B31]/40 to-transparent" />
 
         {/* Content info overlay */}
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-12 max-w-7xl mx-auto w-full z-10">
@@ -231,8 +232,8 @@ function CityContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-[#C69234] text-xs font-bold uppercase tracking-[0.4em] mb-3 flex items-center gap-2">
-              <MapPin size={12} className="text-[#C69234]" />
+            <p className="text-xs font-extrabold uppercase tracking-[0.4em] mb-3 flex items-center gap-2" style={{ color: 'var(--ws-accent)' }}>
+              <MapPin size={12} style={{ color: 'var(--ws-accent)' }} />
               {city.state_name || 'India'}
             </p>
             <h1 className="font-extrabold text-5xl md:text-7xl text-white uppercase leading-none tracking-tight">
@@ -245,19 +246,19 @@ function CityContent() {
             {/* Quick stats tags */}
             <div className="flex flex-wrap gap-2 mt-6">
               {city.best_season && (
-                <span className="bg-[#143028]/80 border border-[#2C5E3B] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-2 rounded-xl flex items-center gap-1.5 backdrop-blur-md shadow-sm">
-                  <Clock size={10} className="text-[#C69234]" />
+                <span className="ws-glass-soft text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-2 rounded-xl flex items-center gap-1.5 backdrop-blur-md shadow-sm">
+                  <Clock size={10} style={{ color: 'var(--ws-accent)' }} />
                   Best: {city.best_season}
                 </span>
               )}
               {city.avg_temp_celsius && (
-                <span className="bg-[#143028]/80 border border-[#2C5E3B] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-2 rounded-xl flex items-center gap-1.5 backdrop-blur-md shadow-sm">
-                  <Thermometer size={10} className="text-[#C69234]" />
+                <span className="ws-glass-soft text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-2 rounded-xl flex items-center gap-1.5 backdrop-blur-md shadow-sm">
+                  <Thermometer size={10} style={{ color: 'var(--ws-accent)' }} />
                   {city.avg_temp_celsius}°C Avg
                 </span>
               )}
               {city.tags?.map((tag) => (
-                <span key={tag} className="bg-[#143028]/80 border border-[#2C5E3B] text-white/90 text-[10px] font-bold uppercase tracking-widest px-3.5 py-2 rounded-xl backdrop-blur-md">
+                <span key={tag} className="ws-glass-soft text-white/90 text-[10px] font-bold uppercase tracking-widest px-3.5 py-2 rounded-xl backdrop-blur-md">
                   #{tag}
                 </span>
               ))}
@@ -267,9 +268,9 @@ function CityContent() {
             <div className="mt-8">
               <button
                 onClick={() => setShowGenModal(true)}
-                className="flex items-center gap-2 px-6 py-5 rounded-2xl bg-[#C69234] text-[#0B1914] font-black uppercase tracking-widest text-xs hover:bg-[#b07f2a] transition-all shadow-lg shadow-[#C69234]/20 hover:scale-[1.02]"
+                className="flex items-center gap-2 px-6 py-5 rounded-2xl text-xs ws-ocean-btn-primary shadow-xl hover:scale-[1.02]"
               >
-                <Sparkles size={14} className="text-[#0B1914] animate-pulse" />
+                <Sparkles size={14} className="animate-pulse" />
                 <span>Create AI Itinerary for {city.name}</span>
               </button>
             </div>
@@ -278,17 +279,21 @@ function CityContent() {
       </div>
 
       {/* Category Filter Bar */}
-      <div className="sticky top-0 z-20 w-full bg-[#0B1914]/90 backdrop-blur-xl border-b border-[#2C5E3B]/40 py-4">
+      <div className="sticky top-0 z-20 w-full ws-glass-strong border-b py-4">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex gap-2 overflow-x-auto no-scrollbar scroll-smooth">
             {CATEGORIES.map(({ key, label, icon: Icon }) => (
               <button
                 key={key}
                 onClick={() => setActiveCategory(key)}
+                style={{
+                  background: activeCategory === key ? 'linear-gradient(135deg, var(--ws-ocean), var(--ws-accent))' : undefined,
+                  color: activeCategory === key ? '#FFFFFF' : 'var(--ws-text-secondary)',
+                }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
                   activeCategory === key
-                    ? 'bg-[#C69234] text-[#0B1914] font-black shadow-md'
-                    : 'bg-[#143028] border border-[#2C5E3B]/60 text-[#A3C2B2] hover:text-white hover:border-[#C69234]'
+                    ? 'shadow-md font-black'
+                    : 'ws-glass hover:border-[var(--ws-accent)]'
                 }`}
               >
                 <Icon size={12} />

@@ -48,19 +48,19 @@ export function Navbar() {
           color: 'var(--ws-text)',
         }}
         className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between transition-all duration-500 ${
-          scrolled ? 'backdrop-blur-md border-b shadow-lg' : ''
+          scrolled ? 'backdrop-blur-xl border-b shadow-lg' : ''
         }`}
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <div 
             style={{
-              backgroundColor: 'rgba(22, 119, 200, 0.12)',
-              borderColor: 'var(--ws-primary)',
+              backgroundColor: 'rgba(25, 167, 224, 0.15)',
+              borderColor: 'var(--ws-border)',
             }}
-            className="w-8 h-8 rounded-full border flex items-center justify-center group-hover:scale-110 transition-transform"
+            className="w-8 h-8 rounded-full border flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm"
           >
-            <Globe size={16} style={{ color: 'var(--ws-primary)' }} />
+            <Globe size={16} style={{ color: 'var(--ws-accent)' }} />
           </div>
           <span className="font-extrabold text-sm tracking-widest uppercase hidden sm:inline" style={{ color: 'var(--ws-text)' }}>
             —WanderSphere
@@ -68,19 +68,13 @@ export function Navbar() {
         </Link>
 
         {/* Center nav pill */}
-        <div 
-          style={{
-            backgroundColor: 'var(--ws-surface-translucent)',
-            borderColor: 'var(--ws-border)',
-          }}
-          className="hidden md:flex items-center gap-1 px-4 py-2 rounded-full border backdrop-blur-md shadow-sm"
-        >
+        <div className="hidden md:flex items-center gap-1 px-4 py-2 rounded-full ws-glass-strong shadow-sm">
           {links.map((l) => (
             <Link
               key={l.label}
               href={l.href}
-              style={{ color: 'var(--ws-text-muted)' }}
-              className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] hover:text-[var(--ws-primary)] transition-colors rounded-full"
+              style={{ color: 'var(--ws-text-secondary)' }}
+              className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] hover:text-[var(--ws-accent)] transition-colors rounded-full"
             >
               {l.label}
             </Link>
@@ -88,8 +82,8 @@ export function Navbar() {
           {user && (
             <Link
               href="/dashboard"
-              style={{ color: 'var(--ws-text-muted)' }}
-              className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] hover:text-[var(--ws-primary)] transition-colors rounded-full"
+              style={{ color: 'var(--ws-text-secondary)' }}
+              className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] hover:text-[var(--ws-accent)] transition-colors rounded-full"
             >
               Dashboard
             </Link>
@@ -105,20 +99,18 @@ export function Navbar() {
           <button
             onClick={() => setSearchOpen(true)}
             style={{
-              backgroundColor: 'var(--ws-surface-translucent)',
-              borderColor: 'var(--ws-border)',
-              color: 'var(--ws-text-muted)',
+              color: 'var(--ws-text-secondary)',
             }}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-full border hover:text-[var(--ws-text)] transition-all duration-300 shadow-sm"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-full ws-glass hover:text-[var(--ws-text)] transition-all duration-300 shadow-sm"
           >
-            <Search size={14} style={{ color: 'var(--ws-primary)' }} />
+            <Search size={14} style={{ color: 'var(--ws-accent)' }} />
             <span className="hidden md:inline text-[10px] font-bold uppercase tracking-widest">
               Search
             </span>
             <kbd 
               style={{
-                backgroundColor: 'var(--ws-surface-elevated)',
-                color: 'var(--ws-text-muted)',
+                backgroundColor: 'var(--ws-glass-soft)',
+                color: 'var(--ws-text-secondary)',
                 borderColor: 'var(--ws-border)',
               }}
               className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded border text-[9px] font-mono"
@@ -132,24 +124,18 @@ export function Navbar() {
               <Link 
                 href="/dashboard" 
                 style={{
-                  backgroundColor: 'var(--ws-surface-translucent)',
-                  borderColor: 'var(--ws-border)',
                   color: 'var(--ws-text)',
                 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest hover:text-[var(--ws-primary)] transition-colors shadow-sm"
+                className="flex items-center gap-2 px-4 py-2 rounded-full ws-glass text-xs font-bold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors shadow-sm"
               >
-                <LayoutDashboard size={14} style={{ color: 'var(--ws-primary)' }} />
+                <LayoutDashboard size={14} style={{ color: 'var(--ws-accent)' }} />
                 <span className="hidden md:inline">Dashboard</span>
               </Link>
             </div>
           ) : (
             <Link 
               href="/auth" 
-              style={{
-                backgroundColor: 'var(--ws-primary)',
-                color: '#FFFFFF',
-              }}
-              className="px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-md"
+              className="px-5 py-2.5 rounded-full text-xs ws-ocean-btn-primary"
             >
               Sign In
             </Link>
@@ -171,19 +157,15 @@ export function Navbar() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              style={{
-                backgroundColor: 'var(--ws-surface)',
-                borderColor: 'var(--ws-border)',
-              }}
-              className="absolute top-full left-0 right-0 border-b p-6 flex flex-col gap-4 md:hidden shadow-2xl backdrop-blur-xl"
+              className="absolute top-full left-0 right-0 ws-glass-strong border-b p-6 flex flex-col gap-4 md:hidden shadow-2xl backdrop-blur-xl"
             >
               {links.map((l) => (
                 <Link
                   key={l.label}
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
-                  style={{ color: 'var(--ws-text-muted)' }}
-                  className="text-sm font-bold uppercase tracking-widest hover:text-[var(--ws-primary)] transition-colors"
+                  style={{ color: 'var(--ws-text-secondary)' }}
+                  className="text-sm font-bold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors"
                 >
                   {l.label}
                 </Link>
@@ -192,8 +174,8 @@ export function Navbar() {
                 <Link
                   href="/dashboard"
                   onClick={() => setMenuOpen(false)}
-                  style={{ color: 'var(--ws-text-muted)' }}
-                  className="text-sm font-bold uppercase tracking-widest hover:text-[var(--ws-primary)] transition-colors"
+                  style={{ color: 'var(--ws-text-secondary)' }}
+                  className="text-sm font-bold uppercase tracking-widest hover:text-[var(--ws-accent)] transition-colors"
                 >
                   Dashboard
                 </Link>

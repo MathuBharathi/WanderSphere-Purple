@@ -5,17 +5,15 @@ import { Compass, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#0B1914] flex items-center justify-center p-6 text-center text-[#F0F7F4] transition-colors duration-300">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2C5E3B]/10 to-transparent pointer-events-none" />
-      
-      <div className="max-w-md w-full relative z-10 space-y-8">
+    <main className="min-h-screen flex items-center justify-center p-6 text-center transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
+      <div className="max-w-md w-full relative z-10 space-y-8 ws-glass-strong p-10 rounded-3xl shadow-2xl">
         {/* Animated Compass Icon */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="w-20 h-20 mx-auto bg-[#1B432C] border border-[#2C5E3B] rounded-full flex items-center justify-center"
+          className="w-20 h-20 mx-auto ws-glass-soft border rounded-full flex items-center justify-center shadow-md"
         >
-          <Compass className="w-10 h-10 text-[#C69234]" />
+          <Compass className="w-10 h-10" style={{ color: 'var(--ws-accent)' }} />
         </motion.div>
 
         <div className="space-y-4">
@@ -23,14 +21,15 @@ export default function NotFound() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-9xl font-extrabold text-[#C69234] tracking-tighter"
+            className="text-9xl font-extrabold tracking-tighter"
+            style={{ color: 'var(--ws-accent)' }}
           >
             404
           </motion.h1>
-          <h2 className="text-2xl font-bold uppercase tracking-wide text-white">
+          <h2 className="text-2xl font-bold uppercase tracking-wide" style={{ color: 'var(--ws-text)' }}>
             Spheres Collided
           </h2>
-          <p className="text-sm text-[#A3C2B2] leading-relaxed">
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--ws-text-secondary)' }}>
             The page you are looking for has drifted off the map. Let&apos;s get you back on track to exploring India.
           </p>
         </div>
@@ -38,7 +37,7 @@ export default function NotFound() {
         <div>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#C69234] hover:bg-[#b07f2a] text-[#0B1914] font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-[#C69234]/20 hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-xs ws-ocean-btn-primary shadow-xl hover:scale-[1.02]"
           >
             <ArrowLeft size={14} />
             <span>Go Home</span>

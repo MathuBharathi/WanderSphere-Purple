@@ -52,8 +52,8 @@ export function TrendingSection() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              style={{ color: 'var(--ws-primary)' }}
-              className="text-[10px] font-bold uppercase tracking-[0.5em] mb-4"
+              style={{ color: 'var(--ws-accent)' }}
+              className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-4"
             >
               ✦ Hot right now ✦
             </motion.p>
@@ -72,17 +72,17 @@ export function TrendingSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            style={{ color: 'var(--ws-text-muted)' }}
-            className="flex items-center gap-2 text-xs uppercase tracking-widest"
+            style={{ color: 'var(--ws-text-secondary)' }}
+            className="flex items-center gap-2 text-xs uppercase tracking-widest font-semibold"
           >
-            <TrendingUp size={14} style={{ color: 'var(--ws-primary)' }} />
+            <TrendingUp size={14} style={{ color: 'var(--ws-accent)' }} />
             <span>Most visited destinations this season</span>
           </motion.div>
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 size={32} style={{ color: 'var(--ws-primary)' }} className="animate-spin" />
+            <Loader2 size={32} style={{ color: 'var(--ws-accent)' }} className="animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -95,12 +95,9 @@ export function TrendingSection() {
                 transition={{ delay: i * 0.08, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => router.push(`/city/${city.id}`)}
                 style={{
-                  backgroundColor: 'var(--ws-surface)',
-                  borderColor: 'var(--ws-border)',
-                  boxShadow: 'var(--ws-shadow)',
                   height: i % 3 === 0 ? 400 : 300,
                 }}
-                className="group relative cursor-pointer rounded-4xl overflow-hidden card-hover border"
+                className="group relative cursor-pointer rounded-4xl overflow-hidden ws-glass card-hover hover:border-[var(--ws-accent)]"
               >
                 {/* Image */}
                 <div
@@ -110,10 +107,10 @@ export function TrendingSection() {
                   }}
                 />
 
-                {/* Gradient */}
+                {/* Gradient overlay */}
                 <div 
                   style={{
-                    background: 'linear-gradient(to top, var(--ws-bg) 0%, rgba(5,11,24,0.4) 50%, transparent 100%)',
+                    background: 'linear-gradient(to top, #020B18 0%, rgba(4,27,49,0.5) 50%, transparent 100%)',
                   }}
                   className="absolute inset-0" 
                 />
@@ -127,26 +124,24 @@ export function TrendingSection() {
                         <span
                           key={tag}
                           style={{
-                            backgroundColor: 'var(--ws-surface-elevated)',
-                            color: 'var(--ws-primary)',
-                            borderColor: 'var(--ws-border)',
+                            color: 'var(--ws-accent)',
                           }}
-                          className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${tagColors[tag] || ''}`}
+                          className="text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full ws-glass-soft"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
                   )}
-                  <h3 style={{ color: '#FFFFFF' }} className="font-display text-2xl group-hover:text-[var(--ws-secondary)] transition-colors drop-shadow-md">
+                  <h3 style={{ color: '#FFFFFF' }} className="font-display text-2xl group-hover:text-[var(--ws-accent)] transition-colors drop-shadow-md">
                     {city.name}
                   </h3>
-                  <p style={{ color: 'rgba(244, 248, 255, 0.8)' }} className="text-xs mt-1 drop-shadow">{city.state_name}</p>
+                  <p style={{ color: '#A9DFF4' }} className="text-xs mt-1 drop-shadow">{city.state_name}</p>
 
                   {/* Arrow reveal */}
                   <div className="flex items-center gap-2 mt-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    <span style={{ color: 'var(--ws-secondary)' }} className="text-xs font-bold uppercase tracking-widest">Explore</span>
-                    <ArrowRight size={12} style={{ color: 'var(--ws-secondary)' }} />
+                    <span style={{ color: 'var(--ws-accent)' }} className="text-xs font-bold uppercase tracking-widest">Explore</span>
+                    <ArrowRight size={12} style={{ color: 'var(--ws-accent)' }} />
                   </div>
                 </div>
 
@@ -154,11 +149,9 @@ export function TrendingSection() {
                 {city.visit_count && city.visit_count > 0 && (
                   <div 
                     style={{
-                      backgroundColor: 'var(--ws-surface-translucent)',
-                      borderColor: 'var(--ws-border)',
-                      color: 'var(--ws-primary)',
+                      color: 'var(--ws-accent)',
                     }}
-                    className="absolute top-4 right-4 border rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-widest z-10 backdrop-blur-md shadow-sm"
+                    className="absolute top-4 right-4 ws-glass-soft rounded-full px-3 py-1 text-[9px] font-extrabold uppercase tracking-widest z-10 shadow-sm"
                   >
                     {city.visit_count.toLocaleString()} visits
                   </div>

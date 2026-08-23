@@ -122,9 +122,14 @@ export function NearbySection() {
   };
 
   return (
-    <section id="nearby" className="relative py-24 overflow-hidden bg-[#0B1914]">
-      {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0B1914] via-[#143028]/30 to-[#0B1914] z-0" />
+    <section id="nearby" className="relative py-24 overflow-hidden transition-colors duration-500">
+      {/* Ocean atmosphere tint */}
+      <div 
+        style={{
+          background: 'linear-gradient(180deg, rgba(25, 167, 224, 0.06) 0%, transparent 100%)',
+        }}
+        className="absolute inset-0 z-0 pointer-events-none" 
+      />
 
       <div className="relative max-w-7xl mx-auto px-6 z-10">
         {/* Header */}
@@ -133,8 +138,8 @@ export function NearbySection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            style={{ color: 'var(--ws-primary)' }}
-            className="flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.5em] mb-4"
+            style={{ color: 'var(--ws-accent)' }}
+            className="flex items-center justify-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.5em] mb-4"
           >
             {showNearbyMode ? (
               <>
@@ -164,17 +169,17 @@ export function NearbySection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            style={{ color: 'var(--ws-text-muted)' }}
+            style={{ color: 'var(--ws-text-secondary)' }}
             className="text-xs mt-3 flex items-center justify-center gap-1.5"
           >
             {showNearbyMode ? (
               <>
-                <MapPin size={12} style={{ color: 'var(--ws-primary)' }} />
+                <MapPin size={12} style={{ color: 'var(--ws-accent)' }} />
                 Showing handpicked cities and places near you
               </>
             ) : (
               <>
-                <Compass size={12} style={{ color: 'var(--ws-primary)' }} />
+                <Compass size={12} style={{ color: 'var(--ws-accent)' }} />
                 Location access unavailable. Displaying India&apos;s iconic treasures and destinations.
               </>
             )}
@@ -184,8 +189,8 @@ export function NearbySection() {
         {/* Loading Indicator */}
         {loading && !showNearbyMode && featuredCities.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-3">
-            <Loader2 size={32} style={{ color: 'var(--ws-primary)' }} className="animate-spin" />
-            <p className="text-sm" style={{ color: 'var(--ws-text-muted)' }}>Discovering destinations...</p>
+            <Loader2 size={32} style={{ color: 'var(--ws-accent)' }} className="animate-spin" />
+            <p className="text-sm" style={{ color: 'var(--ws-text-secondary)' }}>Discovering destinations...</p>
           </div>
         )}
 
@@ -194,18 +199,12 @@ export function NearbySection() {
           <>
             {/* Tab Switcher */}
             <div className="flex justify-center mb-10">
-              <div 
-                style={{
-                  backgroundColor: 'var(--ws-surface-elevated)',
-                  borderColor: 'var(--ws-border)',
-                }}
-                className="inline-flex p-1 backdrop-blur-xl border rounded-full shadow-inner"
-              >
+              <div className="inline-flex p-1 ws-glass-strong rounded-full shadow-inner">
                 <button
                   onClick={() => setActiveTab('cities')}
                   style={{
-                    backgroundColor: activeTab === 'cities' ? 'var(--ws-primary)' : 'transparent',
-                    color: activeTab === 'cities' ? '#FFFFFF' : 'var(--ws-text-muted)',
+                    background: activeTab === 'cities' ? 'linear-gradient(135deg, var(--ws-ocean), var(--ws-accent))' : 'transparent',
+                    color: activeTab === 'cities' ? '#FFFFFF' : 'var(--ws-text-secondary)',
                   }}
                   className="px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm"
                 >
@@ -214,8 +213,8 @@ export function NearbySection() {
                 <button
                   onClick={() => setActiveTab('places')}
                   style={{
-                    backgroundColor: activeTab === 'places' ? 'var(--ws-primary)' : 'transparent',
-                    color: activeTab === 'places' ? '#FFFFFF' : 'var(--ws-text-muted)',
+                    background: activeTab === 'places' ? 'linear-gradient(135deg, var(--ws-ocean), var(--ws-accent))' : 'transparent',
+                    color: activeTab === 'places' ? '#FFFFFF' : 'var(--ws-text-secondary)',
                   }}
                   className="px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm"
                 >
@@ -260,10 +259,10 @@ export function NearbySection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.04, duration: 0.5 }}
-                      className="flex-shrink-0 w-[260px] md:w-[320px] aspect-[3/4] rounded-3xl overflow-hidden relative snap-start cursor-pointer group shadow-xl hover:shadow-2xl border border-[#2C5E3B]/60 transition-all duration-300 bg-[#143028]"
+                      className="flex-shrink-0 w-[260px] md:w-[320px] aspect-[3/4] rounded-3xl overflow-hidden relative snap-start cursor-pointer group ws-glass card-hover hover:border-[var(--ws-accent)]"
                       onClick={() => handleItemClick(item.id)}
                     >
-                      {/* Image tag - safe from WebGL CORS limits */}
+                      {/* Image tag */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={imgUrl}
@@ -271,31 +270,30 @@ export function NearbySection() {
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         loading="lazy"
                         onError={(e) => {
-                          // Image load fallback
                           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600';
                         }}
                       />
 
-                      {/* Glassmorphic Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1914]/95 via-[#0B1914]/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-300 z-10" />
+                      {/* Glassmorphic Gradient Overlay over image */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#021423]/90 via-[#021423]/30 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-300 z-10" />
 
                       {/* Card Content */}
                       <div className="absolute bottom-0 inset-x-0 p-6 flex flex-col justify-end text-white z-20">
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-[#C69234] mb-1.5 flex items-center gap-1">
+                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-[var(--ws-accent)] mb-1.5 flex items-center gap-1">
                           <Sparkles size={10} />
                           {isCitiesTab ? 'Destination' : 'Attraction'}
                         </span>
                         <h3 className="font-display text-lg md:text-xl font-bold leading-tight line-clamp-2 drop-shadow">
                           {title}
                         </h3>
-                        <p className="text-[#A3C2B2] text-[11px] mt-2 flex items-center gap-1.5 font-medium">
-                          <MapPin size={11} className="text-[#C69234] flex-shrink-0" />
+                        <p className="text-[#A9DFF4] text-[11px] mt-2 flex items-center gap-1.5 font-medium">
+                          <MapPin size={11} className="text-[var(--ws-accent)] flex-shrink-0" />
                           <span className="line-clamp-1">{subtitle}</span>
                         </p>
                       </div>
 
                       {/* Hover Border Glow */}
-                      <div className="absolute inset-0 border border-transparent group-hover:border-[#C69234]/60 rounded-3xl transition-colors duration-300 z-30" />
+                      <div className="absolute inset-0 border border-transparent group-hover:border-[var(--ws-accent)] rounded-3xl transition-colors duration-300 z-30" />
                     </motion.div>
                   );
                 })}
@@ -304,19 +302,19 @@ export function NearbySection() {
               {/* Right arrow button */}
               <button
                 onClick={() => handleScroll('right')}
-                className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#143028] backdrop-blur-md border border-[#2C5E3B] items-center justify-center text-white shadow-xl opacity-0 group-hover/scroll:opacity-100 transition-opacity duration-300 z-20 hover:scale-105 hover:bg-[#1B432C] active:scale-95 hidden md:flex"
+                className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full ws-glass-strong items-center justify-center text-white shadow-xl opacity-0 group-hover/scroll:opacity-100 transition-opacity duration-300 z-20 hover:scale-105 active:scale-95 hidden md:flex"
               >
-                <ChevronRight size={20} className="text-[#C69234]" />
+                <ChevronRight size={20} style={{ color: 'var(--ws-accent)' }} />
               </button>
             </div>
 
             {/* Quick List Section below Slider */}
             <div className="mt-12">
-              <div className="flex items-center justify-between mb-5 border-b border-[#2C5E3B]/40 pb-2">
-                <h3 className="font-semibold text-md text-white tracking-tight">
+              <div className="flex items-center justify-between mb-5 border-b pb-2" style={{ borderColor: 'var(--ws-border)' }}>
+                <h3 className="font-bold text-md tracking-tight" style={{ color: 'var(--ws-text)' }}>
                   {isCitiesTab ? 'Trending Destinations' : 'Must-Visit Places'}
                 </h3>
-                <span className="text-[10px] text-[#A3C2B2] font-bold uppercase tracking-wider">Top selections</span>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider" style={{ color: 'var(--ws-accent)' }}>Top selections</span>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -329,19 +327,19 @@ export function NearbySection() {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       onClick={() => router.push(`/city/${city.id}`)}
-                      className="border border-[#2C5E3B]/60 bg-[#143028]/80 rounded-2xl p-4 text-left hover:border-[#C69234] hover:bg-[#1B432C] transition-all duration-300 card-hover group"
+                      className="ws-glass rounded-2xl p-4 text-left hover:border-[var(--ws-accent)] transition-all duration-300 card-hover group"
                     >
                       <div
                         className="w-full h-28 rounded-xl bg-cover bg-center mb-3 overflow-hidden shadow-sm"
                         style={{ backgroundImage: `url(${city.cover_image || 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400'})` }}
                       />
-                      <p className="text-white text-xs font-bold group-hover:text-[#C69234] transition-colors line-clamp-1">
+                      <p className="text-xs font-bold group-hover:text-[var(--ws-accent)] transition-colors line-clamp-1" style={{ color: 'var(--ws-text)' }}>
                         {city.name}
                       </p>
-                      <p className="text-[#A3C2B2] text-[10px] mt-1 flex items-center gap-1 font-semibold">
+                      <p className="text-[10px] mt-1 flex items-center gap-1 font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>
                         {city.distance_km ? (
                           <>
-                            <Navigation size={9} className="text-[#C69234]" />
+                            <Navigation size={9} style={{ color: 'var(--ws-accent)' }} />
                             <span>{Math.round(city.distance_km)} km away</span>
                           </>
                         ) : (
@@ -359,19 +357,19 @@ export function NearbySection() {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       onClick={() => router.push(`/place/${place.id}`)}
-                      className="border border-[#2C5E3B]/60 bg-[#143028]/80 rounded-2xl p-4 text-left hover:border-[#C69234] hover:bg-[#1B432C] transition-all duration-300 card-hover group"
+                      className="ws-glass rounded-2xl p-4 text-left hover:border-[var(--ws-accent)] transition-all duration-300 card-hover group"
                     >
                       <div
                         className="w-full h-28 rounded-xl bg-cover bg-center mb-3 overflow-hidden shadow-sm"
                         style={{ backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400'})` }}
                       />
-                      <p className="text-white text-xs font-bold group-hover:text-[#C69234] transition-colors line-clamp-1">
+                      <p className="text-xs font-bold group-hover:text-[var(--ws-accent)] transition-colors line-clamp-1" style={{ color: 'var(--ws-text)' }}>
                         {place.name}
                       </p>
-                      <p className="text-[#A3C2B2] text-[10px] mt-1 flex items-center gap-1 font-semibold">
+                      <p className="text-[10px] mt-1 flex items-center gap-1 font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>
                         {place.distance_km ? (
                           <>
-                            <Navigation size={9} className="text-[#C69234]" />
+                            <Navigation size={9} style={{ color: 'var(--ws-accent)' }} />
                             <span>{Math.round(place.distance_km)} km away</span>
                           </>
                         ) : (

@@ -13,10 +13,10 @@ import type { City, Place } from '@/types';
 const LeafletMap = dynamic(() => import('@/components/map/LeafletMap'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-[#0B1914]">
+    <div className="w-full h-full flex items-center justify-center" style={{ color: 'var(--ws-text)' }}>
       <div className="flex flex-col items-center gap-3">
-        <div className="w-8 h-8 rounded-full border-4 border-[#C69234] border-t-transparent animate-spin" />
-        <p className="text-[#C69234] text-xs uppercase tracking-widest font-semibold">Initializing Map...</p>
+        <div className="w-8 h-8 rounded-full border-4 border-t-transparent animate-spin" style={{ borderColor: 'var(--ws-accent)', borderTopColor: 'transparent' }} />
+        <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-accent)' }}>Initializing Map...</p>
       </div>
     </div>
   ),

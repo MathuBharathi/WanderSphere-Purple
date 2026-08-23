@@ -73,10 +73,10 @@ export default function PlacePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0B1914] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ color: 'var(--ws-text)' }}>
         <div className="flex flex-col items-center gap-4">
           <div className="spinner" />
-          <p className="text-[#A3C2B2] text-sm uppercase tracking-widest">Loading place...</p>
+          <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: 'var(--ws-text-secondary)' }}>Loading place...</p>
         </div>
       </div>
     );
@@ -84,10 +84,10 @@ export default function PlacePage() {
 
   if (!place) {
     return (
-      <div className="min-h-screen bg-[#0B1914] flex items-center justify-center text-center px-6">
+      <div className="min-h-screen flex items-center justify-center text-center px-6" style={{ color: 'var(--ws-text)' }}>
         <div>
-          <p className="text-[#A3C2B2] text-lg mb-4">Place not found</p>
-          <Link href="/" className="text-[#C69234] text-sm underline font-semibold">Go Home</Link>
+          <p className="text-lg mb-4" style={{ color: 'var(--ws-text-secondary)' }}>Place not found</p>
+          <Link href="/" className="text-sm underline font-semibold" style={{ color: 'var(--ws-accent)' }}>Go Home</Link>
         </div>
       </div>
     );
@@ -106,16 +106,16 @@ export default function PlacePage() {
   }));
 
   const infoItems = [
-    { icon: Star, label: 'Rating', value: place.avg_rating ? `${place.avg_rating}/5 (${place.review_count} reviews)` : 'Not rated', color: 'text-[#C69234]' },
-    { icon: Clock, label: 'Best Time', value: place.best_time_to_visit || 'Any time', color: 'text-[#C69234]' },
-    { icon: DollarSign, label: 'Entry Fee', value: place.entry_fee === 0 ? 'Free' : place.entry_fee ? `₹${place.entry_fee}` : 'Varies', color: 'text-[#C69234]' },
-    { icon: Users, label: 'Crowd Level', value: place.crowd_level || 'Moderate', color: 'text-[#A65D29]' },
-    { icon: Shield, label: 'Safety', value: place.safety_rating ? `${place.safety_rating}/5` : 'Good', color: 'text-[#A3C2B2]' },
-    { icon: Clock, label: 'Duration', value: place.avg_visit_duration ? `~${place.avg_visit_duration} mins` : 'Varies', color: 'text-[#A3C2B2]' },
+    { icon: Star, label: 'Rating', value: place.avg_rating ? `${place.avg_rating}/5 (${place.review_count} reviews)` : 'Not rated', color: 'var(--ws-accent)' },
+    { icon: Clock, label: 'Best Time', value: place.best_time_to_visit || 'Any time', color: 'var(--ws-accent)' },
+    { icon: DollarSign, label: 'Entry Fee', value: place.entry_fee === 0 ? 'Free' : place.entry_fee ? `₹${place.entry_fee}` : 'Varies', color: 'var(--ws-accent)' },
+    { icon: Users, label: 'Crowd Level', value: place.crowd_level || 'Moderate', color: 'var(--ws-accent)' },
+    { icon: Shield, label: 'Safety', value: place.safety_rating ? `${place.safety_rating}/5` : 'Good', color: 'var(--ws-text-secondary)' },
+    { icon: Clock, label: 'Duration', value: place.avg_visit_duration ? `~${place.avg_visit_duration} mins` : 'Varies', color: 'var(--ws-text-secondary)' },
   ];
 
   return (
-    <main className="min-h-screen bg-[#0B1914] text-[#F0F7F4]">
+    <main className="min-h-screen pb-24 transition-colors duration-500" style={{ color: 'var(--ws-text)' }}>
       {/* Hero Banner */}
       <div className="relative h-[60vh] overflow-hidden">
         <div
@@ -124,14 +124,15 @@ export default function PlacePage() {
             backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600'})`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1914] via-[#0B1914]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1914]/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-[#041B31]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020B18]/60 via-transparent to-transparent" />
 
         {/* Navigation */}
         <div className="absolute top-8 left-8 right-8 flex items-center justify-between z-10">
           <Link
             href={place.city_id ? `/city/${place.city_id}` : '/'}
-            className="flex items-center gap-2 bg-[#0B1914]/80 border border-[#2C5E3B] rounded-full px-4 py-2 text-white hover:text-[#C69234] hover:border-[#C69234] transition-all duration-300 text-xs font-bold uppercase tracking-widest backdrop-blur-lg"
+            style={{ color: 'var(--ws-text)' }}
+            className="flex items-center gap-2 ws-glass rounded-full px-4 py-2 hover:border-[var(--ws-accent)] transition-all duration-300 text-xs font-bold uppercase tracking-widest backdrop-blur-lg shadow-sm"
           >
             <ArrowLeft size={14} />
             Back

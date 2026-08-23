@@ -155,22 +155,22 @@ export function SearchSection() {
           setSearchQuery('');
         }}
         style={{
-          backgroundColor: 'var(--ws-surface-elevated)',
-          borderColor: openDropdown === dropdownKey ? 'var(--ws-primary)' : 'var(--ws-border)',
+          backgroundColor: 'var(--ws-input-bg)',
+          borderColor: openDropdown === dropdownKey ? 'var(--ws-accent)' : 'var(--ws-input-border)',
         }}
         className={`w-full flex items-center justify-between gap-3 px-6 py-5 rounded-2xl border backdrop-blur-md transition-all duration-300 text-left ${
-          disabled ? 'opacity-40 cursor-not-allowed' : 'hover:border-[var(--ws-primary)] cursor-pointer'
+          disabled ? 'opacity-40 cursor-not-allowed' : 'hover:border-[var(--ws-accent)] cursor-pointer'
         }`}
       >
         <div>
-          <p className="text-[9px] uppercase tracking-widest font-bold mb-0.5" style={{ color: 'var(--ws-primary)' }}>{label}</p>
-          <p className="text-sm font-semibold" style={{ color: value ? 'var(--ws-text)' : 'var(--ws-text-muted)' }}>
-            {loading ? <Loader2 size={14} style={{ color: 'var(--ws-primary)' }} className="animate-spin" /> : (value || `Select ${label}`)}
+          <p className="text-[9px] uppercase tracking-widest font-extrabold mb-0.5" style={{ color: 'var(--ws-accent)' }}>{label}</p>
+          <p className="text-sm font-semibold" style={{ color: value ? 'var(--ws-text)' : 'var(--ws-text-secondary)' }}>
+            {loading ? <Loader2 size={14} style={{ color: 'var(--ws-accent)' }} className="animate-spin" /> : (value || `Select ${label}`)}
           </p>
         </div>
         <ChevronDown
           size={14}
-          style={{ color: openDropdown === dropdownKey ? 'var(--ws-primary)' : 'var(--ws-text-muted)' }}
+          style={{ color: openDropdown === dropdownKey ? 'var(--ws-accent)' : 'var(--ws-text-secondary)' }}
           className={`flex-shrink-0 transition-transform ${openDropdown === dropdownKey ? 'rotate-180' : ''}`}
         />
       </button>
@@ -182,12 +182,7 @@ export function SearchSection() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            style={{
-              backgroundColor: 'var(--ws-surface)',
-              borderColor: 'var(--ws-border)',
-              boxShadow: 'var(--ws-shadow)',
-            }}
-            className="absolute top-full mt-2 left-0 right-0 border rounded-2xl overflow-hidden z-50 max-h-64 flex flex-col shadow-2xl backdrop-blur-xl"
+            className="absolute top-full mt-2 left-0 right-0 ws-glass-strong rounded-2xl overflow-hidden z-50 max-h-64 flex flex-col shadow-2xl backdrop-blur-xl"
           >
             <div className="p-2 border-b" style={{ borderColor: 'var(--ws-border)' }}>
               <input
@@ -196,16 +191,16 @@ export function SearchSection() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search..."
                 style={{
-                  backgroundColor: 'var(--ws-surface-elevated)',
+                  backgroundColor: 'var(--ws-input-bg)',
                   color: 'var(--ws-text)',
                   borderColor: 'var(--ws-border)',
                 }}
-                className="w-full text-sm px-3 py-2 rounded-xl outline-none placeholder:text-[var(--ws-text-muted)] border"
+                className="w-full text-sm px-3 py-2 rounded-xl outline-none placeholder:text-[var(--ws-text-secondary)] border"
               />
             </div>
             <div className="overflow-y-auto py-1">
               {filtered(items).length === 0 ? (
-                <p className="text-center text-xs py-4" style={{ color: 'var(--ws-text-muted)' }}>No results found</p>
+                <p className="text-center text-xs py-4" style={{ color: 'var(--ws-text-secondary)' }}>No results found</p>
               ) : (
                 filtered(items).map((item: any) => (
                   <button
@@ -213,7 +208,7 @@ export function SearchSection() {
                     type="button"
                     onClick={() => { onSelect(item); setOpenDropdown(null); setSearchQuery(''); }}
                     style={{ color: 'var(--ws-text)' }}
-                    className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-[var(--ws-surface-elevated)] transition-colors text-sm"
+                    className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-[var(--ws-glass-soft)] transition-colors text-sm"
                   >
                     <span>{item.name}</span>
                     {item.code && <span className="text-[10px] opacity-60 uppercase font-semibold">{item.code}</span>}
@@ -235,8 +230,8 @@ export function SearchSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          style={{ color: 'var(--ws-primary)' }}
-          className="text-[10px] font-bold uppercase tracking-[0.5em] mb-4"
+          style={{ color: 'var(--ws-accent)' }}
+          className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-4"
         >
           ✦ Discover India ✦
         </motion.p>
@@ -255,7 +250,7 @@ export function SearchSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          style={{ color: 'var(--ws-text-muted)' }}
+          style={{ color: 'var(--ws-text-secondary)' }}
           className="text-sm mt-4 max-w-md mx-auto"
         >
           Select an Indian state and city to explore hidden gems, or let AI generate a customized itinerary for you.
@@ -268,12 +263,7 @@ export function SearchSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        style={{
-          backgroundColor: 'var(--ws-surface-translucent)',
-          borderColor: 'var(--ws-border)',
-          boxShadow: 'var(--ws-shadow)',
-        }}
-        className="max-w-4xl mx-auto border rounded-3xl p-5 shadow-2xl backdrop-blur-xl"
+        className="max-w-4xl mx-auto ws-glass-strong rounded-3xl p-5 shadow-2xl backdrop-blur-xl"
       >
         <div className="flex flex-col md:flex-row gap-3 items-stretch">
           <div className="flex flex-col sm:flex-row gap-3 flex-1">
@@ -303,9 +293,9 @@ export function SearchSection() {
               onClick={() => setShowPreferences(!showPreferences)}
               disabled={!selCity}
               style={{
-                backgroundColor: showPreferences ? 'var(--ws-primary)' : 'var(--ws-surface-elevated)',
-                borderColor: showPreferences ? 'var(--ws-primary)' : 'var(--ws-border)',
-                color: showPreferences ? '#FFFFFF' : 'var(--ws-primary)',
+                backgroundColor: showPreferences ? 'var(--ws-ocean)' : 'var(--ws-input-bg)',
+                borderColor: showPreferences ? 'var(--ws-accent)' : 'var(--ws-border)',
+                color: showPreferences ? '#FFFFFF' : 'var(--ws-accent)',
               }}
               className="flex items-center justify-center p-5 rounded-2xl border transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-sm"
               title="Itinerary Options"
