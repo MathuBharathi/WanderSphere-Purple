@@ -1,4 +1,3 @@
-@'
 <p align="center">
   <img src="public/banner.png" alt="WanderSphere Logo" width="900">
 </p>
