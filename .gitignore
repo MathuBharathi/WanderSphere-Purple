@@ -19,3 +19,4 @@ pnpm-debug.log*
 Thumbs.db
 "@ | Set-Content .gitignore
 .vercel
+.vscode/
