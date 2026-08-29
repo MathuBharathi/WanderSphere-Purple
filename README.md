@@ -28,7 +28,7 @@ A modern <b>Full-Stack India Travel & Tourism Website</b> featuring intelligent 
 
 # 🚀 Live Website
 
-### 🌐 https://wandersphere-purple.vercel.app/
+### 🌐 https://wandersphere-in.vercel.app/
 
 ---
 
