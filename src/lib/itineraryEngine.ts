@@ -259,6 +259,7 @@ export function generateItinerary(config: ItineraryConfig): GeneratedItinerary {
 function createFallbackPlace(cityId: string, slot: 'morning' | 'afternoon' | 'evening'): Place {
   const city = cities.find(c => c.id === cityId);
   const cityName = city?.name || 'Local Area';
+  const fallbackImage = city?.cover_image || 'https://images.pexels.com/photos/11948442/pexels-photo-11948442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
 
   if (slot === 'morning') {
     return {
@@ -267,7 +268,7 @@ function createFallbackPlace(cityId: string, slot: 'morning' | 'afternoon' | 'ev
       name: 'Local Heritage Walk & Breakfast',
       description: `Embark on a self-guided walking tour around the oldest streets of ${cityName}. Stop by traditional bakeries or street vendor stalls to try local breakfast delicacies.`,
       category: 'cultural',
-      cover_image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800',
+      cover_image: fallbackImage,
       latitude: city?.latitude || 20.0,
       longitude: city?.longitude || 77.0,
       avg_rating: 4.5,
@@ -282,7 +283,7 @@ function createFallbackPlace(cityId: string, slot: 'morning' | 'afternoon' | 'ev
       name: 'Artisan & Craft Bazaar',
       description: `Visit the central shopping area of ${cityName} to view local handicrafts, handloom textiles, and witness local master craftsmen at work. Great opportunity for souvenirs.`,
       category: 'shopping',
-      cover_image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800',
+      cover_image: fallbackImage,
       latitude: (city?.latitude || 20.0) + 0.01,
       longitude: (city?.longitude || 77.0) + 0.01,
       avg_rating: 4.3,
@@ -297,7 +298,7 @@ function createFallbackPlace(cityId: string, slot: 'morning' | 'afternoon' | 'ev
       name: 'Sunset Viewpoint & Street Food Trail',
       description: `Find a local hilltop, bridge or park to catch the beautiful sunset over ${cityName}. Cap off the day by exploring the popular night food stalls.`,
       category: 'food',
-      cover_image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?w=800',
+      cover_image: fallbackImage,
       latitude: (city?.latitude || 20.0) - 0.01,
       longitude: (city?.longitude || 77.0) - 0.01,
       avg_rating: 4.6,

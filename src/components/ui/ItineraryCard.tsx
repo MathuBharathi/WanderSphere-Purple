@@ -26,7 +26,7 @@ export function ItineraryCard({ itinerary, onOpen, onDelete }: ItineraryCardProp
     itinerary.cover_image ||
     staticPlaces.find(p => p.city_id === itinerary.config?.cityId)?.cover_image ||
     (itinerary.config?.cityName ? getCityImageUrl(itinerary.config.cityName) : '') ||
-    'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800';
+    'https://images.pexels.com/photos/11948442/pexels-photo-11948442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
 
   return (
     <motion.div

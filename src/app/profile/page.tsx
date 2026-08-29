@@ -17,6 +17,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import type { Place, SavedItinerary } from '@/types';
 import { places as staticPlaces } from '@/data/travelData';
+import { getPlaceImageUrl } from '@/lib/placeImages';
 import { useAppStore } from '@/store';
 
 const TABS = [
@@ -453,7 +454,7 @@ function ProfileContent() {
                       >
                         <div
                           className="h-28 sm:h-36 md:h-44 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                          style={{ backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400'})` }}
+                          style={{ backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})` }}
                         />
                         <div className="p-3 sm:p-4 md:p-5">
                           <span className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-widest" style={{ color: 'var(--ws-accent)' }}>{place.category}</span>

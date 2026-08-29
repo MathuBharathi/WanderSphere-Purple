@@ -111,12 +111,23 @@ export function PlaceModal({ place, onClose }: PlaceModalProps) {
         className="min-h-screen md:min-h-0 md:my-8 md:mx-auto md:max-w-5xl ws-glass-strong border md:rounded-4xl overflow-hidden shadow-2xl"
       >
         {/* Header image */}
-        <div className="relative h-64 md:h-80 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-transparent to-transparent" />
+        <div className="relative h-64 md:h-80 overflow-hidden bg-slate-900/90 flex items-center justify-center">
+          {place.cover_image ? (
+            <>
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${place.cover_image})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-transparent to-transparent" />
+            </>
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-2 p-6 text-center z-10">
+              <Camera className="w-10 h-10 text-[var(--ws-accent)]/70" />
+              <span className="text-xs font-extrabold uppercase tracking-widest text-cyan-200/80 ws-glass-strong px-4 py-1.5 rounded-full border border-cyan-500/30 shadow-lg">
+                No verified place photo available
+              </span>
+            </div>
+          )}
 
           {/* Close */}
           <button

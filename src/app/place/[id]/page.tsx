@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { getPlaceById, getPlaceImages, getReviewsByPlace } from '@/lib/api';
+import { getPlaceImageUrl } from '@/lib/placeImages';
 import { MasonryGallery } from '@/components/gallery/MasonryGallery';
 import { ReviewForm } from '@/components/ui/ReviewForm';
 import { NavDock } from '@/components/dock/NavDock';
@@ -121,7 +122,7 @@ export default function PlacePage() {
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-[2s] hover:scale-105"
           style={{
-            backgroundImage: `url(${place.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600'})`,
+            backgroundImage: `url(${getPlaceImageUrl(place.name, place.category, place.cover_image)})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-[#041B31]/40 to-transparent" />

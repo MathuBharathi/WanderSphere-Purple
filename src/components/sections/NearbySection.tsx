@@ -270,7 +270,7 @@ export function NearbySection() {
                         className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                         loading="lazy"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600';
+                          (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/11948442/pexels-photo-11948442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
                         }}
                       />
 

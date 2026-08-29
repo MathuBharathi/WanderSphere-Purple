@@ -9,8 +9,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { getCityById, getPlacesByCity, getWeather, createItinerary } from '@/lib/api';
+import { getCityImageUrl, getPlaceImageUrl } from '@/lib/placeImages';
 import { generateItinerary } from '@/lib/itineraryEngine';
-import { MasonryGallery } from '@/components/gallery/MasonryGallery';
 import { PlaceModal } from '@/components/ui/PlaceModal';
 import { NavDock } from '@/components/dock/NavDock';
 import { WeatherWidget } from '@/components/ui/WeatherWidget';
@@ -220,7 +220,7 @@ function CityContent() {
         {/* Main image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${city.cover_image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200'})` }}
+          style={{ backgroundImage: `url(${getCityImageUrl(city.name, city.cover_image)})` }}
         />
         {/* Dark ocean gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#020B18] via-[#041B31]/40 to-transparent" />
@@ -279,8 +279,8 @@ function CityContent() {
       </div>
 
       {/* Category Filter Bar */}
-      <div className="sticky top-0 z-20 w-full ws-glass-strong border-b py-4">
-        <div className="max-w-7xl mx-auto px-6">
+      <div className="sticky top-0 z-20 w-full ws-glass-strong border-b py-4 backdrop-blur-xl">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-2 overflow-x-auto no-scrollbar scroll-smooth">
             {CATEGORIES.map(({ key, label, icon: Icon }) => (
               <button
@@ -290,13 +290,13 @@ function CityContent() {
                   background: activeCategory === key ? 'linear-gradient(135deg, var(--ws-ocean), var(--ws-accent))' : undefined,
                   color: activeCategory === key ? '#FFFFFF' : 'var(--ws-text-secondary)',
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-all duration-300 shrink-0 ${
                   activeCategory === key
-                    ? 'shadow-md font-black'
+                    ? 'shadow-md font-black scale-[1.02]'
                     : 'ws-glass hover:border-[var(--ws-accent)]'
                 }`}
               >
-                <Icon size={12} />
+                <Icon size={14} />
                 {label}
               </button>
             ))}
@@ -305,19 +305,19 @@ function CityContent() {
       </div>
 
       {/* Interactive Leaflet Map of the City places */}
-      <div className="max-w-7xl mx-auto px-6 pt-16">
-        <div className="mb-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-3">
-            ✦ Geographic View ✦
+      <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-16">
+        <div className="mb-6 md:mb-8">
+          <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.5em] mb-2 flex items-center gap-1.5" style={{ color: 'var(--ws-accent)' }}>
+            ✦ GEOGRAPHIC VIEW ✦
           </p>
-          <h2 className="font-extrabold text-3xl text-white uppercase tracking-tight">
+          <h2 className="font-extrabold text-3xl md:text-4xl text-white uppercase tracking-tight">
             Interactive City Map
           </h2>
-          <p className="text-xs text-[#A3C2B2] mt-1">
+          <p className="text-xs md:text-sm text-[#A3C2B2] mt-1">
             Visual map of all major sights, hidden gems, and local recommendations.
           </p>
         </div>
-        <div className="h-[400px] border border-[#2C5E3B] rounded-3xl overflow-hidden shadow-xl p-2 bg-[#143028]">
+        <div className="h-[350px] md:h-[420px] border border-[#2C5E3B] rounded-3xl overflow-hidden shadow-xl p-2 bg-[#143028]">
           <LeafletMap
             items={mapItems}
             center={city.latitude && city.longitude ? [city.latitude, city.longitude] : [20.5937, 78.9629]}
@@ -331,55 +331,135 @@ function CityContent() {
         </div>
       </div>
 
-      {/* Places Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex items-end justify-between mb-12">
+      {/* Places Gallery Section */}
+      <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-12">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C69234] mb-3">
-              ✦ {activeCategory === 'all' ? 'All Places' : CATEGORIES.find(c => c.key === activeCategory)?.label} ✦
+            <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.5em] mb-2 flex items-center gap-1.5" style={{ color: 'var(--ws-accent)' }}>
+              ✦ {activeCategory === 'all' ? 'ALL PLACES' : CATEGORIES.find(c => c.key === activeCategory)?.label?.toUpperCase()} ✦
             </p>
-            <h2 className="font-extrabold text-4xl text-white uppercase tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl text-white uppercase tracking-tight">
               {places.length} Sights
             </h2>
           </div>
-          <p className="text-[#A3C2B2] text-xs uppercase tracking-widest font-bold hidden md:block">
-            Click any photo to explore
+          <p className="text-xs uppercase tracking-widest font-bold hidden sm:block text-[#A3C2B2]">
+            Select any photo to explore
           </p>
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 size={32} className="text-[#C69234] animate-spin" />
+          <div className="flex items-center justify-center py-24">
+            <Loader2 size={36} className="animate-spin" style={{ color: 'var(--ws-accent)' }} />
           </div>
-        ) : masonryItems.length > 0 ? (
-          <MasonryGallery
-            items={masonryItems}
-            animateFrom="bottom"
-            blurToFocus={true}
-            stagger={0.06}
-            scaleOnHover={true}
-            hoverScale={0.97}
-            colorShiftOnHover={true}
-            onItemClick={(item) => {
-              const place = places.find((p) => p.id === item.id);
-              if (place) setSelectedPlace(place);
-            }}
-          />
+        ) : places.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+            {places.map((place, i) => (
+              <motion.div
+                key={place.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 8) * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                onClick={() => setSelectedPlace(place)}
+                className="group cursor-pointer rounded-2xl sm:rounded-3xl overflow-hidden ws-glass hover:border-[var(--ws-accent)] transition-all duration-300 card-hover flex flex-col h-full shadow-lg hover:shadow-2xl"
+              >
+                {/* Image Area */}
+                <div className="relative h-32 sm:h-44 md:h-52 lg:h-56 overflow-hidden w-full flex-shrink-0 bg-slate-900/80 flex items-center justify-center">
+                  {place.cover_image ? (
+                    <>
+                      <div
+                        className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                        style={{
+                          backgroundImage: `url(${place.cover_image})`,
+                        }}
+                      />
+                      <div
+                        style={{
+                          background: 'linear-gradient(to top, #020B18 0%, rgba(4,27,49,0.3) 60%, transparent 100%)',
+                        }}
+                        className="absolute inset-0"
+                      />
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center gap-2 p-4 text-center z-10">
+                      <Camera className="w-6 h-6 text-[var(--ws-accent)]/60" />
+                      <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-widest text-cyan-200/80 ws-glass-soft px-3 py-1 rounded-full border border-cyan-500/20">
+                        No verified place photo
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Hidden Gem Badge */}
+                  {place.is_hidden_gem && (
+                    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex items-center gap-1 ws-glass-soft rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-md backdrop-blur-md border border-amber-400/30">
+                      <Sparkles size={10} className="text-amber-400 animate-pulse" />
+                      <span className="text-[7px] sm:text-[9px] font-extrabold uppercase tracking-wider text-amber-300">Hidden Gem</span>
+                    </div>
+                  )}
+
+                  {/* Rating Badge */}
+                  {place.avg_rating && (
+                    <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-1 ws-glass-soft rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-md backdrop-blur-md border border-white/20">
+                      <Star size={10} className="text-amber-400 fill-amber-400" />
+                      <span className="text-[8px] sm:text-[10px] font-extrabold text-white">{place.avg_rating}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Card Info Content */}
+                <div className="p-3 sm:p-4 md:p-5 flex flex-col justify-between flex-grow">
+                  <div>
+                    {/* Category Label */}
+                    <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest block mb-1" style={{ color: 'var(--ws-accent)' }}>
+                      {place.category ? place.category.replace('_', ' ') : 'SIGHT'}
+                    </span>
+                    
+                    {/* Title */}
+                    <h3 className="font-display font-bold text-xs sm:text-base md:text-lg text-white group-hover:text-[var(--ws-accent)] transition-colors line-clamp-1 leading-snug">
+                      {place.name}
+                    </h3>
+
+                    {/* Short Description */}
+                    <p className="text-[11px] sm:text-xs mt-1.5 leading-relaxed line-clamp-2" style={{ color: 'var(--ws-text-secondary)' }}>
+                      {place.description}
+                    </p>
+                  </div>
+
+                  {/* Meta Footer Row */}
+                  <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/10 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--ws-text-secondary)' }}>
+                    <span className="truncate">
+                      {place.entry_fee !== undefined ? (place.entry_fee === 0 ? 'Free Entry' : `₹${place.entry_fee}`) : 'Open Entry'}
+                    </span>
+                    {place.avg_visit_duration ? (
+                      <span className="flex items-center gap-1 shrink-0">
+                        <Clock size={10} style={{ color: 'var(--ws-accent)' }} />
+                        {place.avg_visit_duration}m
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-1 shrink-0 text-[var(--ws-accent)]">
+                        Explore <ArrowRight size={10} />
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         ) : (
-          <div className="text-center py-20 bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl">
+          <div className="text-center py-20 bg-[#143028]/60 border border-[#2C5E3B] rounded-3xl max-w-2xl mx-auto">
             <p className="text-[#A3C2B2] text-sm font-semibold">No places found in this category.</p>
           </div>
         )}
       </div>
 
       {/* Travel Tips Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-8 shadow-xl">
-          <h3 className="font-extrabold text-2xl text-white uppercase tracking-tight mb-6 flex items-center gap-2">
+      <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-8 pb-32">
+        <div className="bg-[#143028] border border-[#2C5E3B] rounded-3xl p-6 sm:p-8 shadow-xl">
+          <h3 className="font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mb-6 flex items-center gap-2">
             <Sparkles size={20} className="text-[#C69234]" />
             Travel Tips for {city.name}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="space-y-2">
               <h4 className="font-bold text-sm text-[#C69234]">Best Time to Visit</h4>
               <p className="text-xs text-[#A3C2B2] leading-relaxed">

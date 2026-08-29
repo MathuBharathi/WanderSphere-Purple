@@ -30,7 +30,7 @@ function enrichState(s: State): State {
     slug: s.slug || s.name.toLowerCase().replace(/[\s-]+/g, '-'),
     city_count: sCities.length,
     place_count: sPlaces.length,
-    cover_image: s.cover_image || sCities.find(c => c.cover_image)?.cover_image || 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800',
+    cover_image: s.cover_image || sCities.find(c => c.cover_image)?.cover_image || 'https://images.pexels.com/photos/11948442/pexels-photo-11948442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     description: s.description || `Explore the beautiful cities and tourist places in ${s.name}.`
   };
 }
