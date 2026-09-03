@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft, MapPin, Star, Clock, DollarSign, Users, Shield,
@@ -84,14 +84,8 @@ export default function PlacePage() {
   }
 
   if (!place) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-center px-6" style={{ color: 'var(--ws-text)' }}>
-        <div>
-          <p className="text-lg mb-4" style={{ color: 'var(--ws-text-secondary)' }}>Place not found</p>
-          <Link href="/" className="text-sm underline font-semibold" style={{ color: 'var(--ws-accent)' }}>Go Home</Link>
-        </div>
-      </div>
-    );
+    notFound();
+    return null;
   }
 
   const allImages = [

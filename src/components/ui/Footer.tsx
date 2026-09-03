@@ -1,5 +1,6 @@
 'use client';
-import { Globe, Heart, MapPin, Compass, Mail, Github, Twitter } from 'lucide-react';
+
+import { Globe, Heart, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 export function Footer({ className = '' }: { className?: string }) {
@@ -17,9 +18,9 @@ export function Footer({ className = '' }: { className?: string }) {
       />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10 md:gap-8">
           {/* Brand */}
-          <div className="md:col-span-1">
+          <div className="sm:col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
               <div 
                 style={{
@@ -35,22 +36,73 @@ export function Footer({ className = '' }: { className?: string }) {
               </span>
             </Link>
             <p className="text-xs leading-relaxed max-w-xs" style={{ color: 'var(--ws-text-secondary)' }}>
-              Discover cities intelligently. Explore hidden gems, plan cinematic routes,
-              and experience the world like never before.
+              Discover cities intelligently across India. Explore hidden gems, plan customized itineraries, and experience seamless travel.
             </p>
           </div>
 
           {/* Explore */}
           <div>
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-4" style={{ color: 'var(--ws-accent)' }}>
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.4em] mb-4" style={{ color: 'var(--ws-accent)' }}>
               Explore
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {[
                 { label: 'Trending Cities', href: '/#trending' },
                 { label: 'Hidden Gems', href: '/#gems' },
                 { label: 'Near Me', href: '/#nearby' },
-                { label: 'Map', href: '/map' },
+                { label: 'Interactive Map', href: '/map' },
+                { label: 'Itinerary Planner', href: '/itinerary' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    style={{ color: 'var(--ws-text-secondary)' }}
+                    className="text-xs hover:text-[var(--ws-accent)] transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--ws-accent)' }} />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company & Support */}
+          <div>
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.4em] mb-4" style={{ color: 'var(--ws-accent)' }}>
+              Company
+            </p>
+            <ul className="space-y-2.5">
+              {[
+                { label: 'About WanderSphere', href: '/about' },
+                { label: 'Contact Support', href: '/contact' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    style={{ color: 'var(--ws-text-secondary)' }}
+                    className="text-xs hover:text-[var(--ws-accent)] transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--ws-accent)' }} />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal & Trust */}
+          <div>
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.4em] mb-4" style={{ color: 'var(--ws-accent)' }}>
+              Legal & Trust
+            </p>
+            <ul className="space-y-2.5">
+              {[
+                { label: 'Privacy Policy', href: '/privacy' },
+                { label: 'Terms of Service', href: '/terms' },
+                { label: 'Cookie Policy', href: '/cookie-policy' },
+                { label: 'Accessibility', href: '/accessibility' },
+                { label: 'Disclaimer', href: '/disclaimer' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link
@@ -68,13 +120,13 @@ export function Footer({ className = '' }: { className?: string }) {
 
           {/* Account */}
           <div>
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-4" style={{ color: 'var(--ws-accent)' }}>
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.4em] mb-4" style={{ color: 'var(--ws-accent)' }}>
               Account
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {[
-                { label: 'Sign In', href: '/auth' },
-                { label: 'Profile', href: '/profile' },
+                { label: 'Sign In / Register', href: '/auth' },
+                { label: 'Profile Settings', href: '/profile' },
                 { label: 'Saved Places', href: '/profile?tab=saved' },
                 { label: 'My Trips', href: '/profile?tab=trips' },
               ].map((link) => (
@@ -91,39 +143,12 @@ export function Footer({ className = '' }: { className?: string }) {
               ))}
             </ul>
           </div>
-
-          {/* Newsletter */}
-          <div>
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.5em] mb-4" style={{ color: 'var(--ws-accent)' }}>
-              Stay Connected
-            </p>
-            <p className="text-xs mb-4" style={{ color: 'var(--ws-text-secondary)' }}>
-              Get travel inspiration delivered to your inbox.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                style={{
-                  backgroundColor: 'var(--ws-input-bg)',
-                  borderColor: 'var(--ws-input-border)',
-                  color: 'var(--ws-text)',
-                }}
-                className="flex-1 border rounded-xl py-2.5 px-4 text-xs placeholder:text-[var(--ws-text-secondary)] focus:outline-none focus:border-[var(--ws-accent)] transition-colors"
-              />
-              <button 
-                className="px-4 py-2.5 rounded-xl ws-ocean-btn-primary"
-              >
-                <Mail size={14} />
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* Bottom */}
+        {/* Bottom Bar */}
         <div className="mt-16 pt-6 border-t flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderColor: 'var(--ws-border)' }}>
           <p className="text-[10px] uppercase tracking-widest font-medium" style={{ color: 'var(--ws-text-secondary)' }}>
-            © 2026 WanderSphere. All rights reserved. • Photos provided by{' '}
+            © 2026 WanderSphere. All rights reserved. • Photography by{' '}
             <a
               href="https://www.pexels.com"
               target="_blank"
@@ -140,7 +165,7 @@ export function Footer({ className = '' }: { className?: string }) {
             </span>
             <Heart size={10} style={{ color: 'var(--ws-accent)', fill: 'var(--ws-accent)' }} />
             <span className="text-[10px] uppercase tracking-widest font-medium" style={{ color: 'var(--ws-text-secondary)' }}>
-              for travelers
+              for travelers in India
             </span>
           </div>
         </div>

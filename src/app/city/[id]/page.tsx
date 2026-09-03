@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, Suspense } from 'react';
-import { useParams, useSearchParams, useRouter } from 'next/navigation';
+import { useParams, useSearchParams, useRouter, notFound } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, MapPin, Thermometer, Clock, Star, Loader2,
@@ -193,14 +193,8 @@ function CityContent() {
   }
 
   if (!city) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-center px-6" style={{ color: 'var(--ws-text)' }}>
-        <div>
-          <p className="text-lg mb-4" style={{ color: 'var(--ws-text-secondary)' }}>City not found</p>
-          <Link href="/" className="text-sm underline font-semibold" style={{ color: 'var(--ws-accent)' }}>Go Home</Link>
-        </div>
-      </div>
-    );
+    notFound();
+    return null;
   }
 
   return (

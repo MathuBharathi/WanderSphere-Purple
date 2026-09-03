@@ -34,6 +34,9 @@ export function Navbar() {
   const links = [
     { label: 'Explore', href: '/#explore' },
     { label: 'Map', href: '/map' },
+    { label: 'Itinerary', href: '/itinerary' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   const getDisplayName = (): string => {

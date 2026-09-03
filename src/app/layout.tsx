@@ -8,19 +8,69 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
+import { SITE_URL, SITE_DESCRIPTION } from '@/lib/siteConfig';
+
 export const metadata: Metadata = {
-  title: 'WanderSphere — Explore India',
-  description: 'Plan personalized, AI-powered travel itineraries across Indian states and cities. Discover famous attractions and hidden gems with our interactive travel map.',
-  keywords: 'travel, India, states, cities, tourism, explore, WanderSphere, places, itinerary, AI travel planner',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'WanderSphere | Discover the Best Places to Travel in India',
+    template: '%s | WanderSphere',
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    'travel India',
+    'India tourism',
+    'itinerary planner',
+    'hidden gems India',
+    'city travel guide',
+    'WanderSphere',
+    'interactive travel map',
+    'Indian travel discovery',
+    'state attraction guide',
+  ],
+  authors: [{ name: 'WanderSphere' }],
+  creator: 'WanderSphere',
+  publisher: 'WanderSphere',
   icons: {
     icon: '/logo.png',
     shortcut: '/logo.png',
     apple: '/logo.png',
   },
+  alternates: {
+    canonical: './',
+  },
   openGraph: {
-    title: 'WanderSphere — Explore India',
-    description: 'Plan personalized, AI-powered travel itineraries across Indian states and cities.',
+    title: 'WanderSphere | Discover the Best Places to Travel in India',
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: 'WanderSphere',
+    locale: 'en_IN',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'WanderSphere — Interactive Travel Platform for India',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'WanderSphere | Discover the Best Places to Travel in India',
+    description: SITE_DESCRIPTION,
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
